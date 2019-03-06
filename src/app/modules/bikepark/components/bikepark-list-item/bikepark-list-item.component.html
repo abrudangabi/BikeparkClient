@@ -1,0 +1,37 @@
+<mat-card class="top-gradient-div">
+  <mat-card-header class="">
+    <div mat-card-avatar>
+      <img mat-card-sm-image src="{{bikepark.contact.photo.url}}" alt="{{bikepark.denumire}}">
+    </div>
+
+    <mat-card-title>{{ bikepark.denumire }}</mat-card-title>
+    <mat-card-subtitle>Bikepark Name</mat-card-subtitle>
+    <div class="header-text additional-header">
+      <div class="mat-card-subtitle date">
+        Space: {{bikepark.nrLocuri}}
+      </div>
+      <div class="mat-card-subtitle date">
+        Chairlift: {{bikepark.telescaun}}
+      </div>
+    </div>
+
+  </mat-card-header>
+  <hr>
+  <mat-card-content>
+    <p>
+      {{ bikepark.descriere }}
+      {{bikepark.contact.photo.url}}
+    </p>
+  </mat-card-content>
+  <!--<mat-card-content>
+    <mat-card-actions class="m-0">
+
+      <div class="content-text d-flex flex-row float-right" >
+        <img class="imagine" src="assets/img/distance.png">
+        <span class="align-self-center" >{{distance}} m</span>
+      </div>
+
+    </mat-card-actions>
+
+  </mat-card-content>-->
+</mat-card>

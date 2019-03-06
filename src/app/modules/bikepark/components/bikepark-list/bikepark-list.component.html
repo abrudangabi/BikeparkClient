@@ -1,0 +1,5 @@
+<h2>Bikepark list !</h2>
+<app-filters></app-filters>
+<app-bikepark-list-item *ngFor="let companyE1 of filteredBikeparks ; let i = index" [bikepark]="companyE1"
+                       [index]="i" (click)="goToDetailedBikepark(companyE1.id)"
+></app-bikepark-list-item>

@@ -1,0 +1,33 @@
+<p>
+  bikepark-profile-page works!
+</p>
+<h2>{{bikepark.denumire}}</h2>
+<div mat-card-avatar>
+  <img mat-card-sm-image class="size" src="{{bikepark.contact.photo.url}}" alt="{{bikepark.denumire}}">
+</div>
+
+<div>
+  <p>{{bikepark.nrLocuri}}</p>
+</div>
+<div>
+  <p>{{bikepark.contact.locatie.tara}},{{bikepark.contact.locatie.provincie}},{{bikepark.contact.locatie.localitate}}</p>
+</div>
+<div>
+
+  <form>
+    <label><p>Rezervare Bike Park ziua:</p>
+      <input type="date" #ziua>
+    </label>
+  </form>
+
+  <button class="add" (click)="addFinal(ziua.value); ziua.value=''">
+    add
+  </button>
+
+  <!--<mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Start date" [(ngModel)]="education.startDate">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker startView="year" [startAt]="startDatex"></mat-datepicker>
+  </mat-form-field>-->
+
+</div>

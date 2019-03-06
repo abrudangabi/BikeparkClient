@@ -1,0 +1,33 @@
+<p>
+  filters works!
+</p>
+<form [formGroup]="filterForm" class="form-group">
+  <mat-expansion-panel>
+
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Filter Bikeparks
+      </mat-panel-title>
+      <mat-panel-description>
+        Cauta bikepark dupa un filtru
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-form-field>
+      <mat-chip-list #chipListName>
+        <mat-chip *ngFor="let filter of selectedNames" [selectable]="false" [removable]="removable" (removed)="removeName(filter)">
+          {{filter}}
+          <mat-icon matChipRemove *ngIf="removable">&times;</mat-icon>
+        </mat-chip>
+        <input #triggerName type="text" matInput placeholder="Filtrati dupa numele bikepark-ului" formControlName="nameFilter"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputFor]="chipListName" [matAutocomplete]="autoName">
+      </mat-chip-list>
+      <mat-autocomplete #autoName="matAutocomplete" (optionSelected)="selectedBikepark($event)">
+        <mat-option *ngFor="let bikepark of filteredNames" [value]="bikepark">
+          {{bikepark}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+  </mat-expansion-panel>
+</form>

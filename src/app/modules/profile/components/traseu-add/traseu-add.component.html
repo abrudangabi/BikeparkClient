@@ -1,0 +1,40 @@
+<h1 mat-dialog-title>Adaugare Traseu</h1>
+<div mat-dialog-content>
+  <div class="main-container">
+    <mat-form-field>
+      <input matInput [(ngModel)]="traseu.denumire" placeholder="Denumire"
+             value="{{traseu.denumire}}" onchange="">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="traseu.dificultate" placeholder="Dificultate"
+             value="{{traseu.dificultate}}" onchange="">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="traseu.lungime" placeholder="Lungime"
+             value="{{traseu.lungime}}" onchange="">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="traseu.tipTraseu" placeholder="Tip Traseu"
+             value="{{traseu.tipTraseu}}" onchange="">
+    </mat-form-field>
+    <!--<mat-form-field>
+      <input matInput [matDatepicker]="picker2" placeholder="End Date" [(ngModel)]="rezervareBikepark.ziua">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2 startView="year"></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker3" placeholder="Deadline" [(ngModel)]="rezervareBikepark.ziua">
+      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+      <mat-datepicker #picker3 startView="year"></mat-datepicker>
+    </mat-form-field>-->
+    <!--<mat-form-field>
+      <textarea matInput [(ngModel)]="rezervareBikepark.id" placeholder="Description"
+                matTextareaAutosize matAutosizeMinRows=7
+                value={{rezervareBikepark.id}}></textarea>
+    </mat-form-field>-->
+  </div>
+</div>
+<div class="float-right" mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="onNoClick()">Cancel</button>
+  <button mat-raised-button (click)="onSaveClick()">Save</button>
+</div>

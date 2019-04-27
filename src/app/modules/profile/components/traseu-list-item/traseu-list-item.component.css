@@ -1,0 +1,86 @@
+a {
+  cursor: pointer;
+}
+
+a:hover {
+  background-color: lightblue;
+}
+
+mat-card {
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.mat-card-avatar {
+  width: unset;
+  height: unset;
+  border-radius: 0;
+}
+
+.top-gradient-div {
+  background: #000046;
+  background: -webkit-linear-gradient(to right, #87CEEB,  	#E6E6FA);
+  background: linear-gradient(to right, #87CEEB,  	#E6E6FA);
+}
+
+mat-card:hover {
+  background-color: lightblue;
+}
+
+.trasee-greu{
+  /*background: #0F2027;
+  background: -webkit-linear-gradient(to right, #0F2027, #203A43, #2C5364);
+  background: linear-gradient(to right, #0F2027, #203A43, #2C5364);*/
+  background: #f12711;
+  background: -webkit-linear-gradient(to right, #f12711, #f5af19);
+  background: linear-gradient(to right, #f12711, #f5af19);
+}
+
+.trasee-mediu{
+  /*background: #f12711;
+  background: -webkit-linear-gradient(to right, #f12711, #f5af19);
+  background: linear-gradient(to right, #f12711, #f5af19);*/
+  background: #00B4DB;
+  /*background: -webkit-linear-gradient(to right, #00B4DB, #0083B0);
+  background: linear-gradient(to right, #00B4DB, #0083B0);*/
+  background: -webkit-linear-gradient(to right, yellowgreen, orange);
+  background: linear-gradient(to right, yellowgreen, orange);
+}
+
+.skill-button {
+  padding-bottom: 20px;
+}
+
+
+.trasee-usor{
+  /*background: #00B4DB;
+  background: -webkit-linear-gradient(to right, #00B4DB, #0083B0);
+  background: linear-gradient(to right, #00B4DB, #0083B0);*/
+  background: #DCE35B;
+  background: -webkit-linear-gradient(to right, #DCE35B, #45B649);
+  background: linear-gradient(to right, #DCE35B, #45B649);
+}
+
+.header-text {
+  align-self: flex-end;
+  margin: 0 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-text {
+  align-self: flex-end;
+  margin: 0 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.additional-header {
+  align-items: end;
+  width: 100%
+}
+
+.imagine {
+  height: 25px;
+  width: 25px;
+}

@@ -1,0 +1,43 @@
+<h1 mat-dialog-title>Edit profile</h1>
+<div mat-dialog-content>
+  <div class="main-container">
+    <mat-form-field>
+      <input matInput [(ngModel)]="bikepark.denumire" placeholder="Denumire"
+             value="{{bikepark.denumire}}" onchange="">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="bikepark.nrLocuri" placeholder="Numar de locuri"
+             value="{{bikepark.nrLocuri}}" onchange="">
+    </mat-form-field>
+    <!--<mat-form-field>
+      <input type="checkbox" checked="checked" />
+      <input type="checkbox" checked="unchecked" />
+      <input matInput [(ngModel)]="bikepark.denumire" placeholder="First name"
+             value="{{bikepark.denumire}}" onchange="">
+    </mat-form-field>-->
+    <!--<mat-form-field>
+      <input matInput [matDatepicker]="picker1" placeholder="Start Date" [(ngModel)]="bikepark.startDate">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1 startView="year"></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker2" placeholder="End Date" [(ngModel)]="bikepark.endDate">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2 startView="year"></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker3" placeholder="Deadline" [(ngModel)]="bikepark.deadline">
+      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+      <mat-datepicker #picker3 startView="year"></mat-datepicker>
+    </mat-form-field>-->
+    <mat-form-field>
+      <textarea matInput [(ngModel)]="bikepark.descriere" placeholder="Descriere"
+                matTextareaAutosize matAutosizeMinRows=7
+                value={{bikepark.descriere}}></textarea>
+    </mat-form-field>
+  </div>
+</div>
+<div class="float-right" mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="onNoClick()">Cancel</button>
+  <button mat-raised-button (click)="onSaveClick()">Save</button>
+</div>

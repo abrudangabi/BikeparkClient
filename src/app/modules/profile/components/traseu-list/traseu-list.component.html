@@ -1,0 +1,22 @@
+<!--<mat-card class="example-card">
+  <mat-card-header>
+    <div class="card-title-wrapper">
+      <mat-card-title>
+        <h2>Lista de Trasee</h2>
+      </mat-card-title>
+    </div>
+    <div class="float-right">
+      <button mat-raised-button *ngIf="!isHisProfile" (click)="openAddTraseuDialog()">Adauga Traseu Nou</button>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <div>
+      <app-traseu-list-item *ngFor="let traseuE1 of traseu; let i = index" [traseu]="traseuE1"
+                            [index]="i"
+      ></app-traseu-list-item>
+    </div>
+  </mat-card-content>
+</mat-card>-->
+<app-traseu-list-item *ngFor="let traseuE1 of ListTraseu; let i = index" [traseu]="traseuE1"
+                        [index]="i"
+></app-traseu-list-item>

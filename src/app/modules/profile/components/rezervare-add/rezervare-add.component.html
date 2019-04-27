@@ -1,0 +1,91 @@
+<h1 mat-dialog-title>Rezervare pentru ziua dorita</h1>
+<div mat-dialog-content>
+  <div class="main-container">
+   <!-- <mat-form-field>
+      <input matInput [(ngModel)]="rezervareBikepark.id" placeholder="First name"
+             value="{{rezervareBikepark.id}}" onchange="">
+    </mat-form-field>-->
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker1" placeholder="Data Rezervarii" [(ngModel)]="rezervareBikepark.ziua">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1 startView="month"></mat-datepicker>
+    </mat-form-field>
+    <!--<p>Merge ?</p>
+
+    <div class="wrapper">
+      <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p> <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+      <br />
+      <div class="container">
+        <div class="row">
+          <div class='col-sm-12'>
+            <div class="form-group">
+              <div id='datetimepicker'></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      $(function () {
+        $('#datetimepicker').datetimepicker({
+          inline: true,
+          sideBySide: true,
+          locale: 'de',
+          format: 'DD.MM.YYYY'
+        });
+      });
+    </script>-->
+    <!--<mat-form-field>
+      <input matInput [matDatepicker]="picker1" placeholder="Data Rezervarii" [(ngModel)]="rezervareBikepark.ziua">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1 startView="month"></mat-datepicker>
+      &lt;!&ndash;<mat-calendar #calendar ></mat-calendar>&ndash;&gt;
+    </mat-form-field>-->
+    <!--<div style="overflow:hidden;">
+    ----[selected]="selDate" (selectedChange)="getChangedValue($event)"
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-8">
+            <div id="rezervareBikepark.ziua"></div>
+          </div>
+        </div>
+      </div>
+      <script type="text/javascript">
+        $(function () {
+          $('#datetimepicker12').datetimepicker({
+            inline: true,
+            sideBySide: true
+          });
+        });
+      </script>
+    </div>-->
+    <!--<div class="container">
+      <div class="row">
+        <div class='col-sm-12'>
+          <div class="form-group">
+            <div id='ziua'></div>
+          </div>
+        </div>
+      </div>
+    </div>-->
+    <!--<mat-form-field>
+      <input matInput [matDatepicker]="picker2" placeholder="End Date" [(ngModel)]="rezervareBikepark.ziua">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2 startView="year"></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker3" placeholder="Deadline" [(ngModel)]="rezervareBikepark.ziua">
+      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+      <mat-datepicker #picker3 startView="year"></mat-datepicker>
+    </mat-form-field>-->
+    <!--<mat-form-field>
+      <textarea matInput [(ngModel)]="rezervareBikepark.id" placeholder="Description"
+                matTextareaAutosize matAutosizeMinRows=7
+                value={{rezervareBikepark.id}}></textarea>
+    </mat-form-field>-->
+  </div>
+</div>
+<div class="float-right" mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="onNoClick()">Cancel</button>
+  <button mat-raised-button (click)="onSaveClick()">Save</button>
+</div>

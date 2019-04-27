@@ -165,5 +165,10 @@
       }
     }
   },
-  "defaultProject": "FrontBikeParkClient"
+  "defaultProject": "FrontBikeParkClient",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

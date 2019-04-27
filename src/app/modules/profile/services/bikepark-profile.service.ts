@@ -8,6 +8,11 @@ import {catchError, tap} from 'rxjs/operators';
 import {SessionManagementService} from '../../../shared/utils/session-management.service';
 import {Contact} from '../../../shared/model/Contact';
 import {Photo} from '../../../shared/model/Photo';
+import {User} from '../../../shared/model/User';
+import * as models from '../../../shared/model/BikePark';
+import {Role} from '../../../shared/model/Role';
+import RoleStringEnum = Role.RoleStringEnum;
+import * as $ from 'node_modules/jquery/dist/jquery.js';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -25,7 +30,11 @@ export abstract class AbstractBikeparkProfileService {
 
   public abstract addRezervare(rezervareBikePark: RezervareBikePark): Observable<RezervareBikePark>;
 
+  public abstract uploadPhoto(uploadData: FormData);
+
   public abstract isHisProfile(): boolean;
+
+  public abstract getRezervari(): RezervareBikePark[] ;
 }
 
 export class MockBikeparkProfileService implements AbstractBikeparkProfileService {
@@ -33,7 +42,25 @@ export class MockBikeparkProfileService implements AbstractBikeparkProfileServic
     id: 1,
     tara: 'Romania',
     provincie: 'Bihor',
-    localitate: 'Betfia'
+    localitate: 'Betfia',
+    codPostal: '400000',
+    longitude: 22.022242,
+    latitude: 46.982779,
+    number: '182',
+    strada: 'Betfia'
+  };
+
+  userB: User = {
+    id: 1,
+    active: true,
+
+    email: 'crater_betfia@yahoo.com',
+
+    password: 'balala',
+
+    // roles: RoleStringEnum.BIKEPARK,
+
+    username: 'crater_betfia',
   };
 
   photo1: Photo = {
@@ -44,7 +71,10 @@ export class MockBikeparkProfileService implements AbstractBikeparkProfileServic
   contact1: Contact = {
     id: 1,
     locatie: this.locatie1,
-    photo: this.photo1
+    photo: this.photo1,
+    phoneNumber: '0771607423',
+    website: 'https://www.dirtbike.ro/',
+    facebookLink: 'Crater-Betfia'
   };
 
   rezervari: RezervareBikePark[] = [];
@@ -54,7 +84,9 @@ export class MockBikeparkProfileService implements AbstractBikeparkProfileServic
     denumire: 'Crater Betfia',
     telescaun: false,
     nrLocuri: 200,
-    contact: this.contact1
+    contact: this.contact1,
+    user: this.userB,
+    descriere: 'ceva in rusa "Cyka Blyat" '
   };
 
   // heroesUrl = 'api/rezervaribikepark';  // URL to web api
@@ -70,6 +102,9 @@ export class MockBikeparkProfileService implements AbstractBikeparkProfileServic
   initialize() {
   }
 
+  uploadPhoto(uploadData: FormData) {
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
@@ -79,6 +114,10 @@ export class MockBikeparkProfileService implements AbstractBikeparkProfileServic
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
+  }
+
+  getRezervari(): RezervareBikePark[] {
+    return this.rezervari;
   }
 
   /*getRezervari(): Observable<RezervareBikePark[]> {
@@ -93,10 +132,12 @@ export class MockBikeparkProfileService implements AbstractBikeparkProfileServic
   }
 
   addRezervare(rezervareBikePark: RezervareBikePark): Observable<RezervareBikePark> {
-    window.alert('Se duce ');
-    window.alert(rezervareBikePark.ziua);
+    // window.alert('Se duce ');
+    // window.alert(rezervareBikePark.ziua);
     // window.alert('numarul : ' + this.getRezervari().subscribe(val => console.log(val.length)));
-    console.log('vine rahatul ' + rezervareBikePark.id + ' ' + rezervareBikePark.ziua + ' '
+    rezervareBikePark.bikepark_id = 1;
+    rezervareBikePark.biker_id = 1;
+    console.log('vine entitatea ' + rezervareBikePark.id + ' ' + rezervareBikePark.ziua + ' '
       + rezervareBikePark.bikepark_id + ' ' + rezervareBikePark.biker_id);
     this.rezervari.push(rezervareBikePark);
     // this.getRezervari().subscribe(val => console.log(val.length));
@@ -129,6 +170,32 @@ export class ServerBikeparkProfileService implements AbstractBikeparkProfileServ
   constructor(private http: HttpClient, private sessionManager: SessionManagementService) {
   }
 
+  getRezervari(): RezervareBikePark[] {
+    return null;
+  }
+
+  uploadPhoto(uploadData: FormData) {
+    return new Promise((resolve, reject) => {
+      const url = 'https://enigmatic-sierra-91538.herokuapp.com/api/company/' + this.bikepark.id + '/photo';
+      $.ajax({
+        url: url,
+        headers: {
+          'Authorization': this.httpOptions.headers.get('Authorization')
+        },
+        data: uploadData,
+        contentType: false,
+        processData: false,
+        type: 'POST',
+        success: function(data) {
+          resolve(data);
+        },
+        error: function(request, status, error) {
+          reject(false);
+        }
+      });
+    });
+  };
+
   getBikepark(id: number): Observable<BikePark> {
     if ((!this.isBikepark) || id === this.bikeparkID) {
       this.isUsersProfile = false;
@@ -145,14 +212,14 @@ export class ServerBikeparkProfileService implements AbstractBikeparkProfileServ
         }
       )
     );
-    return undefined;
+    // return undefined;
   }
 
   initialize() {
   }
 
   addRezervare(rezervareBikePark: RezervareBikePark): Observable<RezervareBikePark> {
-    return this.http.post(this.url + '/rezervarebikepark/rezerva' ,
+    return this.http.post(this.url + '/rezervarebikepark/rezerva',
       rezervareBikePark,
       this.httpOptions
     ).pipe(

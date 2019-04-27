@@ -1,0 +1,35 @@
+<mat-card >
+  <mat-card-header>
+    <div mat-card-avatar>
+      <img mat-card-sm-image src="{{logo}}" alt="{{concurs.denumire}}">
+    </div>
+    <mat-card-title>{{concurs.denumire}}</mat-card-title>
+    <mat-card-subtitle>{{bikepark !== undefined ? bikepark.denumire : ''}}</mat-card-subtitle>
+    <div class="header-text additional-header">
+      <div class="mat-card-subtitle date">
+        Start date: {{concurs.dataStart}}
+      </div>
+      <div class="mat-card-subtitle date">
+        End date: {{concurs.dataStart}}
+      </div>
+    </div>
+  </mat-card-header>
+
+  <div class="rezervare-bikepark-button-wrapper">
+    <button mat-raised-button routerLinkActive="active" [routerLink]="[concurs.id]">
+      <!--<mat-icon>list</mat-icon>-->
+      Rezerva Loc
+    </button>
+  </div>
+
+  <!--<hr>
+
+  <mat-card-content>
+    <p>
+      {{ concurs.minimParticipanti }}
+    </p>
+  </mat-card-content>-->
+  <!--<mat-card-actions class="m-0">
+    <span *ngFor="let tag of tags">#{{tag.name}} </span>
+  </mat-card-actions>-->
+</mat-card>

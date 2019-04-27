@@ -1,0 +1,133 @@
+<!--<ng-template
+  *ngIf="verifGreu();then showGreu"
+  ngif="verifMediu();then showMediu"
+  ngif="verifUsor();then showUsor">
+</ng-template>-->
+
+<div *ngIf="verifGreu();then showGreu">
+</div>
+
+<div *ngIf="verifMediu();then showMediu">
+</div>
+
+<div *ngIf="verifUsor();then showUsor">
+</div>
+
+<ng-template #showGreu>
+  <mat-card class="trasee-greu">
+    <mat-card-header class="">
+
+      <mat-card-title>{{ traseu.denumire }}</mat-card-title>
+      <mat-card-subtitle>TrackName</mat-card-subtitle>
+      <div class="header-text additional-header">
+        <div class="mat-card-subtitle date">
+          Type: {{traseu.tipTraseu}}
+        </div>
+        <div class="mat-card-subtitle date">
+          Distance: {{traseu.lungime}} m
+        </div>
+        <div class="mat-card-subtitle date">
+          Dificulty: {{traseu.dificultate}}
+        </div>
+      </div>
+      <div *ngIf="isHisProfile">
+        <div class="float-right skill-button">
+          <button mat-icon-button color="warn" (click)="deleteTraseu(traseu.id)">
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+        </div>
+      </div>
+
+    </mat-card-header>
+
+  </mat-card>
+</ng-template>
+
+<ng-template #showMediu>
+  <mat-card class="trasee-mediu">
+    <mat-card-header class="">
+
+      <mat-card-title>{{ traseu.denumire }}</mat-card-title>
+      <mat-card-subtitle>TrackName</mat-card-subtitle>
+      <div class="header-text additional-header">
+        <div class="mat-card-subtitle date">
+          Type: {{traseu.tipTraseu}}
+        </div>
+        <div class="mat-card-subtitle date">
+          Distance: {{traseu.lungime}}
+        </div>
+        <div class="mat-card-subtitle date">
+          Dificulty: {{traseu.dificultate}}
+        </div>
+      </div>
+      <div *ngIf="isHisProfile">
+        <div class="float-right skill-button">
+          <button mat-icon-button color="warn" (click)="deleteTraseu(traseu.id)">
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+        </div>
+      </div>
+
+    </mat-card-header>
+    <!--<div class="float-right skill-button">
+      <button mat-icon-button color="warn" >
+        <mat-icon>delete_outline</mat-icon>
+      </button>
+    </div>-->
+
+  </mat-card>
+</ng-template>
+<ng-template #showUsor>
+  <mat-card class="trasee-usor">
+    <mat-card-header class="">
+
+      <mat-card-title>{{ traseu.denumire }}</mat-card-title>
+      <mat-card-subtitle>TrackName</mat-card-subtitle>
+      <div class="header-text additional-header">
+        <div class="mat-card-subtitle date">
+          Type: {{traseu.tipTraseu}}
+        </div>
+        <div class="mat-card-subtitle date">
+          Distance: {{traseu.lungime}}
+        </div>
+        <div class="mat-card-subtitle date">
+          Dificulty: {{traseu.dificultate}}
+        </div>
+      </div>
+      <div *ngIf="isHisProfile">
+        <div class="float-right skill-button">
+          <button mat-icon-button color="warn" (click)="deleteTraseu(traseu.id)">
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+        </div>
+      </div>
+
+    </mat-card-header>
+
+  </mat-card>
+</ng-template>
+
+<!--<mat-card class="top-gradient-div">
+  <mat-card-header class="">
+
+    <mat-card-title>{{ traseu.denumire }}</mat-card-title>
+    <mat-card-subtitle>TrackName</mat-card-subtitle>
+    <div class="header-text additional-header">
+      <div class="mat-card-subtitle date">
+        Type: {{traseu.tipTraseu}}
+      </div>
+      <div class="mat-card-subtitle date">
+        Distance: {{traseu.lungime}}
+      </div>
+      <div class="mat-card-subtitle date">
+        Dificulty: {{traseu.dificultate}}
+      </div>
+    </div>
+
+  </mat-card-header>
+  &lt;!&ndash;<hr>
+  <mat-card-content>
+
+  </mat-card-content>&ndash;&gt;
+
+</mat-card>-->

@@ -11,6 +11,7 @@
  */
 
 import * as models from './models';
+import {Categorie} from './models';
 
 export interface Concurs {
   dataStart?: Date;
@@ -23,4 +24,14 @@ export interface Concurs {
 
   nrParticipanti?: number;
 
+}
+
+export interface JoinBikepark {
+  idConcurs?: number;
+  idBikepark?: number;
+}
+
+export interface JoinCategorii {
+  idConcurs?: number;
+  categorii?: Categorie[];
 }

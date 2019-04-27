@@ -17,7 +17,6 @@ export class BikeparkListComponent implements OnInit {
 
   ngOnInit() {
     this.bikeparkService.initialize();
-    console.log('Bikepark list');
     this.bikeparkService.getBikeParks()
       .subscribe(bikepark => {
         this.unfilteredBikeparksList = bikepark;
@@ -32,8 +31,6 @@ export class BikeparkListComponent implements OnInit {
       this.bikeparks = this.bikeparks.filter(
         (bike) => this.bikeparkService.getNameFilters().indexOf(bike.denumire) > -1);
     }
-
-    console.log(this.bikeparks[0].contact.photo.url);
     return this.bikeparks;
   }
 

@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>Adaugare Categorie</h1>
+<div mat-dialog-content>
+  <div class="main-container">
+    <mat-form-field>
+      <input matInput [(ngModel)]="categorie.tipDisciplina" placeholder="Tip Disciplina"
+             value="{{categorie.tipDisciplina}}" onchange="">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="categorie.dificultate" placeholder="Dificultate"
+             value="{{categorie.dificultate}}" onchange="">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="categorie.lungime" placeholder="Lungime"
+             value="{{categorie.lungime}}" onchange="">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="categorie.varsta" placeholder="Varsta"
+             value="{{categorie.varsta}}" onchange="">
+    </mat-form-field>
+  </div>
+</div>
+<div class="float-right" mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="onNoClick()">Cancel</button>
+  <button mat-raised-button (click)="onSaveClick()">Save</button>
+</div>

@@ -36,6 +36,10 @@ import {NavBarComponent} from './masterComponents/navbar/nav-bar.component';
 import {NotificationManagerComponent} from './shared/utils/component/notification-manager/notification-manager.component';
 import {ProgressSpinnerComponent} from './shared/utils/component/progress-spinner/progress-spinner.component';
 import {ProfileModule} from './modules/profile/profile.module';
+import { ConcursRoutingModule } from './modules/concurs/concurs-routing.module';
+import { ConcursModule } from './modules/concurs/concurs.module';
+import {ConcursPageComponent} from './modules/concurs/pages/concurs-page/concurs-page.component';
+import {ConcursDetailsPageComponent} from './modules/concurs/pages/concurs-details-page/concurs-details-page.component';
 
 export const appRoutes: Routes = [
 ];
@@ -44,6 +48,8 @@ export const appRoutes: Routes = [
   declarations: [
     AppComponent,
     BikeparksPageComponent,
+    ConcursPageComponent,
+    ConcursDetailsPageComponent,
     NavBarComponent,
     NotificationManagerComponent,
     ProgressSpinnerComponent,
@@ -79,6 +85,7 @@ export const appRoutes: Routes = [
     BikeparksRoutingModule,
     BikeparksModule,
     ProfileModule,
+    ConcursModule,
   ],
   entryComponents: [],
   exports: [
@@ -100,6 +107,7 @@ export interface NavBarItem {
 
 export let applicantNavBarItems: NavBarItem[] = [
   {title: 'Bikeparks', path: 'bikeparks'},
+  {title: 'Concurs', path: 'concurs'},
 ];
 
 export let companyNavBarItems: NavBarItem[] = [

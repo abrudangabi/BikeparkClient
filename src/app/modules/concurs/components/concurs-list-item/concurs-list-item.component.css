@@ -1,0 +1,44 @@
+a {
+  cursor: pointer;
+}
+
+a:hover {
+  background-color: lightblue;
+}
+
+mat-card {
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.mat-card-avatar {
+  width: unset;
+  height: unset;
+  border-radius: 0;
+}
+
+mat-card:hover {
+  background-color: lightblue;
+}
+
+.rezervare-bikepark-button-wrapper {
+  padding-bottom: 10px;
+}
+
+mat-card-sm-image {
+  object-fit: cover; /*this makes de image in src fit to the size of specified below*/
+  width: 100%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+  height: 80%;
+}
+
+.header-text {
+  align-self: flex-end;
+  margin: 0 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.additional-header{
+  width: 100%;
+  align-items: end;
+}

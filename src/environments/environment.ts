@@ -1,5 +1,8 @@
 import {MockBikeparksService} from '../app/modules/bikepark/services/bikeparks.service';
 import {MockBikeparkProfileService} from '../app/modules/profile/services/bikepark-profile.service';
+import {MockConcursDetailsService} from '../app/modules/concurs/services/concurs-details.service';
+import {MockConcursService} from '../app/modules/concurs/services/concurs.service';
+import {MockTraseuService} from '../app/modules/profile/services/traseu.service';
 
 export const environment = {
   production: false,
@@ -8,4 +11,7 @@ export const environment = {
   environmentTestText: 'Hello',
   bikeparkService: MockBikeparksService,
   bikeparkProfileService: MockBikeparkProfileService,
+  concursDetailsService: MockConcursDetailsService,
+  concursService: MockConcursService,
+  traseuService: MockTraseuService,
 };

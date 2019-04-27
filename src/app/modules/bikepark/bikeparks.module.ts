@@ -7,6 +7,12 @@ import {FiltersComponent} from './components/filters/filters.component';
 import {environment} from '../../../environments/environment';
 import {AbstractBikeparksService} from './services/bikeparks.service';
 import {
+  MatButtonModule,
+  MatDialogModule, MatDividerModule,
+  MatSelectModule,
+  MatNativeDateModule,
+  MatDatepickerModule,
+  MatListModule,
   MatAutocompleteModule,
   MatCardModule,
   MatCheckboxModule,
@@ -17,10 +23,24 @@ import {
   MatInputModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {RouterModule} from '@angular/router';
+import {profileRoutes} from '../profile/profile.routing';
+import {AgmCoreModule} from '@agm/core';
+import {PdfViewerModule} from 'ng2-pdf-viewer';
 
 @NgModule({
   imports: [
     CommonModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatDividerModule,
+    MatListModule,
+    RouterModule.forChild(profileRoutes),
+    AgmCoreModule,
+    PdfViewerModule,
     BikeparksRoutingModule,
     MatCardModule,
     MatCheckboxModule,

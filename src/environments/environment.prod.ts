@@ -1,5 +1,8 @@
 import {ServerBikeparksService} from '../app/modules/bikepark/services/bikeparks.service';
 import {ServerBikeparkProfileService} from '../app/modules/profile/services/bikepark-profile.service';
+import {ServerConcursDetailsService} from '../app/modules/concurs/services/concurs-details.service';
+import {ServerConcursService} from '../app/modules/concurs/services/concurs.service';
+import {MockTraseuService, ServerTraseuService} from '../app/modules/profile/services/traseu.service';
 
 export const environment = {
   production: true,
@@ -8,4 +11,7 @@ export const environment = {
   environmentTestText: 'Prod is on',
   bikeparkService: ServerBikeparksService,
   bikeparkProfileService: ServerBikeparkProfileService,
+  concursDetailsService: ServerConcursDetailsService,
+  concursService: ServerConcursService,
+  traseuService: ServerTraseuService,
 };

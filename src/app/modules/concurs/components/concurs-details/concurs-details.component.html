@@ -1,0 +1,134 @@
+<mat-card class="internship-details">
+  <div class="grid-container">
+    <mat-card-title class="internship-title">{{concursDetails.denumire}}</mat-card-title>
+    <!--<div class="internship-desc">{{concursDetails.dataStart}}</div>-->
+    <div class="internship-status">
+      <ul>
+        <!--<li>{{concursDetails.dataStart}}</li>
+        <li>{{concursDetails.minimParticipanti}}</li>
+        <li>{{concursDetails.nrParticipanti}}</li>-->
+      </ul>
+    </div>
+    <!--<div class="internship_date">{{concursDetails.dataStart | date: 'yyyy/MM/dd'}}</div>-->
+    <div class="concurs-data">Data de start: {{concursDetails.dataStart | date: 'yyyy/MM/dd'}}</div>
+    <div class="concurs-numarpart">Numar inscrisi: {{concursDetails.nrParticipanti }}</div>
+    <div class="concurs-numar">Minim inscrisi: {{concursDetails.minimParticipanti }}</div>
+    <!--<div class= "internship-logo"> <img src="{{concursLogo.url}}"></div>-->
+    <div class="internship-logo"><img src={{concursLogo.url}} alt="..."></div>
+    <!--<div class="internship-tags">
+      <ul>
+        <li *ngFor = "let tag of internshipTags">#{{tag.name}}</li>
+      </ul>
+    </div>-->
+    <button mat-raised-button class="internship-modify" (click)="openEditDialog()">Edit</button>
+    <button mat-raised-button class="internship-apply" (click)="openRezervareConcursDialog()">Inscriere</button>
+    <div class="col-sm-12">
+      <!--Photo upload-->
+      <input class="input-file"
+             type="file" (change)="onPhotoFileChanged($event)"
+             #fileInput>
+      <button mat-raised-button *ngIf="isHisProfile" class="edit-button upload-button" (click)="fileInput.click()">
+        <mat-icon>add_a_photo</mat-icon>
+        Upload Photo
+      </button>
+    </div>
+    <!--<a mat-raised-button class="internship-apply" (click)="applyForConcurs(concursDetails.id)">Inscrie-te</a>-->
+  </div>
+</mat-card>
+<mat-card class="mat-card">
+  <mat-card-header>
+    <div class="card-title-wrapper">
+      <mat-card-title>
+        <h2>Categorii</h2>
+      </mat-card-title>
+    </div>
+    <div *ngIf="isHisProfile">
+      <div class="float-right">
+        <button mat-icon-button color="primary" (click)="openCategorieAddDialog()">
+          <mat-icon>add_circle</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let categorie of concursCategorii; let lastItem = last;">
+        <div class="card-title-wrapper skill-item">
+          <p>{{categorie.tipDisciplina}}</p>
+        </div>
+        <div class="card-title-wrapper skill-item">
+          <p>{{categorie.varsta}} ani</p>
+        </div>
+        <div *ngIf="isHisProfile">
+          <div class="float-right skill-button">
+            <button mat-icon-button color="warn" (click)="deleteCategorie(categorie.id)">
+              <mat-icon>delete_outline</mat-icon>
+            </button>
+          </div>
+        </div>
+        <mat-divider *ngIf="!lastItem"></mat-divider>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
+<!--<mat-card class="mat-card">
+  <mat-card-header>
+    <div class="card-title-wrapper">
+      <mat-card-title>
+        <h2>Requirements</h2>
+      </mat-card-title>
+    </div>
+    <div class="float-right">
+      <button mat-icon-button color="primary">
+        <mat-icon>add_circle</mat-icon>
+      </button>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let skill of internshipSkills; let lastItem = last;">
+        <div class="card-title-wrapper skill-item">
+          <p>{{skill.name}}</p>
+        </div>
+        <div class="float-right skill-button">
+          <button mat-icon-button color="warn">
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+        </div>
+        <mat-divider *ngIf="!lastItem"></mat-divider>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
+<mat-card class="mat-card">
+  <mat-card-header>
+    <div class="card-title-wrapper">
+      <mat-card-title>
+        <h2>Attributes</h2>
+      </mat-card-title>
+    </div>
+    <div class="float-right">
+      <button mat-icon-button color="primary">
+        <mat-icon>add_circle</mat-icon>
+      </button>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let skill of internshipSkills; let lastItem = last;">
+        <div class="card-title-wrapper skill-item">
+          <p>{{skill.name}}</p>
+        </div>
+        <div class="float-right skill-button">
+          <button mat-icon-button color="warn">
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+        </div>
+        <mat-divider *ngIf="!lastItem"></mat-divider>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>-->
+
+
+

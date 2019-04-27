@@ -1,10 +1,9 @@
-<p>
-  bikepark-profile-page works!
-</p>
-<h2>{{bikepark.denumire}}</h2>
-<div mat-card-avatar>
+<!--<h2>{{bikepark.denumire}}</h2>
+
+<img class="size" src="{{bikepark.contact.photo.url}}">
+&lt;!&ndash;<div mat-card-avatar>
   <img mat-card-sm-image class="size" src="{{bikepark.contact.photo.url}}" alt="{{bikepark.denumire}}">
-</div>
+</div>&ndash;&gt;
 
 <div>
   <p>{{bikepark.nrLocuri}}</p>
@@ -24,10 +23,222 @@
     add
   </button>
 
-  <!--<mat-form-field>
+  &lt;!&ndash;<mat-form-field>
     <input matInput [matDatepicker]="picker" placeholder="Start date" [(ngModel)]="education.startDate">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker startView="year" [startAt]="startDatex"></mat-datepicker>
-  </mat-form-field>-->
+  </mat-form-field>&ndash;&gt;
 
+</div>-->
+
+<div class="container content" *ngIf="bikepark">
+  <div class="top-gradient-div">
+    <div class="row">
+      <div class="col-sm-12 image-wrapper-gabi">
+        <img src={{bikepark.contact.photo.url}} alt="..." class="profile-pic">
+      </div>
+    </div>
+  </div>
+  <mat-card class="example-card, bottom-gradient-div">
+    <mat-card-content>
+      <div class="row">
+        <div class="col-md-6">
+
+          <div class="col-sm-12 name-wrapper">
+            <h1>{{bikepark.denumire}}</h1>
+          </div>
+          <div class="col-sm-12">
+            <h5>{{bikepark.nrLocuri}} Locuri Total</h5>
+          </div>
+          <div class="col-sm-12">
+            <div *ngIf="bikepark.telescaun">
+              <h5>Telescaun : Da</h5>
+            </div>
+            <div *ngIf="!bikepark.telescaun">
+              <h5>Telescaun : Nu</h5>
+            </div>
+          </div>
+
+          <!--<button mat-raised-button class="internship-modify" (click)="openEditDialog()">Edit</button>-->
+          <div class="col-sm-12 traseu-edit-button-wrapper" *ngIf="!isHisProfile">
+            <button mat-raised-button (click)="openAddRezervareDialog()">
+              <!--<mat-icon>list</mat-icon>-->
+              Rezerva
+            </button>
+          </div>
+          <div class="col-sm-12 traseu-edit-button-wrapper" *ngIf="!isHisProfile">
+            <button mat-raised-button (click)="openEditBikeparkDialog()">
+              Edit
+            </button>
+            <!--<div class="col-sm-12">
+              &lt;!&ndash;Photo upload&ndash;&gt;
+              <input class="input-file"
+                     type="file" (change)="onPhotoFileChanged($event)"
+                     #fileInput>
+              <button mat-raised-button *ngIf="!isHisProfile" class="edit-button upload-button" (click)="fileInput.click()">
+                <mat-icon>add_a_photo</mat-icon>
+                Upload Photo
+              </button>
+            </div>-->
+          </div>
+
+
+        </div>
+        <!--<div class="col-md-6">
+          <div class="row">
+            <div class="col-sm-12">
+              <button mat-raised-button *ngIf="isHisProfile" class="edit-button" (click)="openBasicEditDialog()">Edit
+              </button>
+            </div>
+            <div class="col-sm-12">
+              &lt;!&ndash;Photo upload&ndash;&gt;
+              <input class="input-file"
+                     type="file" (change)="onPhotoFileChanged($event)"
+                     #fileInput>
+              <button mat-raised-button *ngIf="isHisProfile" class="edit-button upload-button"
+                      (click)="fileInput.click()">
+                <mat-icon>add_a_photo</mat-icon>
+                Upload Photo
+              </button>
+            </div>
+          </div>
+        </div>-->
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-sm-12">
+              <!--Photo upload-->
+              <input class="input-file"
+                     type="file" (change)="onPhotoFileChanged($event)"
+                     #fileInput>
+              <button mat-raised-button *ngIf="!isHisProfile" class="edit-button upload-button" (click)="fileInput.click()">
+                <mat-icon>add_a_photo</mat-icon>
+                Upload Photo
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="divider">
+        <mat-divider></mat-divider>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <h5>Descriere :</h5>
+          <h6>{{bikepark.descriere}}</h6>
+        </div>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+
+  <!--<mat-card class="example-card, trasee-color">-->
+  <!--<app-traseu-list></app-traseu-list>-->
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div class="card-title-wrapper">
+        <mat-card-title>
+          <h2>Lista de Trasee</h2>
+        </mat-card-title>
+      </div>
+      <div class="float-right">
+        <button mat-raised-button *ngIf="!isHisProfile" (click)="openAddTraseuDialog()">Adauga Traseu Nou</button>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div>
+        <app-traseu-list></app-traseu-list>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="example-card, contact-color">
+    <mat-card-header>
+      <div class="card-title-wrapper">
+        <mat-card-title>
+          <h2>Contact Bikepark</h2>
+        </mat-card-title>
+      </div>
+      <div class="float-right">
+        <button mat-raised-button *ngIf="!isHisProfile" (click)="openEditContactBikeparkDialog()">Edit Contact</button>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-sm-12 col-md-2 ">
+          <h5>Phone:</h5>
+        </div>
+        <div class="col-sm-12 col-md-10">
+          <h5>{{bikepark.contact.phoneNumber}}</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-md-2 ">
+          <h5>Email:</h5>
+        </div>
+        <div class="col-sm-12 col-md-10">
+          <h5>{{bikepark.user.email}}</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-md-2 ">
+          <h5>Facebook:</h5>
+        </div>
+        <div class="col-sm-12 col-md-10">
+          <h5><a href={{bikepark.contact.facebookLink}}> {{bikepark.contact.facebookLink}}</a></h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-md-2 ">
+          <h5>Website:</h5>
+        </div>
+        <div class="col-sm-12 col-md-10">
+          <h5><a href={{bikepark.contact.website}}> {{bikepark.contact.website}}</a></h5>
+        </div>
+      </div>
+      <div class="divider">
+        <mat-divider></mat-divider>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <h4>Adress</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-md-2 ">
+          <h5>Country:</h5>
+        </div>
+        <div class="col-sm-12 col-md-10">
+          <h5>{{bikepark.contact.locatie.tara}}</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-lg-2 ">
+          <h5>City:</h5>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <h5>{{bikepark.contact.locatie.localitate}}</h5>
+        </div>
+        <div class="col-md-6 col-lg-2 ">
+          <h5>County:</h5>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <h5>{{bikepark.contact.locatie.provincie}}</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-lg-2 ">
+          <h5>Street:</h5>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <h5>{{bikepark.contact.locatie.strada}}</h5>
+        </div>
+        <div class="col-md-6 col-lg-2 ">
+          <h5>Number:</h5>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <h5>{{bikepark.contact.locatie.number}}</h5>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>

@@ -18,6 +18,7 @@ export class AppComponent {
   }
 
   public getContentAreaClass(): string {
+    return 'contentArea'; // TODO
     if (this.sessionManagementService.isUserLoggedIn() &&
       this.sessionManagementService.isEverythingLoaded()) {
       return 'contentArea';
@@ -27,6 +28,7 @@ export class AppComponent {
   }
 
   public getNavBarClass(): string {
+    return ''; // TODO
     if (this.sessionManagementService.isUserLoggedIn() &&
       this.sessionManagementService.isEverythingLoaded()) {
       return '';

@@ -17,10 +17,20 @@ mat-card {
   border-radius: 0;
 }
 
+mat-card-sm-image {
+  object-fit: cover; /*this makes de image in src fit to the size of specified below*/
+  width: 100px; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+  height: 90px;
+}
+
 .top-gradient-div {
   background: #000046;
   background: -webkit-linear-gradient(to right, #87CEEB,  	#E6E6FA);
   background: linear-gradient(to right, #87CEEB,  	#E6E6FA);
+}
+
+.rezervare-bikepark-button-wrapper {
+  padding-bottom: 10px;
 }
 
 mat-card:hover {

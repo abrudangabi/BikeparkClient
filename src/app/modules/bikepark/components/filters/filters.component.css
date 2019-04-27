@@ -8,3 +8,7 @@
 .mat-expansion-panel-header.mat-expanded:hover {
   background: lightblue !important;
 }
+
+.culoare-bara {
+  background: yellowgreen;
+}

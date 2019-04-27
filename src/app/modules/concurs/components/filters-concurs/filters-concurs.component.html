@@ -1,0 +1,46 @@
+<form [formGroup]="filterForm" class="form-group">
+  <mat-expansion-panel>
+
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Filter concurs
+      </mat-panel-title>
+      <mat-panel-description>
+        Cauta concurs dupa un filtru
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-form-field>
+      <mat-chip-list #chipListBikepark>
+        <mat-chip *ngFor="let bikePark of selectedBikeparks" [selectable]="false" [removable]="removable" (removed)="removeBikepark(bikePark)">
+          {{bikePark.denumire}}
+          <mat-icon matChipRemove *ngIf="removable">&times;</mat-icon>
+        </mat-chip>
+        <input #triggerBikepark type="text" matInput placeholder="Filtrati dupa denumirea bikepark-ului" formControlName="bikeparkFilter"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputFor]="chipListBikepark" [matAutocomplete]="autoBikepark">
+      </mat-chip-list>
+      <mat-autocomplete #autoBikepark="matAutocomplete" (optionSelected)="selectedBikepark($event)">
+        <mat-option *ngFor="let bikepark of filteredBikeparks" [value]="bikepark">
+          {{bikepark.denumire}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-chip-list #chipListCategorie>
+        <mat-chip *ngFor="let categorie of selectedCategorii" [selectable]="false" [removable]="removable" (removed)="removeCategorie(categorie)">
+          {{categorie.tipDisciplina}}
+          <mat-icon matChipRemove *ngIf="removable">&times;</mat-icon>
+        </mat-chip>
+        <input #triggerCategorii type="text" matInput placeholder="Filtrati dupa categorie" formControlName="categorieFilter" [matChipInputFor]="chipListCategorie"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matAutocomplete]="autoCategorie">
+      </mat-chip-list>
+      <mat-autocomplete #autoCategorie="matAutocomplete" (optionSelected)="selectedCategorie($event)">
+        <mat-option *ngFor="let categorie of filteredCategorii" [value]="categorie">
+          {{categorie.tipDisciplina}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+  </mat-expansion-panel>
+</form>

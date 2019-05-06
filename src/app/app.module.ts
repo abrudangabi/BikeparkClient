@@ -30,6 +30,9 @@ import { FiltersComponent } from './modules/bikepark/components/filters/filters.
 import { BikeparksPageComponent } from './modules/bikepark/page/bikeparks-page/bikeparks-page.component';
 import { BikeparksRoutingModule } from './modules/bikepark/bikeparks-routing.module';
 import { BikeparksModule } from './modules/bikepark/bikeparks.module';
+import {DashboardModule} from './modules/dashboard/dashboard.module';
+import {DashboardPageComponent} from './modules/dashboard/pages/dashboard-page/dashboard-page.component';
+import {BikerDashboardComponent} from './modules/dashboard/components/biker-dashboard/biker-dashboard.component';
 import {SessionManagementService} from './shared/utils/session-management.service';
 import {AuthGuard} from './modules/guard/auth-guard.service';
 import {NavBarComponent} from './masterComponents/navbar/nav-bar.component';
@@ -40,8 +43,33 @@ import { ConcursRoutingModule } from './modules/concurs/concurs-routing.module';
 import { ConcursModule } from './modules/concurs/concurs.module';
 import {ConcursPageComponent} from './modules/concurs/pages/concurs-page/concurs-page.component';
 import {ConcursDetailsPageComponent} from './modules/concurs/pages/concurs-details-page/concurs-details-page.component';
+import {BikeparkDashboardComponent} from './modules/dashboard/components/bikepark-dashboard/bikepark-dashboard.component';
 
 export const appRoutes: Routes = [
+  /*{path: 'login', component: LoginPageComponent, pathMatch: 'full'},*/
+  /*{
+    path: 'profile',
+    component: CompanyProfilePageComponent,
+    loadChildren: './modules/profile/profile.module#ProfileModule',
+    // canActivate: [AuthGuard]
+  },
+  {path: 'register', component: RegisterPageComponent, pathMatch: 'full'},*/
+  {
+    path: 'dashboard',
+    component: DashboardPageComponent,
+    children: [
+      {path: 'bikerHome', component: BikerDashboardComponent},
+      {path: 'bikeparkHome', component: BikeparkDashboardComponent}
+    ],
+    // canActivate: [AuthGuard]
+  },
+  {
+    path: 'dashboard',
+    component: DashboardPageComponent,
+    loadChildren: './modules/dashboard/dashboard.module#DashboardModule',
+    // canActivate: [AuthGuard]
+  },
+  {path: '**', redirectTo: '/login', pathMatch: 'full', } // canActivate: [AuthGuard]}
 ];
 
 @NgModule({
@@ -50,6 +78,7 @@ export const appRoutes: Routes = [
     BikeparksPageComponent,
     ConcursPageComponent,
     ConcursDetailsPageComponent,
+    DashboardPageComponent,
     NavBarComponent,
     NotificationManagerComponent,
     ProgressSpinnerComponent,
@@ -62,6 +91,7 @@ export const appRoutes: Routes = [
       appRoutes,
       {} // <-- debugging purposes only
     ),
+    DashboardModule,
     FormsModule,
     MatCardModule,
     MatButtonModule,
@@ -106,10 +136,13 @@ export interface NavBarItem {
 }
 
 export let applicantNavBarItems: NavBarItem[] = [
+  {title: 'BikerDashboardComponent', path: 'dashboard/bikerHome'},
   {title: 'Bikeparks', path: 'bikeparks'},
   {title: 'Concurs', path: 'concurs'},
+  // todo Nu e Bun jos
+  {title: 'BikeparkDashboardComponent', path: 'dashboard/bikeparkHome'},
 ];
 
 export let companyNavBarItems: NavBarItem[] = [
-  {title: 'CompanyDashboardComponent', path: 'dashboard/companyHome'},
+  {title: 'BikeparkDashboardComponent', path: 'dashboard/bikeparkHome'},
 ];

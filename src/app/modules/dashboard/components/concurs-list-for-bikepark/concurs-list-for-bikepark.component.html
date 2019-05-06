@@ -1,0 +1,41 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <div class="card-title-wrapper">
+      <mat-card-title>
+        <h2>Lista de Concursuri</h2>
+      </mat-card-title>
+    </div>
+    <div class="float-right">
+      <button mat-raised-button (click)="openAddConcursDialog()">Adauga Concurs Nou</button>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let concurs of concursuri; let lastItem = last;">
+
+        <div class="card-title-wrapper skill-item">
+          <button mat-raised-button (click)="redirectToConcursPage(concurs.id)">
+            <!--<mat-icon>list</mat-icon>-->
+            Detalii
+          </button>
+        </div>
+
+        <div class="card-title-wrapper skill-item">
+          <h5>{{concurs.denumire}}</h5>
+        </div>
+
+        <div class="card-title-wrapper skill-item">
+          {{concurs.dataStart | date: 'yyyy/MM/dd'}}
+        </div>
+
+        <div class="float-right skill-button">
+          <button mat-icon-button color="warn" (click)="deleteConcurs(concurs.id)">
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+        </div>
+
+        <mat-divider *ngIf="!lastItem"></mat-divider>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>

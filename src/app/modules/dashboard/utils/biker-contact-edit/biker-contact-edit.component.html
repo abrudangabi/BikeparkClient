@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Edit Contact Biker profile</h1>
+<div mat-dialog-content>
+  <div class="main-container">
+    <mat-form-field>
+      <input matInput [(ngModel)]="contact.phoneNumber" placeholder="Numar Telefon Biker"
+             value="{{contact.phoneNumber}}" onchange="">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="contact.website" placeholder="Website/Email Biker"
+             value="{{contact.website}}" onchange="">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="contact.facebookLink" placeholder="Pagina Facebook Biker"
+             value="{{contact.facebookLink}}" onchange="">
+    </mat-form-field>
+  </div>
+</div>
+<div class="float-right" mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="onNoClick()">Cancel</button>
+  <button mat-raised-button (click)="onSaveClick()">Save</button>
+</div>

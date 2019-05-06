@@ -1,0 +1,148 @@
+.size {
+  width: 60%;
+  height: auto;
+}
+
+.example-container > * {
+  width: 100%;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.mat-card {
+  margin-bottom: 20px;
+}
+
+.profile-pic {
+  display: inline-block;
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  max-width: 85%;
+}
+
+.mat-card-header-text-wrapper {
+  width: 100%;
+}
+
+.card-title-wrapper {
+  width: 100%;
+}
+
+.contact-color {
+  background: lightgreen;
+}
+
+.trasee-color{
+  background: #00F260;
+  /*background: -webkit-linear-gradient(to right, #22c1c3, #fdbb2d);
+  background: linear-gradient(to right, #22c1c3, #fdbb2d);*/
+  background: -webkit-linear-gradient(to right, #00F260, #0575E6);
+  background: linear-gradient(to right, #00F260, #0575E6);
+}
+
+.trasee-greu{
+  background: #0F2027;
+  background: -webkit-linear-gradient(to right, #0F2027, #203A43, #2C5364);
+  background: linear-gradient(to right, #0F2027, #203A43, #2C5364);
+}
+
+.trasee-mediu{
+  background: #f12711;
+  background: -webkit-linear-gradient(to right, #f12711, #f5af19);
+  background: linear-gradient(to right, #f12711, #f5af19);
+}
+
+.trasee-usor{
+  background: #00B4DB;
+  background: -webkit-linear-gradient(to right, #00B4DB, #0083B0);
+  background: linear-gradient(to right, #00B4DB, #0083B0);
+}
+
+.mat-divider {
+  display: block;
+  border-top-width: 2px;
+  border-top-style: solid;
+  margin-left: 3%;
+  width: 94% !important;
+  padding-bottom: 15px;
+}
+
+.divider {
+  height: 15px;
+}
+
+.mat-list .mat-list-item {
+  display: block;
+  height: 100%;
+}
+
+.skill-item {
+  min-height: 50px;
+}
+
+.skill-button {
+  padding-bottom: 20px;
+}
+
+.intenship-button-wrapper {
+  padding-bottom: 10px;
+}
+
+.traseu-edit-button-wrapper {
+  padding-bottom: 10px;
+}
+
+.input-file {
+  display: none
+}
+
+.top-gradient-div {
+  height: 170px;
+  background: #fc4a1a;
+  /*background: -webkit-linear-gradient(to right, #22c1c3, #fdbb2d);
+  background: linear-gradient(to right, #22c1c3, #fdbb2d);*/
+  background: -webkit-linear-gradient(to right, #fc4a1a, #f7b733);
+  background: linear-gradient(to right, #fc4a1a, #f7b733);
+}
+
+.bottom-gradient-div {
+  background: #22c1c3;
+  background: -webkit-linear-gradient(to right, #22c1c3, #fdbb2d);
+  background: linear-gradient(to right, #22c1c3, #fdbb2d);
+}
+
+.image-wrapper {
+  position: absolute;
+  z-index: 2;
+  padding: 46px;
+}
+
+.image-wrapper-gabi {
+  position: absolute;
+  z-index: 2;
+  padding: 46px;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+.name-wrapper {
+  margin-top: 110px;
+}
+
+.edit-button {
+  float: right;
+  margin-bottom: 15px;
+  z-index: 3;
+}
+
+.upload-button {
+  width: 140px;
+}
+

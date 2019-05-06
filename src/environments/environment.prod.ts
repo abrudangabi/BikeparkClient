@@ -3,6 +3,11 @@ import {ServerBikeparkProfileService} from '../app/modules/profile/services/bike
 import {ServerConcursDetailsService} from '../app/modules/concurs/services/concurs-details.service';
 import {ServerConcursService} from '../app/modules/concurs/services/concurs.service';
 import {MockTraseuService, ServerTraseuService} from '../app/modules/profile/services/traseu.service';
+import {
+  MockBikeparksForDashboardServicesService,
+  ServerBikeparksForDashboardServicesService
+} from '../app/modules/dashboard/services/bikeparks-service.service';
+import {ServerConcursForDashboardServicesService} from '../app/modules/dashboard/services/concurs-service.service';
 
 export const environment = {
   production: true,
@@ -14,4 +19,6 @@ export const environment = {
   concursDetailsService: ServerConcursDetailsService,
   concursService: ServerConcursService,
   traseuService: ServerTraseuService,
+  bikeparkServiceForDashboardService: ServerBikeparksForDashboardServicesService,
+  concursServiceForDashboardService: ServerConcursForDashboardServicesService,
 };

@@ -19,4 +19,8 @@ export interface RezervareConcurs {
 
   numar?: number;
 
+  biker_id?: number;
+
+  concurs_id?: number;
+
 }

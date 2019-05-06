@@ -1,0 +1,51 @@
+<div class="container content" *ngIf="bikepark">
+  <div class="top-gradient-div">
+    <div class="row">
+      <div class="col-sm-12 image-wrapper-gabi">
+        <img src={{bikepark.contact.photo.url}} alt="..." class="profile-pic">
+      </div>
+    </div>
+  </div>
+  <mat-card class="example-card">
+    <mat-card-content>
+      <div class="row">
+        <div class="col-md-6">
+
+          <div class="col-sm-12 name-wrapper">
+            <h1>{{bikepark.denumire}}</h1>
+          </div>
+          <div class="col-sm-12">
+            <h5>Locuri Total: {{bikepark.nrLocuri}}</h5>
+          </div>
+          <div class="col-sm-12">
+            <div *ngIf="bikepark.telescaun">
+              <h5>Telescaun : Da</h5>
+            </div>
+            <div *ngIf="!bikepark.telescaun">
+              <h5>Telescaun : Nu</h5>
+            </div>
+          </div>
+
+          <div class="col-sm-12 traseu-edit-button-wrapper">
+            <button mat-raised-button (click)="goToProfile(bikepark.id)">
+              <!--<mat-icon>list</mat-icon>-->
+              Spre Profil
+            </button>
+          </div>
+        </div>
+
+      </div>
+      <!--<div class="divider">
+        <mat-divider></mat-divider>
+      </div>-->
+      <!--<div class="row">
+        <div class="col-sm-12">
+          <h5>Descriere :</h5>
+          <h6>{{bikepark.descriere}}</h6>
+        </div>
+      </div>-->
+
+    </mat-card-content>
+  </mat-card>
+
+</div>

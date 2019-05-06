@@ -1,0 +1,28 @@
+<p>Bikepark Dashboard</p>
+<div class="container">
+  <div class="row1 box">
+    <app-bikepark-message [concursuri]="this.concursuri"
+                          [rezervariBikepark]="this.rezervariBikepark"
+                          [rezervariConcurs]="this.rezervariConcurs"></app-bikepark-message>
+  </div>
+
+  <div class="box">
+    <app-bikepark-profile [bikepark]="bikepark"></app-bikepark-profile>
+  </div>
+  <!--<div class="row ">
+    <div class="row1 col-12  col-sm-7  box">
+      <app-message-card [rezervariBikepark]="this.rezervariBikepark"></app-message-card>
+    </div>
+    <div class="row1 img1 col-12 col-sm-5 box ">
+      <app-mini-profile [biker]="this.biker"></app-mini-profile>
+    </div>
+  </div>-->
+  <!--<div class="box">
+    <app-biker-info *ngIf="biker" [bikerDetails]="biker"></app-biker-info>
+  </div>-->
+  <div class="box">
+    <!--<app-bikepark-reservations-list-for-biker></app-bikepark-reservations-list-for-biker>-->
+    <app-concurs-list-for-bikepark></app-concurs-list-for-bikepark>
+  </div>
+</div>
+

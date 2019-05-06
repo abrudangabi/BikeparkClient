@@ -3,6 +3,8 @@ import {MockBikeparkProfileService} from '../app/modules/profile/services/bikepa
 import {MockConcursDetailsService} from '../app/modules/concurs/services/concurs-details.service';
 import {MockConcursService} from '../app/modules/concurs/services/concurs.service';
 import {MockTraseuService} from '../app/modules/profile/services/traseu.service';
+import {MockBikeparksForDashboardServicesService} from '../app/modules/dashboard/services/bikeparks-service.service';
+import {MockConcursForDashboardServicesService} from '../app/modules/dashboard/services/concurs-service.service';
 
 
 export const environment = {
@@ -15,4 +17,6 @@ export const environment = {
   concursDetailsService: MockConcursDetailsService,
   concursService: MockConcursService,
   traseuService: MockTraseuService,
+  bikeparkServiceForDashboardService: MockBikeparksForDashboardServicesService,
+  concursServiceForDashboardService: MockConcursForDashboardServicesService,
 };

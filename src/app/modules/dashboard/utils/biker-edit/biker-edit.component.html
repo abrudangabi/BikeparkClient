@@ -1,0 +1,39 @@
+<h1 mat-dialog-title>Edit profile</h1>
+<div mat-dialog-content>
+  <div class="main-container">
+    <mat-form-field>
+      <input matInput [(ngModel)]="biker.prenume" placeholder="Prenume Biker"
+             value="{{biker.prenume}}" onchange="">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="biker.nume" placeholder="Nume Biker"
+             value="{{biker.nume}}" onchange="">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="biker.bicicleta" placeholder="Bicicleta Biker"
+             value="{{biker.bicicleta}}" onchange="">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="biker.disciplinaFavorita" placeholder="Disciplina Biker"
+             value="{{biker.disciplinaFavorita}}" onchange="">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker1" placeholder="Data Nasterii" [(ngModel)]="biker.dataNasterii">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1 startView="year"></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker2" placeholder="Membru din Data" [(ngModel)]="biker.membruData">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2 startView="year"></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="biker.aniExperienta" placeholder="Ani de Experienta"
+             value="{{biker.aniExperienta}}" onchange="">
+    </mat-form-field>
+  </div>
+</div>
+<div class="float-right" mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="onNoClick()">Cancel</button>
+  <button mat-raised-button (click)="onSaveClick()">Save</button>
+</div>

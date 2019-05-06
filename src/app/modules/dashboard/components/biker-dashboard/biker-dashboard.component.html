@@ -1,0 +1,41 @@
+<p>Biker Dashboard</p>
+<div class="container">
+  <div class="row ">
+    <div class="row1 col-12  col-sm-7  box">
+      <app-message-card [rezervariBikepark]="this.rezervariBikepark" [rezervariConcurs]="rezervariBikepark"></app-message-card>
+    </div>
+    <div class="row1 img1 col-12 col-sm-5 box ">
+      <app-mini-profile [biker]="this.biker"></app-mini-profile>
+    </div>
+  </div>
+  <div class="box">
+    <app-biker-info *ngIf="biker" [bikerDetails]="biker"></app-biker-info>
+    <!--<div class="row2 col-sm-5 col-12 box">
+      &lt;!&ndash;<app-business-list [companies]="this.companies"></app-business-list>&ndash;&gt;
+    </div>
+    <div class="row2 col-sm-7 col-12 box">
+      &lt;!&ndash;<app-xyline-chart [data]="this.chartData"></app-xyline-chart>&ndash;&gt;
+    </div>-->
+  </div>
+  <div class="box">
+    <app-bikepark-reservations-list-for-biker></app-bikepark-reservations-list-for-biker>
+  </div>
+  <div class="box">
+    <app-concurs-reservations-list-for-biker></app-concurs-reservations-list-for-biker>
+  </div>
+  <!--<div class="row">
+    <div class="row1 col-12 box">
+      <app-bikepark-reservations-list-for-biker></app-bikepark-reservations-list-for-biker>
+      &lt;!&ndash;<app-internships-list-for-applicant></app-internships-list-for-applicant>&ndash;&gt;
+    </div>
+    &lt;!&ndash;<div class="row1 img1 col-12 col-sm-4 box">
+      &lt;!&ndash;<app-pie-chart [data]="this.pieChartData"></app-pie-chart>&ndash;&gt;
+    </div>&ndash;&gt;
+  </div>
+  <div class="row">
+    <div class="row1 col-12 box">
+      <app-concurs-reservations-list-for-biker></app-concurs-reservations-list-for-biker>
+    </div>
+  </div>-->
+</div>
+

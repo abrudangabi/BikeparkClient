@@ -17,6 +17,8 @@ export interface RezervareBikePark {
 
   ziua?: string;
 
+  numeBikepark?: string;
+
   biker_id?: number;
 
   bikepark_id?: number;

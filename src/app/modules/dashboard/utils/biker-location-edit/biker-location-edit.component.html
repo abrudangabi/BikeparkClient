@@ -1,0 +1,41 @@
+<h1 mat-dialog-title>Edit profile</h1>
+<div mat-dialog-content>
+  <div class="main-container">
+    <mat-form-field>
+      <input matInput [(ngModel)]="location.tara" placeholder="Tara"
+             value="{{location.tara}}" onchange="">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="location.provincie" placeholder="Provincie"
+             value="{{location.provincie}}" onchange="">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="location.localitate" placeholder="Localitate"
+             value="{{location.localitate}}" onchange="">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="location.codPostal" placeholder="Cod Postal"
+             value="{{location.codPostal}}" onchange="">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="location.strada" placeholder="Strada"
+             value="{{location.strada}}" onchange="">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="location.number" placeholder="Numar"
+             value="{{location.number}}" onchange="">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="location.latitude" placeholder="Latitudine"
+             value="{{location.latitude}}" onchange="">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="location.longitude" placeholder="Longitudine"
+             value="{{location.longitude}}" onchange="">
+    </mat-form-field>
+  </div>
+</div>
+<div class="float-right" mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="onNoClick()">Cancel</button>
+  <button mat-raised-button (click)="onSaveClick()">Save</button>
+</div>

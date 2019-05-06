@@ -74,6 +74,22 @@ export class MockBikeparksService implements AbstractBikeparksService {
       nrLocuri: 5000,
       contact: this.contact2,
       descriere: 'Bikeparkul ideal tuturor bikerilor din lume, aici se gasesc orice tip de traseu pe care il cauti'
+    },
+    {
+      id: 3,
+      denumire: 'Whistler2',
+      telescaun: true,
+      nrLocuri: 5000,
+      contact: this.contact2,
+      descriere: 'Bikeparkul ideal tuturor bikerilor din lume, aici se gasesc orice tip de traseu pe care il cauti'
+    },
+    {
+      id: 4,
+      denumire: 'Whistler3',
+      telescaun: true,
+      nrLocuri: 5000,
+      contact: this.contact2,
+      descriere: 'Bikeparkul ideal tuturor bikerilor din lume, aici se gasesc orice tip de traseu pe care il cauti'
     }
   ];
 

@@ -20,7 +20,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   constructor(private sessionManagementService: SessionManagementService, private router: Router) {
     this.environment = environment;
     this.menuNavBar = applicantNavBarItems; // todo
-    this.menuNavBar.concat(companyNavBarItems);
+    // this.menuNavBar.concat(companyNavBarItems);
     this.isLoginDataLoadingFinishedSubscription = this.sessionManagementService.isLoginDataLoadingFinished.subscribe((response) => {
       if (response) {
         if (this.sessionManagementService.getLoggedUserRole() === Role.RoleStringEnum.APPLICANT) {

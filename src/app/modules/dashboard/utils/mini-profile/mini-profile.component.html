@@ -1,0 +1,30 @@
+<div class="card hovercard w-100 h-100">
+  <div class="cardheader">
+
+  </div>
+  <div class="avatar">
+    <img alt="" src="{{biker.contact.photo.url}}">
+  </div>
+  <div class="info">
+    <div class="title">
+      <a target="_blank" href="{{biker.contact.website}}">{{biker.prenume +' '+ biker.nume}}</a>
+    </div>
+  </div>
+  <div class="bottom">
+    <!--<a class="btn btn-primary btn-sm" href="{{biker.contact.linkedinLink}}">
+      <i class="fa fa-linkedin"></i>
+    </a>-->
+    <a class="btn btn-danger btn-sm" rel="publisher"
+       href="{{biker.contact.website}}">
+      <i class="fa fa-google-plus"></i>
+    </a>
+    <a class="btn btn-primary btn-sm" rel="publisher"
+       href="{{biker.contact.facebookLink}}">
+      <i class="fa fa-facebook"></i>
+    </a>
+    <p>
+      {{biker.contact.phoneNumber}}
+    </p>
+
+  </div>
+</div>

@@ -9,6 +9,8 @@ import {RezervareConcursAddComponent} from '../rezervare-concurs-add/rezervare-c
 import {CategorieAddComponent} from '../categorie-add/categorie-add.component';
 import {RezervareBikePark} from '../../../../shared/model/RezervareBikePark';
 import {RezervareConcurs} from '../../../../shared/model/RezervareConcurs';
+import {Router} from '@angular/router';
+import {BikePark} from '../../../../shared/model/BikePark';
 
 @Component({
   selector: 'app-concurs-details',
@@ -21,6 +23,7 @@ export class ConcursDetailsComponent implements OnInit {
   @Input() concursLogo: Photo;
   // @Input() concursTags: Tag[];
   @Input() concursCategorii: Categorie[];
+  bikepark: BikePark;
   isHisProfile = true;
   rezervareConcurs: RezervareConcurs = new class implements RezervareConcurs {
     id: number;
@@ -35,7 +38,9 @@ export class ConcursDetailsComponent implements OnInit {
     varsta: string;
   };
 
-  constructor(public dialog: MatDialog, private concursDetailsService: AbstractConcursDetailsService) {
+  constructor(public dialog: MatDialog,
+              private concursDetailsService: AbstractConcursDetailsService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -64,7 +69,8 @@ export class ConcursDetailsComponent implements OnInit {
   public openRezervareConcursDialog() {
     const dialogRef = this.dialog.open(RezervareConcursAddComponent, {
       width: '90%',
-      data: {rezervareConcurs: this.rezervareConcurs}
+      data: {rezervareConcurs: this.rezervareConcurs,
+      concurs: this.concursDetails}
     });
 
     dialogRef.afterClosed().subscribe(() => {
@@ -75,11 +81,14 @@ export class ConcursDetailsComponent implements OnInit {
   public openCategorieAddDialog() {
     const dialogRef = this.dialog.open(CategorieAddComponent, {
       width: '90%',
-      data: {categorie: this.categorie}
+      data: {categorie: this.categorie,
+      concurs: this.concursDetails}
     });
 
     dialogRef.afterClosed().subscribe(() => {
       console.log('closed');
+      /*dialogRef.close('Refresh');
+      dialogRef.removePanelClass('CategorieAddComponent');*/
     });
   }
 
@@ -100,6 +109,23 @@ export class ConcursDetailsComponent implements OnInit {
     console.log('de ce nu vine img');
     console.log(this.concursLogo.url);
   }
+
+  redirectToBikeparkPage(id: number) {
+    this.concursDetailsService.findBikepark(id).subscribe(bikepark => {
+      this.bikepark = bikepark;
+    });
+    this.router.navigateByUrl('/profile/bikepark/' + this.bikepark.id);
+  }
+
+  /*'i_title i_title i_title i_title i_title i_status'
+    'i_logo i_logo i_desc i_desc i_data i_data'
+    '. . i_desc i_desc i_data i_data'
+    'i_numarpart i_numarpart i_numar . i_modify i_apply';*/
+  /*grid-template-areas:
+    'i_title i_title i_title i_title i_title i_status'
+    'i_logo i_logo i_desc i_desc i_data i_data'
+    '. . i_desc i_desc i_data i_data'
+    'i_numarpart i_numar . i_bikepark i_modify i_apply';*/
 
   onPhotoFileChanged(event) {
     const uploadData = new FormData();

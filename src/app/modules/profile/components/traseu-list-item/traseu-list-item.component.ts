@@ -18,8 +18,9 @@ export class TraseuListItemComponent implements OnInit {
   distance: number;
   isHisProfile = true;
 
-  constructor(private traseuService: AbstractTraseuService, private changeDetectionRef: ChangeDetectorRef,
+  constructor(private traseuService: AbstractTraseuService,
               private traseuList: TraseuListComponent) {
+    // console.log('Traseul ' + this.traseu.denumire);
   }
 
   ngOnInit() {
@@ -30,6 +31,7 @@ export class TraseuListItemComponent implements OnInit {
       }
     );*/
     this.traseuService.initialize();
+    // console.log('Traseul ' + this.traseu.denumire);
   }
 
   public verifGreu() {
@@ -54,7 +56,7 @@ export class TraseuListItemComponent implements OnInit {
   }
 
   deleteTraseu(id: number) {
-    console.log('Apasa delete');
+    console.log('Apasa delete' + id);
     this.traseuList.deleteTraseu(id);
     /*this.traseuService.deleteTraseu(id).subscribe(() => {
       TraseuListComponent.toString();

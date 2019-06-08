@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {BikePark} from '../../../../shared/model/BikePark';
 import {AbstractBikeparksService} from '../../../bikepark/services/bikeparks.service';
 import {Router} from '@angular/router';
@@ -15,6 +15,7 @@ import {Observable, of} from 'rxjs';
 })
 export class TraseuListComponent implements OnInit {
 
+  @Input() bikepark: BikePark;
   traseu: Traseu[];
   traseu1: Traseu = new class implements Traseu {
     denumire: string;
@@ -48,25 +49,25 @@ export class TraseuListComponent implements OnInit {
   ngOnInit() {
     // this.traseuService.initialize();
     this.intialize();
-    this.traseuService.getTrasee(1)
+    this.traseuService.getTrasee(this.bikepark.id)
       .subscribe(traseu => {
         this.traseu = traseu;
         this.changeDetectionRef.detectChanges();
       });
   }
 
-  public getTrasee() {
+  /*public getTrasee() {
     this.traseuService.getTrasee(1).subscribe(
       list => {
         this.traseu = list;
       }
     );
-  }
+  }*/
 
   deleteTraseu(id: number) {
     console.log('Apasa delete');
     this.traseuService.deleteTraseu(id).subscribe(() => {
-      this.getTrasee();
+      // this.getTrasee();
       // this.changeDetectionRef.detectChanges();
     });
   }
@@ -89,7 +90,7 @@ export class TraseuListComponent implements OnInit {
     // console.log('Dece nu face');
 
     dialogRef.afterClosed().subscribe(() => {
-      this.getTrasee();
+      // this.getTrasee();
       console.log('closed');
     });
   }

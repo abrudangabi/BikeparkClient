@@ -5,6 +5,7 @@ import {AbstractBikeparkProfileService} from '../../../profile/services/bikepark
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {RezervareConcurs} from '../../../../shared/model/RezervareConcurs';
 import {AbstractConcursDetailsService} from '../../services/concurs-details.service';
+import {Concurs} from '../../../../shared/model/Concurs';
 
 @Component({
   selector: 'app-rezervare-concurs-add',
@@ -15,6 +16,7 @@ export class RezervareConcursAddComponent implements OnInit {
 
   @Output() editSubmitEventEmitter = new EventEmitter();
   rezervareConcurs: RezervareConcurs;
+  concursDetails: Concurs;
 
   constructor(
     public datepipe: DatePipe,
@@ -22,6 +24,7 @@ export class RezervareConcursAddComponent implements OnInit {
     public dialogRef: MatDialogRef<RezervareConcursAddComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.rezervareConcurs = data.rezervareConcurs;
+    this.concursDetails = data.concurs;
   }
 
   onNoClick() {
@@ -33,13 +36,18 @@ export class RezervareConcursAddComponent implements OnInit {
   }
 
   onSaveClick() {
-    const id = this.rezervareService.getRezervari().length;
+    console.log('concurs ' + this.concursDetails.denumire);
+    this.rezervareConcurs.concurs_id = this.concursDetails.id;
+    this.rezervareService.addRezervare(this.rezervareConcurs)
+      .subscribe();
+    //
+    /*const id = this.rezervareService.getRezervari().length;
     this.rezervareConcurs.id = id;
     console.log('profile: ' + this.rezervareConcurs.id + ' ' + this.rezervareConcurs.categorie + ' ' +
       +this.rezervareConcurs.numar);
     this.rezervareConcurs.id++;
     this.rezervareService.addRezervare(this.rezervareConcurs)
-      .subscribe();
+      .subscribe();*/
     window.alert('S-a trimis rezervarea');
   }
 

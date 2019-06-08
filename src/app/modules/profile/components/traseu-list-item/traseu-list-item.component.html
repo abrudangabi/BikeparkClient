@@ -4,6 +4,34 @@
   ngif="verifUsor();then showUsor">
 </ng-template>-->
 
+<!--<mat-card class="trasee-greu">
+  <mat-card-header class="">
+
+    <mat-card-title>{{ traseu.denumire }}</mat-card-title>
+    <mat-card-subtitle>TrackName</mat-card-subtitle>
+    <div class="header-text additional-header">
+      <div class="mat-card-subtitle date">
+        Type: {{traseu.tipTraseu}}
+      </div>
+      <div class="mat-card-subtitle date">
+        Distance: {{traseu.lungime}} m
+      </div>
+      <div class="mat-card-subtitle date">
+        Dificulty: {{traseu.dificultate}}
+      </div>
+    </div>
+    <div *ngIf="isHisProfile">
+      <div class="float-right skill-button">
+        <button mat-icon-button color="warn" (click)="deleteTraseu(traseu.id)">
+          <mat-icon>delete_outline</mat-icon>
+        </button>
+      </div>
+    </div>
+
+  </mat-card-header>
+
+</mat-card>-->
+
 <div *ngIf="verifGreu();then showGreu">
 </div>
 

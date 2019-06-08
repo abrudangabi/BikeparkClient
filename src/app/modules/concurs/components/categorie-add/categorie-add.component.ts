@@ -5,6 +5,7 @@ import {AbstractTraseuService} from '../../../profile/services/traseu.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Categorie} from '../../../../shared/model/Categorie';
 import {AbstractConcursDetailsService} from '../../services/concurs-details.service';
+import {Concurs} from '../../../../shared/model/Concurs';
 
 @Component({
   selector: 'app-categorie-add',
@@ -15,6 +16,7 @@ export class CategorieAddComponent implements OnInit {
 
   @Output() editSubmitEventEmitter = new EventEmitter();
   categorie: Categorie;
+  concursDetails: Concurs;
 
   constructor(
     public datepipe: DatePipe,
@@ -23,6 +25,7 @@ export class CategorieAddComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private changeDetectionRef: ChangeDetectorRef) {
     this.categorie = data.categorie;
+    this.concursDetails = data.concurs;
   }
 
   onNoClick() {
@@ -33,11 +36,16 @@ export class CategorieAddComponent implements OnInit {
     this.initialize();
   }
 
+  close() {
+    this.dialogRef.close();
+  }
+
   onSaveClick() {
-    console.log('traseu: ' + this.categorie.id + ' ' + this.categorie.tipDisciplina + ' ' +
+    /*console.log('traseu: ' + this.categorie.id + ' ' + this.categorie.tipDisciplina + ' ' +
       +this.categorie.dificultate + ' ' + this.categorie.varsta + ' ' + this.categorie.lungime);
-    this.categorie.id++;
-    this.concursService.addCategorie(this.categorie)
+    this.categorie.id++;*/
+    console.log('concurs ' + this.concursDetails.denumire);
+    this.concursService.addCategorie(this.categorie, this.concursDetails.id)
       .subscribe();
     /*this.concursService.getConcursCategorii('1')
       .subscribe(traseu => {

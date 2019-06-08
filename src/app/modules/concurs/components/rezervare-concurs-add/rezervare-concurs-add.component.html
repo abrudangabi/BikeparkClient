@@ -1,10 +1,10 @@
 <h1 mat-dialog-title>Rezervare Concurs pentru categoria dorita</h1>
 <div mat-dialog-content>
   <div class="main-container">
-    <mat-form-field>
+    <!--<mat-form-field>
       <input matInput [(ngModel)]="rezervareConcurs.id" placeholder="Id"
              value="{{rezervareConcurs.id}}" onchange="">
-    </mat-form-field>
+    </mat-form-field>-->
     <mat-form-field>
       <input matInput [(ngModel)]="rezervareConcurs.categorie" placeholder="Categorie"
              value="{{rezervareConcurs.categorie}}" onchange="">
@@ -18,5 +18,5 @@
 </div>
 <div class="float-right" mat-dialog-actions>
   <button mat-button mat-dialog-close (click)="onNoClick()">Cancel</button>
-  <button mat-raised-button (click)="onSaveClick()">Save</button>
+  <button mat-raised-button (click)="onSaveClick()">Trimite</button>
 </div>

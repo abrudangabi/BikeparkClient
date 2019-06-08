@@ -31,6 +31,8 @@ export class BikeparkEditComponent implements OnInit {
   }
 
   onSaveClick() {
+    this.bikeparkProfileService.editBikepark(this.bikepark)
+      .subscribe();
     // this.internship.birthday = new Date(this.datepipe.transform(this.internship.birthday, 'yyyy-MM-dd'));
     // this.studentProfileService.updateStudentProfileBasic(this.internship)
     //   .subscribe(() => {

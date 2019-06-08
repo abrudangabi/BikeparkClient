@@ -7,6 +7,7 @@ import {Categorie} from '../../../shared/model/Categorie';
 import {Photo} from '../../../shared/model/Photo';
 import {Locatie} from '../../../shared/model/Locatie';
 import {Contact} from '../../../shared/model/Contact';
+import {SessionManagementService} from '../../../shared/utils/session-management.service';
 
 export abstract class AbstractConcursService {
   bikeparkFilters: BikePark[] = [];
@@ -443,13 +444,15 @@ export class ServerConcursService implements AbstractConcursService {
   categoriiSubject = new Subject<Categorie[]>();
   concursSubject: ReplaySubject<Concurs[]>;
 
-  constructor(private httpClient: HttpClient) {
+  // private url = 'http://localhost:8080/api/concurs';
+
+  constructor(private httpClient: HttpClient, private sessionManager: SessionManagementService) {
   }
 
   getConcursuri() {
-    return null;
-    /*const url = 'https://enigmatic-sierra-91538.herokuapp.com/api/internship/all';
-    const httpOptions = {
+    // return null;
+    const url = 'http://localhost:8080/api/concurs/all/concurs';
+    /*const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhd' +
@@ -459,57 +462,31 @@ export class ServerConcursService implements AbstractConcursService {
           'OGVjMzg1ODg2MSIsImNsaWVudF9pZCI6InRlc3Rqd3RjbGllbnRpZCJ9.ekCWKdN7VuQ' +
           'bN9rOexqF07P0B1u2KsiroEOQdsT51Nk'
       })
-    };
-    if (this.internshipSubject) {
-      return this.internshipSubject.asObservable();
+    };*/
+    if (this.concursSubject) {
+      return this.concursSubject.asObservable();
     } else {
-      this.internshipSubject = new ReplaySubject(1);
-      this.httpClient.get<Internship[]>(url, httpOptions).subscribe(data => this.internshipSubject.next(data));
-      return this.internshipSubject.asObservable();
-    }*/
+      this.concursSubject = new ReplaySubject(1);
+      this.httpClient.get<Concurs[]>(url).subscribe(data => this.concursSubject.next(data));
+      return this.concursSubject.asObservable();
+    }
   }
 
   getCategorii() {
-    return null;
+    const url = 'http://localhost:8080/api/concurs/all/categorie';
+    return this.httpClient.get<Categorie[]>(url);
+    // return null;
   }
 
   getBikepark() {
-    return null;
+    // return null;
+    const url = 'http://localhost:8080/api/bikepark/all/bikepark';
+    return this.httpClient.get<BikePark []>(url);
   }
-
-  /*getCompanies() {
-    const url = 'http://enigmatic-sierra-91538.herokuapp.com/api/company/all';
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsidG' +
-          'VzdGp3dHJlc291cmNlaWQiXSwidXNlcl9uYW1lIjoiYXBwbGljYW50Iiwic2NvcGUiOlsicmVh' +
-          'ZCIsIndyaXRlIl0sImV4cCI6MTU3NDgyNDEwNSwiYXV0aG9yaXRpZXMiOlsiQVBQTElDQU5UIl' +
-          '0sImp0aSI6IjZkY2RmYzk1LTc4YzMtNDE3MS1iZGM5LTc2MjJlOTViNmRlMCIsImNsaWVudF9pZ' +
-          'CI6InRlc3Rqd3RjbGllbnRpZCJ9.n7vWD-ZyLxWBf2Dr4wTKKI4uCFF7KFknDoP900Nharg'
-      })
-    };
-    return this.httpClient.get<Company[]>(url, httpOptions);
-  }
-
-  getSkills() {
-    const url = 'http://enigmatic-sierra-91538.herokuapp.com/api/skill/all';
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsidGVzdGp' +
-          '3dHJlc291cmNlaWQiXSwidXNlcl9uYW1lIjoiYXBwbGljYW50Iiwic2NvcGUiOlsicmVhZCIsIndya' +
-          'XRlIl0sImV4cCI6MTU3NTkzNzQ2MCwiYXV0aG9yaXRpZXMiOlsiQVBQTElDQU5UIl0sImp0aSI6ImI' +
-          'wMDdjZTYwLWIyYWMtNDFiYi04ZjM0LTM4YzU0OWE1NmViZCIsImNsaWVudF9pZCI6InRlc3Rqd3Rj' +
-          'bGllbnRpZCJ9.3vQ0cLxYBbuB-2Lmf-rgsLWEdfBb3LdfDCb9169l8CU'
-      })
-    };
-    return this.httpClient.get<Skill[]>(url, httpOptions);
-  }*/
 
   getConcursCategorie(idConcurs: number) {
-    const url = 'http://enigmatic-sierra-91538.herokuapp.com/api/internship/';
-    const httpOptions = {
+    const url = 'http://localhost:8080/api/concurs/';
+    /*const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsidGVzdGp' +
@@ -518,8 +495,8 @@ export class ServerConcursService implements AbstractConcursService {
           'lZWYtNTMzYy00MGQzLWE2YWYtNmFhZTM0YjI3MTY0IiwiY2xpZW50X2lkIjoidGVzdGp3dGNsaWVud' +
           'GlkIn0.YgL9w9v1g6JvOg3_lspms7uMPCpBRMmjkR_I9grAVYY'
       })
-    };
-    return this.httpClient.get<Categorie[]>(url + idConcurs + '/skills', httpOptions);
+    };*/
+    return this.httpClient.get<Categorie[]>(url + idConcurs + '/categorii');
   }
 
   /*getInternshipsForCompany(idCompany: number) {
@@ -554,8 +531,8 @@ export class ServerConcursService implements AbstractConcursService {
 
   getConcursBikepark(idConcurs: number) {
     console.log(idConcurs);
-    const url = 'http://enigmatic-sierra-91538.herokuapp.com/api/internship/';
-    const httpOptions = {
+    const url = 'http://localhost:8080/api/concurs/';
+    /*const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsidGVzdGp3dHJ' +
@@ -564,8 +541,8 @@ export class ServerConcursService implements AbstractConcursService {
           'TQtNDg0Zi1hZjdlLTliOGVjMzg1ODg2MSIsImNsaWVudF9pZCI6InRlc3Rqd3RjbGllbnRpZCJ9.ekCWKd' +
           'N7VuQbN9rOexqF07P0B1u2KsiroEOQdsT51Nk'
       })
-    };
-    return this.httpClient.get<BikePark>(url + idConcurs + '/company', httpOptions);
+    };*/
+    return this.httpClient.get<BikePark>(url + idConcurs + '/bikepark');
   }
 
   setBikeparkFilters(filters: BikePark[]) {

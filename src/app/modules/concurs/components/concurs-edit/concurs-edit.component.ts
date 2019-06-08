@@ -32,6 +32,8 @@ export class ConcursEditComponent implements OnInit {
 
   // TODO trebuie facut
   onSaveClick() {
+    this.concursService.editConcurs(this.concurs)
+      .subscribe();
     // this.internship.birthday = new Date(this.datepipe.transform(this.internship.birthday, 'yyyy-MM-dd'));
     // this.studentProfileService.updateStudentProfileBasic(this.internship)
     //   .subscribe(() => {

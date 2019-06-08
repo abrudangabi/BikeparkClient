@@ -22,7 +22,7 @@ export abstract class AbstractTraseuService {
 
   public abstract getNameFilters(): string[];*/
 
-  public abstract addTraseu(traseu: Traseu): Observable<Traseu>;
+  public abstract addTraseu(traseu: Traseu, bikepark: BikePark): Observable<Traseu>;
 
   public abstract deleteTraseu(id: number): Observable<Traseu>;
 
@@ -68,7 +68,7 @@ export class MockTraseuService implements AbstractTraseuService {
     return of(this.trasee.slice());
   }
 
-  addTraseu(traseu: Traseu): Observable<Traseu> {
+  addTraseu(traseu: Traseu, bikepark: BikePark): Observable<Traseu> {
     /*let nr ;
     this.getTrasee(1)
        .subscribe(() => {
@@ -119,12 +119,14 @@ export class MockTraseuService implements AbstractTraseuService {
 })
 export class ServerTraseuService implements AbstractTraseuService {
 
-  companies: BikePark[];
+  // bikeparks: BikePark[];
+  trasee: Traseu[];
   distance: number;
   bikeparkID: number;
   idBikepark: boolean;
 
   traseu: Traseu;
+  // trasee: Traseu[];
 
   httpOptions = {
     headers: new HttpHeaders(
@@ -133,7 +135,7 @@ export class ServerTraseuService implements AbstractTraseuService {
       })
   };
 
-  private companiesName: string[] = [];
+  // private companiesName: string[] = [];
   nameFilters: string[] = [];
 
   private url = 'http://localhost:8080/api/bikepark';
@@ -143,10 +145,15 @@ export class ServerTraseuService implements AbstractTraseuService {
   constructor(private http: HttpClient, private sessionManager: SessionManagementService) {
   }
 
-  addTraseu(traseu: Traseu): Observable<Traseu> {
-    return null;
-    return this.http.post(this.url + '/rezervarebikepark/rezerva',
-      traseu,
+  addTraseu(traseu: Traseu, bikepark: BikePark): Observable<Traseu> {
+    // return null;
+    return this.http.post(this.url + '/add/traseu',
+      {
+        'bikePark': {
+          'id': bikepark.id
+        },
+        'traseu': traseu
+      },
       this.httpOptions
     ).pipe(
       tap(
@@ -180,10 +187,11 @@ export class ServerTraseuService implements AbstractTraseuService {
 
   public getTrasee(idBikepark: number): Observable<Traseu[]> {
     // return null;
-    return this.http.get<BikePark[]>(this.url + '/all/bikeparks').pipe(
+    return this.http.get<Traseu[]>(this.url + '/traseu/' + idBikepark).pipe(
       tap(
         data => {
-          this.companies = data;
+          this.trasee = data;
+          console.log('cate trasee sunt : ' + this.trasee.length);
         },
         error => {
           console.log(error);
@@ -193,15 +201,22 @@ export class ServerTraseuService implements AbstractTraseuService {
   }
 
   deleteTraseu(id: number): Observable<Traseu> {
-    return of(null);
+    return this.http.delete<Traseu>(this.url + '/traseu/delete/' + id, this.httpOptions).pipe(
+      tap(
+        data => {
+        },
+        error => {
+        }
+      )
+    );
   }
 
-  public getDenumire(): string[] {
-    for (let i = 0; i < this.companies.length; i++) {
-      this.companiesName.push(this.companies[i].denumire);
+  /*public getDenumire(): string[] {
+    for (let i = 0; i < this.bikeparks.length; i++) {
+      this.companiesName.push(this.bikeparks[i].denumire);
     }
     return this.companiesName.slice();
-  }
+  }*/
 
   setNameFilters(filters: string[]) {
     this.nameFilters = filters;

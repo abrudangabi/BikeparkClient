@@ -34,6 +34,8 @@ export class BikeparkContactEditComponent implements OnInit {
   }
 
   onSaveClick() {
+    this.bikeparkProfileService.editContactBikepark(this.contact)
+      .subscribe();
   }
 
   private initialize() {

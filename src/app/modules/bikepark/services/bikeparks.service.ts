@@ -123,7 +123,7 @@ export class MockBikeparksService implements AbstractBikeparksService {
 })
 export class ServerBikeparksService implements AbstractBikeparksService {
 
-  companies: BikePark[];
+  bikeparks: BikePark[] = [];
   distance: number;
   bikeparkID: number;
   idBikepark: boolean;
@@ -167,7 +167,7 @@ export class ServerBikeparksService implements AbstractBikeparksService {
     return this.http.get<BikePark[]>(this.url + '/all/bikeparks').pipe(
       tap(
         data => {
-          this.companies = data;
+          this.bikeparks = data;
         },
         error => {
           console.log(error);
@@ -177,8 +177,8 @@ export class ServerBikeparksService implements AbstractBikeparksService {
   }
 
   public getDenumire(): string[] {
-    for (let i = 0; i < this.companies.length; i++) {
-      this.companiesName.push(this.companies[i].denumire);
+    for (let i = 0; i < this.bikeparks.length; i++) {
+      this.companiesName.push(this.bikeparks[i].denumire);
     }
     return this.companiesName.slice();
   }

@@ -56,13 +56,13 @@ export class RezervareAddComponent implements OnInit {
         format: 'DD.MM.YYYY'
       });
     });*/
-    const ziua = document.getElementById('ziua');
+    /*const ziua = document.getElementById('ziua');
     console.log(ziua);
     const id = this.rezervareService.getRezervari().length;
     this.rezervareBikepark.id = id;
     console.log('profile: ' + this.rezervareBikepark.id + ' ' + this.rezervareBikepark.ziua + ' ' +
       +this.rezervareBikepark.biker_id + ' ' + this.rezervareBikepark.bikepark_id);
-    this.rezervareBikepark.id++;
+    this.rezervareBikepark.id++;*/
     this.rezervareService.addRezervare(this.rezervareBikepark)
       .subscribe();
     window.alert('S-a trimis rezervarea');

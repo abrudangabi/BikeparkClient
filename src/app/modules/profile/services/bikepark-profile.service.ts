@@ -30,6 +30,10 @@ export abstract class AbstractBikeparkProfileService {
 
   public abstract addRezervare(rezervareBikePark: RezervareBikePark): Observable<RezervareBikePark>;
 
+  public abstract editBikepark(bikePark: BikePark): Observable<BikePark>;
+
+  public abstract editContactBikepark(contact: Contact): Observable<Contact>;
+
   public abstract uploadPhoto(uploadData: FormData);
 
   public abstract isHisProfile(): boolean;
@@ -135,6 +139,11 @@ export class MockBikeparkProfileService implements AbstractBikeparkProfileServic
     // window.alert('Se duce ');
     // window.alert(rezervareBikePark.ziua);
     // window.alert('numarul : ' + this.getRezervari().subscribe(val => console.log(val.length)));
+    const id = this.getRezervari().length;
+    rezervareBikePark.id = id;
+    console.log('profile: ' + rezervareBikePark.id + ' ' + rezervareBikePark.ziua + ' ' +
+      +rezervareBikePark.biker_id + ' ' + rezervareBikePark.bikepark_id);
+    rezervareBikePark.id++;
     rezervareBikePark.bikepark_id = 1;
     rezervareBikePark.biker_id = 1;
     console.log('vine entitatea ' + rezervareBikePark.id + ' ' + rezervareBikePark.ziua + ' '
@@ -147,6 +156,14 @@ export class MockBikeparkProfileService implements AbstractBikeparkProfileServic
       .pipe(
         catchError(this.handleError('addHero', rezervareBikePark))
       );*/
+  }
+
+  editBikepark(bikePark: BikePark): Observable<BikePark> {
+    return of(bikePark);
+  }
+
+  editContactBikepark(contact: Contact): Observable<Contact> {
+    return of(contact);
   }
 }
 
@@ -200,12 +217,12 @@ export class ServerBikeparkProfileService implements AbstractBikeparkProfileServ
     if ((!this.isBikepark) || id === this.bikeparkID) {
       this.isUsersProfile = false;
     }
-    return this.http.get<BikePark>(this.url + '/bikepark/details/' + id).pipe(
+    return this.http.get<BikePark>(this.url + '/details/' + id).pipe(
       tap(
         data => {
           this.bikepark = data;
           // todo delete this after backend delivers the object properly :)
-          this.bikepark.contact = {};
+          // this.bikepark.contact = {};
         },
         error => {
           console.log(error);
@@ -219,8 +236,14 @@ export class ServerBikeparkProfileService implements AbstractBikeparkProfileServ
   }
 
   addRezervare(rezervareBikePark: RezervareBikePark): Observable<RezervareBikePark> {
+    console.log('bikepark_id ' + this.bikepark.id);
     return this.http.post(this.url + '/rezervarebikepark/rezerva',
-      rezervareBikePark,
+      {
+        'bikePark': {
+          'id': this.bikepark.id
+        },
+        'rezervareBikePark': rezervareBikePark
+      },
       this.httpOptions
     ).pipe(
       tap(
@@ -233,6 +256,39 @@ export class ServerBikeparkProfileService implements AbstractBikeparkProfileServ
       )
     );
     // return undefined;
+  }
+
+  editBikepark(bikePark: BikePark): Observable<BikePark> {
+    console.log('Intra in edit');
+    return this.http.put(this.url + '/edit/' + bikePark.id,
+      bikePark,
+      this.httpOptions
+    ).pipe(
+      tap(
+        data => {
+          this.bikepark = data;
+        },
+        error => {
+          console.log(error);
+        }
+      )
+    );
+  }
+
+  editContactBikepark(contact: Contact): Observable<Contact> {
+    return this.http.put(this.url + '/edit/contact/' + this.bikepark.id,
+      contact,
+      this.httpOptions
+    ).pipe(
+      tap(
+        data => {
+          this.bikepark = data;
+        },
+        error => {
+          console.log(error);
+        }
+      )
+    );
   }
 
   isHisProfile(): boolean {

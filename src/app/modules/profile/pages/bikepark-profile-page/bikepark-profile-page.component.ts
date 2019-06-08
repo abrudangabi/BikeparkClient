@@ -108,7 +108,8 @@ export class BikeparkProfilePageComponent implements OnInit {
   public openAddTraseuDialog() {
     const dialogRef = this.dialog.open(TraseuAddComponent, {
       width: '90%',
-      data: {traseu: this.traseu}
+      data: {traseu: this.traseu,
+      bikepark: this.bikepark}
     });
 
     dialogRef.afterClosed().subscribe(() => {

@@ -60,7 +60,8 @@ export class ServerConcursDetailsService implements AbstractConcursDetailsServic
   httpOptions = {
     headers: new HttpHeaders(
       {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer x'
       })
   };
   private url = 'http://localhost:8080/api';  // URL to web api
@@ -68,24 +69,25 @@ export class ServerConcursDetailsService implements AbstractConcursDetailsServic
   constructor(private http: HttpClient, private sessionManager: SessionManagementService) {
   }
 
-  initialize() {
-  }
-
   /*initialize() {
+  }*/
+
+  initialize() {
     if (this.sessionManager.isUserLoggedIn()) {
       this.httpOptions = {
         headers: new HttpHeaders(
           {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': '' + this.sessionManager.getToken()
           })
       };
       this.specificID = this.sessionManager.getSpecificId();
-      this.isApplicant = this.sessionManager.getLoggedUserRole() == Role.RoleStringEnum.APPLICANT;
+      this.isApplicant = this.sessionManager.getLoggedUserRole() == Role.RoleStringEnum.BIKER;
     } else {
       // todo redirect to login :)
     }
 
-  }*/
+  }
 
   public getConcurs(concursID: string): Observable<Concurs> {
     // return null;

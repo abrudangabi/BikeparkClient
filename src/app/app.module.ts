@@ -44,16 +44,20 @@ import { ConcursModule } from './modules/concurs/concurs.module';
 import {ConcursPageComponent} from './modules/concurs/pages/concurs-page/concurs-page.component';
 import {ConcursDetailsPageComponent} from './modules/concurs/pages/concurs-details-page/concurs-details-page.component';
 import {BikeparkDashboardComponent} from './modules/dashboard/components/bikepark-dashboard/bikepark-dashboard.component';
+import {AlertModule} from './modules/alert/alert.module';
+import {LoginPageComponent} from './modules/login/pages/login-page/login-page.component';
+import {LoginModule} from './modules/login/login.module';
+import {RegisterPageComponent} from './modules/login/pages/register-page/register-page.component';
 
 export const appRoutes: Routes = [
-  /*{path: 'login', component: LoginPageComponent, pathMatch: 'full'},*/
+  {path: 'login', component: LoginPageComponent, pathMatch: 'full'},
   /*{
     path: 'profile',
     component: CompanyProfilePageComponent,
     loadChildren: './modules/profile/profile.module#ProfileModule',
     // canActivate: [AuthGuard]
-  },
-  {path: 'register', component: RegisterPageComponent, pathMatch: 'full'},*/
+  },*/
+  {path: 'register', component: RegisterPageComponent, pathMatch: 'full'},
   {
     path: 'dashboard',
     component: DashboardPageComponent,
@@ -75,6 +79,8 @@ export const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+    LoginPageComponent,
+    RegisterPageComponent,
     BikeparksPageComponent,
     ConcursPageComponent,
     ConcursDetailsPageComponent,
@@ -116,12 +122,16 @@ export const appRoutes: Routes = [
     BikeparksModule,
     ProfileModule,
     ConcursModule,
+    AlertModule,
+    LoginModule,
   ],
   entryComponents: [],
   exports: [
+    LoginModule,
     ReactiveFormsModule,
   ],
   providers: [
+    AlertModule,
     DatePipe,
     SessionManagementService,
     AuthGuard

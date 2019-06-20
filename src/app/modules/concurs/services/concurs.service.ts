@@ -444,6 +444,13 @@ export class ServerConcursService implements AbstractConcursService {
   categoriiSubject = new Subject<Categorie[]>();
   concursSubject: ReplaySubject<Concurs[]>;
 
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': '' + this.sessionManager.getToken()
+    })
+  };
+
   // private url = 'http://localhost:8080/api/concurs';
 
   constructor(private httpClient: HttpClient, private sessionManager: SessionManagementService) {
@@ -452,36 +459,37 @@ export class ServerConcursService implements AbstractConcursService {
   getConcursuri() {
     // return null;
     const url = 'http://localhost:8080/api/concurs/all/concurs';
-    /*const httpOptions = {
+    const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhd' +
+        'Authorization': '' + this.sessionManager.getToken()
+        /*'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhd' +
           'WQiOlsidGVzdGp3dHJlc291cmNlaWQiXSwidXNlcl9uYW1lIjoiYXBwbGljYW50Iiwi' +
           'c2NvcGUiOlsicmVhZCIsIndyaXRlIl0sImV4cCI6MTU3NjY5OTAzOCwiYXV0aG9yaXRp' +
           'ZXMiOlsiQVBQTElDQU5UIl0sImp0aSI6ImJjMjEyM2Y2LWVmMTQtNDg0Zi1hZjdlLTli' +
           'OGVjMzg1ODg2MSIsImNsaWVudF9pZCI6InRlc3Rqd3RjbGllbnRpZCJ9.ekCWKdN7VuQ' +
-          'bN9rOexqF07P0B1u2KsiroEOQdsT51Nk'
+          'bN9rOexqF07P0B1u2KsiroEOQdsT51Nk'*/
       })
-    };*/
+    };
     if (this.concursSubject) {
       return this.concursSubject.asObservable();
     } else {
       this.concursSubject = new ReplaySubject(1);
-      this.httpClient.get<Concurs[]>(url).subscribe(data => this.concursSubject.next(data));
+      this.httpClient.get<Concurs[]>(url, httpOptions).subscribe(data => this.concursSubject.next(data));
       return this.concursSubject.asObservable();
     }
   }
 
   getCategorii() {
     const url = 'http://localhost:8080/api/concurs/all/categorie';
-    return this.httpClient.get<Categorie[]>(url);
+    return this.httpClient.get<Categorie[]>(url, this.httpOptions);
     // return null;
   }
 
   getBikepark() {
     // return null;
     const url = 'http://localhost:8080/api/bikepark/all/bikepark';
-    return this.httpClient.get<BikePark []>(url);
+    return this.httpClient.get<BikePark []>(url, this.httpOptions);
   }
 
   getConcursCategorie(idConcurs: number) {
@@ -496,38 +504,8 @@ export class ServerConcursService implements AbstractConcursService {
           'GlkIn0.YgL9w9v1g6JvOg3_lspms7uMPCpBRMmjkR_I9grAVYY'
       })
     };*/
-    return this.httpClient.get<Categorie[]>(url + idConcurs + '/categorii');
+    return this.httpClient.get<Categorie[]>(url + idConcurs + '/categorii', this.httpOptions);
   }
-
-  /*getInternshipsForCompany(idCompany: number) {
-    const url = 'http://enigmatic-sierra-91538.herokuapp.com/api/internship/all/company/';
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsidGVzdGp' +
-          '3dHJlc291cmNlaWQiXSwidXNlcl9uYW1lIjoiYXBwbGljYW50Iiwic2NvcGUiOlsicmVhZCIsIndya' +
-          'XRlIl0sImV4cCI6MTU3MjYzODAxNCwiYXV0aG9yaXRpZXMiOlsiQVBQTElDQU5UIl0sImp0aSI6Ijdk' +
-          'MDg4NDM5LTkzMjUtNDA2Yi1hNWQyLTJkOTAzYzQzMmVhYiIsImNsaWVudF9pZCI6InRlc3Rqd3RjbGl' +
-          'lbnRpZCJ9.tgaxNfcl4SqHWM2FT30f5d_I4HFgAAnTbKwIU7VYFrY'
-      })
-    };
-    return this.httpClient.get<Internship[]>(url + idCompany, httpOptions);
-  }*/
-
-  /*getInternshipTags(idInternship: number) {
-    const url = 'http://enigmatic-sierra-91538.herokuapp.com/api/internship/';
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsidGVzdGp3' +
-          'dHJlc291cmNlaWQiXSwidXNlcl9uYW1lIjoiY29tcGFueSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJd' +
-          'LCJleHAiOjE1NzY3MDYyMjksImF1dGhvcml0aWVzIjpbIkNPTVBBTlkiXSwianRpIjoiYTYzZDdlZWYtN' +
-          'TMzYy00MGQzLWE2YWYtNmFhZTM0YjI3MTY0IiwiY2xpZW50X2lkIjoidGVzdGp3dGNsaWVudGlkIn0.YgL' +
-          '9w9v1g6JvOg3_lspms7uMPCpBRMmjkR_I9grAVYY'
-      })
-    };
-    return this.httpClient.get<Tag[]>(url + idInternship + '/tags', httpOptions);
-  }*/
 
   getConcursBikepark(idConcurs: number) {
     console.log(idConcurs);
@@ -542,7 +520,7 @@ export class ServerConcursService implements AbstractConcursService {
           'N7VuQbN9rOexqF07P0B1u2KsiroEOQdsT51Nk'
       })
     };*/
-    return this.httpClient.get<BikePark>(url + idConcurs + '/bikepark');
+    return this.httpClient.get<BikePark>(url + idConcurs + '/bikepark', this.httpOptions);
   }
 
   setBikeparkFilters(filters: BikePark[]) {

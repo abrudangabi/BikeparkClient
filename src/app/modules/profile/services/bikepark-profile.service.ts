@@ -179,6 +179,7 @@ export class ServerBikeparkProfileService implements AbstractBikeparkProfileServ
     headers: new HttpHeaders(
       {
         'Content-Type': 'application/json',
+        'Authorization': 'Bearer x'
       })
   };
 
@@ -217,7 +218,7 @@ export class ServerBikeparkProfileService implements AbstractBikeparkProfileServ
     if ((!this.isBikepark) || id === this.bikeparkID) {
       this.isUsersProfile = false;
     }
-    return this.http.get<BikePark>(this.url + '/details/' + id).pipe(
+    return this.http.get<BikePark>(this.url + '/details/' + id, this.httpOptions).pipe(
       tap(
         data => {
           this.bikepark = data;
@@ -233,6 +234,19 @@ export class ServerBikeparkProfileService implements AbstractBikeparkProfileServ
   }
 
   initialize() {
+    if (this.sessionManager.isUserLoggedIn()) {
+      this.httpOptions = {
+        headers: new HttpHeaders(
+          {
+            'Content-Type': 'application/json',
+            'Authorization': '' + this.sessionManager.getToken()
+          })
+      };
+      this.bikeparkID = this.sessionManager.getLoggedUserId();
+      this.isBikepark = this.sessionManager.getLoggedUserRole() == Role.RoleStringEnum.BIKEPARK;
+    } else {
+      // todo redirect to login :)
+    }
   }
 
   addRezervare(rezervareBikePark: RezervareBikePark): Observable<RezervareBikePark> {

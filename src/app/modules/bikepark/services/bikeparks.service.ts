@@ -7,6 +7,7 @@ import {SessionManagementService} from '../../../shared/utils/session-management
 import {tap} from 'rxjs/operators';
 import {Contact} from '../../../shared/model/Contact';
 import {Photo} from '../../../shared/model/Photo';
+import {Role} from '../../../shared/model/Role';
 
 @Injectable()
 export abstract class AbstractBikeparksService {
@@ -126,12 +127,13 @@ export class ServerBikeparksService implements AbstractBikeparksService {
   bikeparks: BikePark[] = [];
   distance: number;
   bikeparkID: number;
-  idBikepark: boolean;
+  isBikepark: boolean;
 
   httpOptions = {
     headers: new HttpHeaders(
       {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer x'
       })
   };
 
@@ -145,10 +147,10 @@ export class ServerBikeparksService implements AbstractBikeparksService {
   constructor(private http: HttpClient, private sessionManager: SessionManagementService) {
   }
 
-  public initialize() {
-  }
+  /*public initialize() {
+  }*/
 
-  /*initialize() {
+  initialize() {
     if (this.sessionManager.isUserLoggedIn()) {
       this.httpOptions = {
         headers: new HttpHeaders(
@@ -157,14 +159,14 @@ export class ServerBikeparksService implements AbstractBikeparksService {
             'Authorization': '' + this.sessionManager.getToken()
           })
       };
-      this.companyID = this.sessionManager.getLoggedUserId();
-      this.isCompany = this.sessionManager.getLoggedUserRole() == Role.RoleStringEnum.COMPANY;
+      this.bikeparkID = this.sessionManager.getLoggedUserId();
+      this.isBikepark = this.sessionManager.getLoggedUserRole() == Role.RoleStringEnum.BIKEPARK;
     }
-  }*/
+  }
 
   public getBikeParks(): Observable<BikePark[]> {
     // return null;
-    return this.http.get<BikePark[]>(this.url + '/all/bikeparks').pipe(
+    return this.http.get<BikePark[]>(this.url + '/all/bikeparks', this.httpOptions).pipe(
       tap(
         data => {
           this.bikeparks = data;

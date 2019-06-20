@@ -6,6 +6,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Role} from '../model/Role';
 import {Applicant} from '../model/applicant';
 import {applicantNavBarItems, companyNavBarItems} from '../../app.module';
+import {BikePark} from '../model/BikePark';
+import {Biker} from '../model/Biker';
 
 @Injectable()
 export class SessionManagementService {
@@ -27,9 +29,9 @@ export class SessionManagementService {
     this.token = token;
     this.getLoggedUser().subscribe((user) => {
       this.currentLoggedUser = user;
-      if (this.currentLoggedUser.roles[0].roleString === Role.RoleStringEnum.APPLICANT) {
-        this.getLoggedApplicantInfo().subscribe((applicant) => {
-          this.specificId = applicant.id;
+      if (this.currentLoggedUser.roles[0].roleString === Role.RoleStringEnum.BIKER) {
+        this.getLoggedBikerInfo().subscribe((biker) => {
+          this.specificId = biker.id;
           this.addMyProfileButtonToNavBar();
           this.everythingLoaded = true;
           this.persistInLocalStorage();
@@ -38,9 +40,9 @@ export class SessionManagementService {
           console.log(error);
           this.isLoginDataLoadingFinished.emit(false);
         });
-      } else if (this.currentLoggedUser.roles[0].roleString === Role.RoleStringEnum.COMPANY) {
-        this.getLoggedCompanyInfo().subscribe((company) => {
-          this.specificId = company.id;
+      } else if (this.currentLoggedUser.roles[0].roleString === Role.RoleStringEnum.BIKEPARK) {
+        this.getLoggedBikeparkInfo().subscribe((bikepark) => {
+          this.specificId = bikepark.id;
           this.addMyProfileButtonToNavBar();
           this.everythingLoaded = true;
           this.persistInLocalStorage();
@@ -79,17 +81,18 @@ export class SessionManagementService {
   }
 
   private addMyProfileButtonToNavBar() {
-    if (this.currentLoggedUser.roles[0].roleString === Role.RoleStringEnum.APPLICANT) {
+    if (this.currentLoggedUser.roles[0].roleString === Role.RoleStringEnum.BIKER) {
       if (applicantNavBarItems.length === 4) {
         applicantNavBarItems.splice(applicantNavBarItems.length - 1, 1);
       }
       applicantNavBarItems.push({title: 'My profile', path: 'profile/student/' + this.specificId});
 
-    } else if (this.currentLoggedUser.roles[0].roleString === Role.RoleStringEnum.COMPANY) {
+      // TODO AM DE FACUT AICI FOARTE IMPORTANT SUS
+    } else if (this.currentLoggedUser.roles[0].roleString === Role.RoleStringEnum.BIKEPARK) {
       if (companyNavBarItems.length === 2) {
         companyNavBarItems.splice(applicantNavBarItems.length - 1, 1);
       }
-      companyNavBarItems.push({title: 'My profile', path: 'profile/company/' + this.specificId});
+      companyNavBarItems.push({title: 'My profile', path: 'profile/bikepark/' + this.specificId});
     }
   }
 
@@ -142,25 +145,25 @@ export class SessionManagementService {
     return this.http.get<User>(this.getLoggedUserInfoUrl, httpOptions);
   }
 
-  private getLoggedCompanyInfo(): Observable<Company> {
+  private getLoggedBikeparkInfo(): Observable<BikePark> {
     const httpOptions = {
       headers: new HttpHeaders(
         {
           'Authorization': this.token
         })
     };
-    return this.http.get<Company>(this.baseUrl + '/user/company/' +
+    return this.http.get<BikePark>(this.baseUrl + '/user/bikepark/' +
       this.getLoggedUserId(), httpOptions);
   }
 
-  private getLoggedApplicantInfo(): Observable<Applicant> {
+  private getLoggedBikerInfo(): Observable<Biker> {
     const httpOptions = {
       headers: new HttpHeaders(
         {
           'Authorization': this.token
         })
     };
-    return this.http.get<Company>(this.baseUrl + '/user/applicant/' +
+    return this.http.get<BikePark>(this.baseUrl + '/user/biker/' +
       this.getLoggedUserId(), httpOptions);
   }
 

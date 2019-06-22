@@ -47,7 +47,7 @@ export class ConcursListForBikeparkComponent implements OnInit {
 
   private getConcursuri() {
     this.concursService.initialize();
-    this.concursService.getConcursuri(1).subscribe(data => {
+    this.concursService.getConcursuri().subscribe(data => {
       this.concursuri = data;
       // this.changeDetectionRef.detectChanges();
     });

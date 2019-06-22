@@ -47,7 +47,7 @@ export class BikeparkDashboardComponent implements OnInit {
     this.concursService.getRezervariForBikepark().subscribe((rez) => {
       this.rezervariConcurs = rez;
     });
-    this.concursService.getConcursuri(this.bikepark.id).subscribe((rez) => {
+    this.concursService.getConcursuri().subscribe((rez) => {
       this.concursuri = rez;
     });
     /*this.companies = [

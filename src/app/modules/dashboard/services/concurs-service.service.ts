@@ -38,7 +38,7 @@ export abstract class AbstractConcursForDashboardServicesService {
 
   public abstract deleteConcurs(id: number): Observable<Concurs> ;
 
-  public abstract getConcursuri(id: number): Observable<Concurs[]> ;
+  public abstract getConcursuri(): Observable<Concurs[]> ;
 
   public abstract getBiker(): Observable<Biker> ;
 
@@ -198,7 +198,7 @@ export class MockConcursForDashboardServicesService implements AbstractConcursFo
     return of(rez);
   }
 
-  getConcursuri(id: number): Observable<Concurs[]> {
+  getConcursuri(): Observable<Concurs[]> {
     console.log('getConcursuri');
     return of(this.concursList);
   }
@@ -318,7 +318,7 @@ export class ServerConcursForDashboardServicesService implements AbstractConcurs
     // this.sessionManager.getLoggedUserId(),
   }
 
-  getConcursuri(id: number): Observable<Concurs[]> {
+  getConcursuri(): Observable<Concurs[]> {
     console.log('getConcursuri Server');
     const httpOptions = {
       headers: new HttpHeaders(

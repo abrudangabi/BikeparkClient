@@ -13,6 +13,8 @@ import * as models from '../../../shared/model/BikePark';
 import {Locatie} from '../../../shared/model/Locatie';
 import {Photo} from '../../../shared/model/Photo';
 import {User} from '../../../shared/model/User';
+import {Traseu} from '../../../shared/model/Traseu';
+import {Categorie} from '../../../shared/model/Categorie';
 
 @Injectable({
   providedIn: 'root'
@@ -24,11 +26,17 @@ export abstract class AbstractBikeparksForDashboardServicesService {
 
   public abstract getRezervariBikeparkForBiker(): Observable<BikeparkReservationRequest[]> ;
 
-  public abstract getRezervari(): Observable<RezervareBikePark[]> ;
+  // public abstract getRezervari(): Observable<RezervareBikePark[]> ;
 
-  public abstract getBiker(): Biker ;
+  public abstract getRezervariForBiker(): Observable<RezervareBikePark[]> ;
 
-  public abstract getBikepark(): BikePark ;
+  public abstract getRezervariForBikepark(): Observable<RezervareBikePark[]> ;
+
+  public abstract getBiker(): Observable<Biker> ;
+
+  public abstract getBikepark(): Observable<BikePark> ;
+
+  public abstract deleteRezervareBikepark(id: number): Observable<RezervareBikePark> ;
 
   public abstract uploadPhoto(uploadData: FormData);
 
@@ -150,6 +158,10 @@ export class MockBikeparksForDashboardServicesService implements AbstractBikepar
     bikepark_id: 2,
     numeBikepark: this.bikepark2.denumire
   };
+  rezervariSimple: RezervareBikePark[] = [
+    this.rez1,
+    this.rez2
+  ];
   rezervareList: BikeparkReservationRequest[] = [
     {
       id: 1,
@@ -167,27 +179,69 @@ export class MockBikeparksForDashboardServicesService implements AbstractBikepar
   }
 
   getRezervariBikeparkForBiker(): Observable<BikeparkReservationRequest[]> {
-    console.log('Lungimea dashboard in service ' + this.rezervareList.length);
+    // console.log('Lungimea dashboard in service ' + this.rezervareList.length);
     return of(this.rezervareList);
   }
 
-  getBiker(): Biker {
-    return this.biker;
+  getBiker(): Observable<Biker> {
+    console.log('getBiker');
+    return of(this.biker);
   }
 
-  getBikepark(): BikePark {
-    return this.bikepark1;
+  getBikepark(): Observable<BikePark> {
+    console.log('getBikepark');
+    return of(this.bikepark1);
+  }
+
+  getRezervariForBiker(): Observable<RezervareBikePark[]> {
+    console.log('getRezervariBikeparkForBiker');
+    /*let rezervariSimple: RezervareBikePark[] = [];
+    for (let i = 0; i < this.rezervareList.length; i++) {
+      rezervariSimple.push(this.rezervareList[i]);
+    }*/
+    /*for (let i = 0; i < rezervariSimple.length; i++){
+      console.log('Ce trimite la message ' + rezervariSimple[i].ziua);
+    }*/
+    console.log('Lungimea dashboard in service ' + this.rezervariSimple.length);
+    return of(this.rezervariSimple);
+  }
+
+  getRezervariForBikepark(): Observable<RezervareBikePark[]> {
+    console.log('getRezervariBikeparkForBikepark');
+    /*let rezervariSimple: RezervareBikePark[] = [];
+    for (let i = 0; i < this.rezervareList.length; i++) {
+      rezervariSimple.push(this.rezervareList[i]);
+    }*/
+    /*for (let i = 0; i < rezervariSimple.length; i++){
+      console.log('Ce trimite la message ' + rezervariSimple[i].ziua);
+    }*/
+    return of(this.rezervariSimple);
   }
 
   getRezervari(): Observable<RezervareBikePark[]> {
+    console.log('getRezervari');
     let rezervariSimple: RezervareBikePark[] = [];
-    for (let i = 0; i < this.rezervareList.length; i++){
+    for (let i = 0; i < this.rezervareList.length; i++) {
       rezervariSimple.push(this.rezervareList[i]);
     }
     /*for (let i = 0; i < rezervariSimple.length; i++){
       console.log('Ce trimite la message ' + rezervariSimple[i].ziua);
     }*/
     return of(rezervariSimple);
+  }
+
+  deleteRezervareBikepark(id: number): Observable<RezervareBikePark> {
+    console.log('Vine asta in metoda de delete ' + id);
+    let rez: RezervareBikePark = null;
+    for (let i = 0; i <= this.rezervariSimple.length - 1; i++) {
+      if (this.rezervariSimple[i].id === id) {
+        rez = this.rezervariSimple[i];
+        this.rezervariSimple.splice(i, 1);
+        console.log('Na, ai gasit ceva ?');
+        console.log('Arata ce mai exact ' + this.rezervariSimple.length);
+      }
+    }
+    return of(rez);
   }
 
   uploadPhoto(uploadData: FormData) {
@@ -223,9 +277,12 @@ export class MockBikeparksForDashboardServicesService implements AbstractBikepar
 })
 export class ServerBikeparksForDashboardServicesService implements AbstractBikeparksForDashboardServicesService {
   rezervareList: BikeparkReservationRequest[];
+  rezervareBikeparkForBiker: RezervareBikePark[];
+  rezervareBikeparkForBikepark: RezervareBikePark[];
+  id = 1;
   applicantID: number;
   isApplicant: boolean;
-  private url = 'https://enigmatic-sierra-91538.herokuapp.com/api';  // URL to web api
+  private url = 'http://localhost:8080/api';  // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders(
@@ -239,6 +296,9 @@ export class ServerBikeparksForDashboardServicesService implements AbstractBikep
   }
 
   initialize() {
+  }
+
+  /*initialize() {
     if (this.sessionManager.isUserLoggedIn()) {
       this.httpOptions = {
         headers: new HttpHeaders(
@@ -248,14 +308,14 @@ export class ServerBikeparksForDashboardServicesService implements AbstractBikep
           })
       };
       this.applicantID = this.sessionManager.getLoggedUserId();
-      this.isApplicant = this.sessionManager.getLoggedUserRole() == Role.RoleStringEnum.APPLICANT;
+      this.isApplicant = this.sessionManager.getLoggedUserRole() == Role.RoleStringEnum.BIKER;
     } else {
       // todo redirect to login :)
     }
-  }
+  }*/
 
   getRezervariBikeparkForBiker(): Observable<BikeparkReservationRequest[]> {
-    return this.http.get<BikeparkReservationRequest[]>(this.url + '/applicant/internshipRequests', this.httpOptions).pipe(
+    return this.http.get<BikeparkReservationRequest[]>(this.url + '/biker/rezervariRequests', this.httpOptions).pipe(
       tap(
         data => {
           this.rezervareList = data;
@@ -267,16 +327,95 @@ export class ServerBikeparksForDashboardServicesService implements AbstractBikep
     );
   }
 
-  getBiker(): Biker {
-    return null;
+  getBiker(): Observable<Biker> {
+    console.log('getBiker Server');
+    const httpOptions = {
+      headers: new HttpHeaders(
+        {
+          'Content-Type': 'application/json',
+          'Authorization': this.sessionManager.getToken()
+        })
+    };
+    return this.http.get<Biker>(this.url + '/user/biker/' + this.id, this.httpOptions);
+    // this.sessionManager.getLoggedUserId(),
   }
 
-  getBikepark(): BikePark {
-    return null;
+  getBikepark(): Observable<BikePark> {
+    console.log('getBikepark Server');
+    const httpOptions = {
+      headers: new HttpHeaders(
+        {
+          'Content-Type': 'application/json',
+          'Authorization': this.sessionManager.getToken()
+        })
+    };
+    return this.http.get<BikePark>(this.url + '/user/bikepark/' + this.id, this.httpOptions);
+    // this.sessionManager.getLoggedUserId(),
   }
 
-  getRezervari(): Observable<RezervareBikePark[]> {
-    return null;
+  // rezervariByBiker
+  getRezervariForBiker(): Observable<RezervareBikePark[]> {
+    console.log('getRezervariBikeparkForBiker Server');
+    const httpOptions = {
+      headers: new HttpHeaders(
+        {
+          'Content-Type': 'application/json',
+          'Authorization': this.sessionManager.getToken()
+        })
+    };
+    // http://localhost:8080/api/biker/rezervariByBiker/1
+
+    return this.http.get<RezervareBikePark[]>(this.url + '/biker/rezervariByBiker/' + this.id, this.httpOptions).pipe(
+      tap(
+        data => {
+          /*this.trasee = data;
+          console.log('cate trasee sunt : ' + this.trasee.length);*/
+        },
+        error => {
+          console.log(error);
+        }
+      )
+    );
+
+    /*return this.http.get<RezervareBikePark[]>(this.url + '/biker/rezervariByBiker/' + this.id,
+      httpOptions).pipe(
+      tap(
+        data => {
+          this.rezervareBikeparkForBiker = data;
+        },
+        error => {
+          console.log(error);
+        }
+      )
+    );*/
+    // this.sessionManager.getSpecificId(),
+    // return null;
+  }
+
+  getRezervariForBikepark(): Observable<RezervareBikePark[]> {
+    console.log('getRezervariBikeparkForBikepark Server');
+    const httpOptions = {
+      headers: new HttpHeaders(
+        {
+          'Content-Type': 'application/json',
+          'Authorization': this.sessionManager.getToken()
+        })
+    };
+    return this.http.get<RezervareBikePark[]>(this.url + '/bikepark/rezervariByBiker/' + this.id,
+      this.httpOptions);
+    // this.sessionManager.getSpecificId(),
+    // return null;
+  }
+
+  deleteRezervareBikepark(id: number): Observable<RezervareBikePark> {
+    return this.http.delete<Traseu>(this.url + '/biker/rezervarebikepark/delete/' + id, this.httpOptions).pipe(
+      tap(
+        data => {
+        },
+        error => {
+        }
+      )
+    );
   }
 
   uploadPhoto(uploadData: FormData) {

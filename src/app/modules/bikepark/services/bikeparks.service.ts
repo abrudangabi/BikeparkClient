@@ -166,17 +166,7 @@ export class ServerBikeparksService implements AbstractBikeparksService {
 
   public getBikeParks(): Observable<BikePark[]> {
     // return null;
-    return this.http.get<BikePark[]>(this.url + '/all/bikeparks', this.httpOptions).pipe(
-      tap(
-        data => {
-          this.bikeparks = data;
-        },
-        error => {
-          console.log(error);
-        }
-      )
-    );
-    /*return this.http.get<BikePark[]>(this.url + '/' + 1 + '/recommendations').pipe(
+    /*return this.http.get<BikePark[]>(this.url + '/all/bikeparks', this.httpOptions).pipe(
       tap(
         data => {
           this.bikeparks = data;
@@ -186,6 +176,16 @@ export class ServerBikeparksService implements AbstractBikeparksService {
         }
       )
     );*/
+    return this.http.get<BikePark[]>(this.url + '/' + 1 + '/recommendations').pipe(
+      tap(
+        data => {
+          this.bikeparks = data;
+        },
+        error => {
+          console.log(error);
+        }
+      )
+    );
   }
 
   public getDenumire(): string[] {

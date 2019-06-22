@@ -187,7 +187,7 @@ export class ServerTraseuService implements AbstractTraseuService {
 
   public getTrasee(idBikepark: number): Observable<Traseu[]> {
     // return null;
-    return this.http.get<Traseu[]>(this.url + '/traseu/' + idBikepark).pipe(
+    return this.http.get<Traseu[]>(this.url + '/traseu/' + idBikepark, this.httpOptions).pipe(
       tap(
         data => {
           this.trasee = data;

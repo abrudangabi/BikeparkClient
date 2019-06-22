@@ -7,6 +7,7 @@ import {AbstractConcursForDashboardServicesService} from '../../services/concurs
 import {TraseuAddComponent} from '../../../profile/components/traseu-add/traseu-add.component';
 import {AbstractBikeparkProfileService} from '../../../profile/services/bikepark-profile.service';
 import {MatDialog} from '@angular/material';
+import {RezervareConcurs} from '../../../../shared/model/RezervareConcurs';
 
 @Component({
   selector: 'app-concurs-reservations-list-for-biker',
@@ -14,7 +15,8 @@ import {MatDialog} from '@angular/material';
   styleUrls: ['./concurs-reservations-list-for-biker.component.scss']
 })
 export class ConcursReservationsListForBikerComponent implements OnInit {
-  concursRezervationList: ConcursReservationRequest[] = [];
+  // concursRezervationList: ConcursReservationRequest[] = [];
+  concursRezervationList: RezervareConcurs[] = [];
 
   constructor(private concursRezervation: AbstractConcursForDashboardServicesService,
               private router: Router, private changeDetectionRef: ChangeDetectorRef/*,
@@ -23,14 +25,13 @@ export class ConcursReservationsListForBikerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getInternships();
+    this.getRezervari();
   }
 
-  private getInternships() {
+  private getRezervari() {
     this.concursRezervation.initialize();
-    this.concursRezervation.getRezervariConcursForBiker().subscribe(data => {
+    this.concursRezervation.getRezervariForBiker().subscribe(data => {
       this.concursRezervationList = data;
-      // this.changeDetectionRef.detectChanges();
     });
   }
 
@@ -50,6 +51,8 @@ export class ConcursReservationsListForBikerComponent implements OnInit {
   }*/
 
   deleteConcursRezervation(id: number) {
+    this.concursRezervation.deleteRezervareConcurs(id).subscribe(() => {
+    });
     console.log('Se sterge Rezervarea ' + id);
   }
 }

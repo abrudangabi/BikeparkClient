@@ -12,7 +12,8 @@ import {RezervareBikePark} from '../../../../shared/model/RezervareBikePark';
   styleUrls: ['./bikepark-reservations-list-for-biker.component.scss']
 })
 export class BikeparkReservationsListForBikerComponent implements OnInit {
-  bikeparkRezervationList: BikeparkReservationRequest[] = [];
+  // bikeparkRezervationList: BikeparkReservationRequest[] = [];
+  bikeparkRezervationList: RezervareBikePark[] = [];
 
   constructor(private bikeparkRezervation: AbstractBikeparksForDashboardServicesService,
               private router: Router, private changeDetectionRef: ChangeDetectorRef) {
@@ -20,14 +21,13 @@ export class BikeparkReservationsListForBikerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getInternships();
+    this.getRezervari();
   }
 
-  private getInternships() {
+  private getRezervari() {
     this.bikeparkRezervation.initialize();
-    this.bikeparkRezervation.getRezervariBikeparkForBiker().subscribe(data => {
+    this.bikeparkRezervation.getRezervariForBiker().subscribe(data => {
       this.bikeparkRezervationList = data;
-      // this.changeDetectionRef.detectChanges();
     });
   }
 
@@ -36,6 +36,11 @@ export class BikeparkReservationsListForBikerComponent implements OnInit {
   }
 
   deleteBikeparkRezervation(id: number) {
+    this.bikeparkRezervation.deleteRezervareBikepark(id).subscribe(() => {
+      /*this.bikeparkRezervation.getRezervariBikeparkForBiker().subscribe( data => {
+        this.bikeparkRezervationList = data;
+      });*/
+    });
     console.log('Se sterge Rezervarea ' + id);
   }
 

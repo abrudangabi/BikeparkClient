@@ -58,6 +58,8 @@ export class ConcursListForBikeparkComponent implements OnInit {
   }
 
   deleteConcurs(id: number) {
+    this.concursService.deleteConcurs(id).subscribe(() => {
+    });
     console.log('Se sterge Concursul ' + id);
   }
 

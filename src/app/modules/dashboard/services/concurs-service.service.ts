@@ -16,6 +16,7 @@ import {Photo} from '../../../shared/model/Photo';
 import {Contact} from '../../../shared/model/Contact';
 import {Concurs} from '../../../shared/model/Concurs';
 import {Categorie} from '../../../shared/model/Categorie';
+import {Traseu} from '../../../shared/model/Traseu';
 
 @Injectable({
   providedIn: 'root'
@@ -25,15 +26,21 @@ export abstract class AbstractConcursForDashboardServicesService {
 
   public abstract initialize();
 
-  public abstract getRezervariConcursForBiker(): Observable<ConcursReservationRequest[]> ;
+  // public abstract getRezervariConcursForBiker(): Observable<ConcursReservationRequest[]> ;
 
-  public abstract getRezervari(): Observable<RezervareConcurs[]> ;
+  public abstract getRezervariForBiker(): Observable<RezervareConcurs[]> ;
+
+  public abstract getRezervariForBikepark(): Observable<RezervareConcurs[]> ;
+
+  public abstract deleteRezervareConcurs(id: number): Observable<RezervareConcurs> ;
 
   public abstract addConcurs(concurs: Concurs) ;
 
+  public abstract deleteConcurs(id: number): Observable<Concurs> ;
+
   public abstract getConcursuri(id: number): Observable<Concurs[]> ;
 
-  public abstract getBiker(): Biker ;
+  public abstract getBiker(): Observable<Biker> ;
 
   public abstract cancelInternship(id: number);
 }
@@ -129,6 +136,10 @@ export class MockConcursForDashboardServicesService implements AbstractConcursFo
     biker_id: 1,
     concurs_id: 2
   };
+  rezervariSimple: RezervareConcurs[] = [
+    this.rez1,
+    this.rez2
+  ];
   rezervareList: ConcursReservationRequest[] = [
     {
       id: 1,
@@ -153,19 +164,42 @@ export class MockConcursForDashboardServicesService implements AbstractConcursFo
     return of(this.rezervareList);
   }
 
-  getBiker(): Biker {
-    return this.biker;
+  getBiker(): Observable<Biker> {
+    console.log('getBiker');
+    return of(this.biker);
   }
 
-  getRezervari(): Observable<RezervareConcurs[]> {
-    let rezervariSimple: RezervareConcurs[] = [];
+  getRezervariForBiker(): Observable<RezervareConcurs[]> {
+    console.log('getRezervariConcursForBiker');
+    /*let rezervariSimple: RezervareConcurs[] = [];
     for (let i = 0; i < this.rezervareList.length; i++) {
       rezervariSimple.push(this.rezervareList[i]);
+    }*/
+    return of(this.rezervariSimple);
+  }
+
+  getRezervariForBikepark(): Observable<RezervareConcurs[]> {
+    console.log('getRezervariConcursForBikepark');
+    /*let rezervariSimple: RezervareConcurs[] = [];
+    for (let i = 0; i < this.rezervareList.length; i++) {
+      rezervariSimple.push(this.rezervareList[i]);
+    }*/
+    return of(this.rezervariSimple);
+  }
+
+  deleteRezervareConcurs(id: number): Observable<RezervareConcurs> {
+    let rez: RezervareConcurs = null;
+    for (let i = 0; i <= this.rezervariSimple.length - 1; i++) {
+      if (this.rezervariSimple[i].id === id) {
+        rez = this.rezervariSimple[i];
+        this.rezervariSimple.splice(i, 1);
+      }
     }
-    return of(rezervariSimple);
+    return of(rez);
   }
 
   getConcursuri(id: number): Observable<Concurs[]> {
+    console.log('getConcursuri');
     return of(this.concursList);
   }
 
@@ -179,6 +213,17 @@ export class MockConcursForDashboardServicesService implements AbstractConcursFo
     console.log('cate sunt : ' + this.concursList.length);
   }
 
+  deleteConcurs(id: number): Observable<Concurs> {
+    let rez: Concurs = null;
+    for (let i = 0; i <= this.concursList.length - 1; i++) {
+      if (this.concursList[i].id === id) {
+        rez = this.concursList[i];
+        this.concursList.splice(i, 1);
+      }
+    }
+    return of(rez);
+  }
+
   cancelInternship(id: number) {
   }
 
@@ -190,9 +235,12 @@ export class MockConcursForDashboardServicesService implements AbstractConcursFo
 })
 export class ServerConcursForDashboardServicesService implements AbstractConcursForDashboardServicesService {
   rezervareList: ConcursReservationRequest[];
+  id = 1;
   applicantID: number;
   isApplicant: boolean;
-  private url = 'https://enigmatic-sierra-91538.herokuapp.com/api';  // URL to web api
+  bikeparkID: number;
+  isBikepark: boolean;
+  private url = 'http://localhost:8080/api';  // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders(
@@ -206,6 +254,9 @@ export class ServerConcursForDashboardServicesService implements AbstractConcurs
   }
 
   initialize() {
+  }
+
+  /*initialize() {
     if (this.sessionManager.isUserLoggedIn()) {
       this.httpOptions = {
         headers: new HttpHeaders(
@@ -215,14 +266,16 @@ export class ServerConcursForDashboardServicesService implements AbstractConcurs
           })
       };
       this.applicantID = this.sessionManager.getLoggedUserId();
-      this.isApplicant = this.sessionManager.getLoggedUserRole() == Role.RoleStringEnum.APPLICANT;
+      this.isApplicant = this.sessionManager.getLoggedUserRole() == Role.RoleStringEnum.BIKER;
+      /!*this.bikeparkID = this.sessionManager.getLoggedUserId();
+      this.isBikepark = this.sessionManager.getLoggedUserRole() == Role.RoleStringEnum.BIKEPARK;*!/
     } else {
       // todo redirect to login :)
     }
-  }
+  }*/
 
-  getRezervariConcursForBiker(): Observable<ConcursReservationRequest[]> {
-    return this.http.get<BikeparkReservationRequest[]>(this.url + '/applicant/internshipRequests', this.httpOptions).pipe(
+  /*getRezervariConcursForBiker(): Observable<ConcursReservationRequest[]> {
+    return this.http.get<BikeparkReservationRequest[]>(this.url + '/biker/concursRequests', this.httpOptions).pipe(
       tap(
         data => {
           this.rezervareList = data;
@@ -232,21 +285,93 @@ export class ServerConcursForDashboardServicesService implements AbstractConcurs
         }
       )
     );
-  }
+  }*/
 
-  getBiker(): Biker {
+  //TODO IN JOS MAINE
+  getBiker(): Observable<Biker> {
     return null;
   }
 
-  getRezervari(): Observable<RezervareConcurs[]> {
-    return null;
+  getRezervariForBiker(): Observable<RezervareConcurs[]> {
+    console.log('getRezervariConcursForBiker Server');
+    const httpOptions = {
+      headers: new HttpHeaders(
+        {
+          'Authorization': this.sessionManager.getToken()
+        })
+    };
+    return this.http.get<RezervareBikePark[]>(this.url + '/biker/inscrieriByBiker/' + this.id,
+      this.httpOptions);
+    // this.sessionManager.getLoggedUserId(),
+  }
+
+  getRezervariForBikepark(): Observable<RezervareConcurs[]> {
+    console.log('getRezervariConcursForBikepark Server');
+    const httpOptions = {
+      headers: new HttpHeaders(
+        {
+          'Authorization': this.sessionManager.getToken()
+        })
+    };
+    return this.http.get<RezervareBikePark[]>(this.url + '/bikepark/inscrieriByBikepark/' + this.id,
+      this.httpOptions);
+    // this.sessionManager.getLoggedUserId(),
   }
 
   getConcursuri(id: number): Observable<Concurs[]> {
-    return null;
+    console.log('getConcursuri Server');
+    const httpOptions = {
+      headers: new HttpHeaders(
+        {
+          'Authorization': this.sessionManager.getToken()
+        })
+    };
+    return this.http.get<RezervareBikePark[]>(this.url + '/bikepark/concursByBikepark/' + this.id,
+      this.httpOptions);
+    // this.sessionManager.getLoggedUserId(),
+  }
+
+  deleteRezervareConcurs(id: number): Observable<RezervareConcurs> {
+    return this.http.delete<RezervareConcurs>(this.url + '/biker/rezervareconcurs/delete/' + id, this.httpOptions).pipe(
+      tap(
+        data => {
+        },
+        error => {
+        }
+      )
+    );
+  }
+
+  deleteConcurs(id: number): Observable<Concurs> {
+    return this.http.delete<Concurs>(this.url + '/bikepark/concurs/delete/' + id, this.httpOptions).pipe(
+      tap(
+        data => {
+        },
+        error => {
+        }
+      )
+    );
   }
 
   addConcurs(concurs: Concurs) {
+    return this.http.post(this.url + '/bikepark/add/concurs',
+      {
+        'bikePark': {
+          'id': this.bikeparkID
+        },
+        'concurs': concurs
+      },
+      this.httpOptions
+    ).pipe(
+      tap(
+        data => {
+          // this.traseu = data;
+        },
+        error => {
+          console.log(error);
+        }
+      )
+    );
   }
 
   cancelInternship(id: number) {

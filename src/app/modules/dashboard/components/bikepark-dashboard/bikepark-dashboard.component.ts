@@ -19,9 +19,9 @@ import {AbstractConcursForDashboardServicesService} from '../../services/concurs
 export class BikeparkDashboardComponent implements OnInit {
 
   // public companies: Company[];
-  public rezervariBikepark: RezervareBikePark[];
-  public rezervariConcurs: RezervareConcurs[];
-  public concursuri: Concurs[];
+  public rezervariBikepark: RezervareBikePark[] = [];
+  public rezervariConcurs: RezervareConcurs[] = [];
+  public concursuri: Concurs[] = [];
   // public biker: Biker;
   public bikepark: BikePark;
   photo1: Photo = {id: 1, url: 'https://image.shutterstock.com/image-photo/valencia-spain-march-05-2017-260nw-593204357.jpg'};
@@ -30,18 +30,21 @@ export class BikeparkDashboardComponent implements OnInit {
   contact1: Contact = {id: 1, phoneNumber: '124124', photo: this.photo1};
   contact2: Contact = {id: 2, phoneNumber: '4234235', photo: this.photo2};
 
-  constructor(private dashboardService: DashboardService,
+  constructor(/*private dashboardService: DashboardService,*/
               private bikeparkService: AbstractBikeparksForDashboardServicesService,
               private concursService: AbstractConcursForDashboardServicesService) {
 
-    this.dashboardService.initialize();
-    this.bikepark = bikeparkService.getBikepark();
+    // this.dashboardService.initialize();
+    // this.bikepark = bikeparkService.getBikepark();
+    this.bikeparkService.getBikepark().subscribe((rez) => {
+      this.bikepark = rez;
+    });
     // this.biker = bikeparkService.getBiker();
-    this.bikeparkService.getRezervari().subscribe((rez) => {
+    this.bikeparkService.getRezervariForBikepark().subscribe((rez) => {
       this.rezervariBikepark = rez;
     }, (error) => {
     });
-    this.concursService.getRezervari().subscribe((rez) => {
+    this.concursService.getRezervariForBikepark().subscribe((rez) => {
       this.rezervariConcurs = rez;
     });
     this.concursService.getConcursuri(this.bikepark.id).subscribe((rez) => {

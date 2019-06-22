@@ -28,8 +28,8 @@ export class BikerDashboardComponent implements OnInit {
   public allInternshipsDTO: InternshipDTO[];
   public allSkills: Skill[];*/
   // public companies: Company[];
-  public rezervariBikepark: RezervareBikePark[];
-  public rezervariConcurs: RezervareConcurs[];
+  public rezervariBikepark: RezervareBikePark[] = [];
+  public rezervariConcurs: RezervareConcurs[] = [];
   public biker: Biker;
   public pieChartData;
   public chartData;
@@ -39,13 +39,16 @@ export class BikerDashboardComponent implements OnInit {
   contact1: Contact = {id: 1, phoneNumber: '124124', photo: this.photo1};
   contact2: Contact = {id: 2, phoneNumber: '4234235', photo: this.photo2};
 
-  constructor(private dashboardService: DashboardService,
+  constructor(/*private dashboardService: DashboardService,*/
               private bikeparkService: AbstractBikeparksForDashboardServicesService,
               private concursService: AbstractConcursForDashboardServicesService) {
 
-    this.dashboardService.initialize();
-    this.biker = bikeparkService.getBiker();
-    this.bikeparkService.getRezervari().subscribe((rez) => {
+    // this.dashboardService.initialize();
+    // this.biker = bikeparkService.getBiker();
+    this.bikeparkService.getBiker().subscribe((rez) => {
+      this.biker = rez;
+    });
+    this.bikeparkService.getRezervariForBiker().subscribe((rez) => {
       this.rezervariBikepark = rez;
       // this.rezervariBikepark.push(rez);
       /*for (let i = 0; i < rez.length; i++) {
@@ -53,7 +56,7 @@ export class BikerDashboardComponent implements OnInit {
       }*/
     }, (error) => {
     });
-    this.concursService.getRezervari().subscribe((rez) => {
+    this.concursService.getRezervariForBiker().subscribe((rez) => {
       this.rezervariConcurs = rez;
     });
     /*this.companies = [

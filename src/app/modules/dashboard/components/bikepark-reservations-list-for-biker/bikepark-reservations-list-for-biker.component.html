@@ -10,27 +10,27 @@
     <mat-card-content>
       <!--<p>{{bikeparkRezervationList.length}}</p>-->
       <mat-list>
-        <mat-list-item *ngFor="let rezervation of bikeparkRezervationList; let lastItem = last;">
+        <mat-list-item *ngFor="let rezervareBikePark of bikeparkRezervationList; let lastItem = last;">
           <div class="card-title-wrapper internship">
             <div class="row">
 
               <div class="col-sm-14">
-                <button mat-raised-button (click)="redirectToBikeparkPage(rezervation.rezervareBikepark.bikepark_id)">
+                <button mat-raised-button (click)="redirectToBikeparkPage(rezervareBikePark.bikepark_id)">
                   <!--<mat-icon>list</mat-icon>-->
                   Detalii
                 </button>
               </div>
 
               <div class="col-sm-6">
-                <h5>{{rezervation.rezervareBikepark.numeBikepark}}</h5>
+                <h5>{{rezervareBikePark.numeBikepark}}</h5>
               </div>
 
-              <div class="col-sm-4 {{rezervation.rezervareBikepark.ziua}}">
-                {{rezervation.rezervareBikepark.ziua}}
+              <div class="col-sm-4 {{rezervareBikePark.ziua}}">
+                {{rezervareBikePark.ziua}}
               </div>
 
               <div class="float-right skill-button">
-                <button mat-icon-button color="warn" (click)="deleteBikeparkRezervation(rezervation.id)">
+                <button mat-icon-button color="warn" (click)="deleteBikeparkRezervation(rezervareBikePark.id)">
                   <mat-icon>delete_outline</mat-icon>
                 </button>
               </div>

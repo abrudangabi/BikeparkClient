@@ -18,7 +18,7 @@ import {RezervareBikeparkDTO} from '../../../../shared/model/RezervareBikeparkDT
 
 export class DashboardService {
 
-  private url = 'https://enigmatic-sierra-91538.herokuapp.com/api';  // URL to web api
+  private url = 'http://localhost:8080/api';  // URL to web api
   private httpClient: HttpClient;
   private httpOptions = {
     headers: new HttpHeaders(

@@ -11,27 +11,27 @@ s<div class="limiter">
 					</span>
         <!--First Name-->
         <div class="form-group wrap-input100 validate-input">
-          <input class="input100" formControlName="firstName" placeholder="First Name"
-                 [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"/>
+          <input class="input100" formControlName="prenume" placeholder="First Name"
+                 [ngClass]="{ 'is-invalid': submitted && f.prenume.errors }"/>
           <span class="focus-input100"></span>
           <span class="symbol-input100">
 							<i class="fa fa-user" aria-hidden="true"></i>
 						</span>
         </div>
-        <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback-y">
-          <div *ngIf="f.lastName.errors.required">First Name is required</div>
+        <div *ngIf="submitted && f.nume.errors" class="invalid-feedback-y">
+          <div *ngIf="f.nume.errors.required">First Name is required</div>
         </div>
         <!--Last Name-->
         <div class="wrap-input100 validate-input">
-          <input class="input100" type="text" formControlName="lastName" placeholder="Last Name"
-                 [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
+          <input class="input100" type="text" formControlName="nume" placeholder="Last Name"
+                 [ngClass]="{ 'is-invalid': submitted && f.nume.errors }">
           <span class="focus-input100"></span>
           <span class="symbol-input100">
 							<i class="fa fa-user" aria-hidden="true"></i>
 						</span>
         </div>
-        <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback-y">
-          <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+        <div *ngIf="submitted && f.nume.errors" class="invalid-feedback-y">
+          <div *ngIf="f.nume.errors.required">Last Name is required</div>
         </div>
         <!--Email-->
         <div class="wrap-input100 validate-input">

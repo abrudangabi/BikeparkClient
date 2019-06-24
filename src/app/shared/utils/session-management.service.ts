@@ -12,8 +12,8 @@ import {Biker} from '../model/Biker';
 @Injectable()
 export class SessionManagementService {
 
-  private getLoggedUserInfoUrl = 'https://enigmatic-sierra-91538.herokuapp.com/api/user';
-  private baseUrl = 'https://enigmatic-sierra-91538.herokuapp.com/api';
+  private getLoggedUserInfoUrl = 'http://localhost:8080/api/user';
+  private baseUrl = 'http://localhost:8080/api';
   private token = null;
   private currentLoggedUser: User = null;
   private specificId: number;

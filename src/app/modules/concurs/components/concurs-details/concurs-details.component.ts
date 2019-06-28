@@ -70,7 +70,8 @@ export class ConcursDetailsComponent implements OnInit {
     const dialogRef = this.dialog.open(RezervareConcursAddComponent, {
       width: '90%',
       data: {rezervareConcurs: this.rezervareConcurs,
-      concurs: this.concursDetails}
+      concurs: this.concursDetails,
+      categorii: this.concursCategorii}
     });
 
     dialogRef.afterClosed().subscribe(() => {
@@ -113,8 +114,9 @@ export class ConcursDetailsComponent implements OnInit {
   redirectToBikeparkPage(id: number) {
     this.concursDetailsService.findBikepark(id).subscribe(bikepark => {
       this.bikepark = bikepark;
+      this.router.navigateByUrl('/profile/bikepark/' + this.bikepark.id);
     });
-    this.router.navigateByUrl('/profile/bikepark/' + this.bikepark.id);
+    // this.router.navigateByUrl('/profile/bikepark/' + this.bikepark.id);
   }
 
   /*'i_title i_title i_title i_title i_title i_status'

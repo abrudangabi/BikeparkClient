@@ -23,7 +23,13 @@ export class BikeparkDashboardComponent implements OnInit {
   public rezervariConcurs: RezervareConcurs[] = [];
   public concursuri: Concurs[] = [];
   // public biker: Biker;
-  public bikepark: BikePark;
+  public bikepark: BikePark = new class implements BikePark {
+    denumire: string;
+    descriere: string;
+    id: number;
+    nrLocuri: number;
+    telescaun: boolean;
+  };
   photo1: Photo = {id: 1, url: 'https://image.shutterstock.com/image-photo/valencia-spain-march-05-2017-260nw-593204357.jpg'};
   photo2: Photo = {id: 2, url: 'https://cdn4.iconfinder.com/data/icons/new-google-logo-2015/400/new-google-favicon-512.png'};
 

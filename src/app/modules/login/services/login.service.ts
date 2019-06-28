@@ -45,7 +45,7 @@ export class ServerLoginService implements AbstractLoginService {
 
   // http://localhost:8080/api/bikepark
   // url = 'http://localhost:8080/oauth/token';
-  url = 'https://cors-anywhere.herokuapp.com/http://proiectbikeparkreserve.herokuapp.com/oauth/token';
+  url = 'http://proiectbikeparkreserve.herokuapp.com/oauth/token';
   // url = 'https://proiectbikepark.herokuapp.com/oauth/token';
 
   httpOptions = {

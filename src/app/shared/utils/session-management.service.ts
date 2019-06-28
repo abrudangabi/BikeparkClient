@@ -12,8 +12,10 @@ import {Biker} from '../model/Biker';
 @Injectable()
 export class SessionManagementService {
 
-  private getLoggedUserInfoUrl = 'http://localhost:8080/api/user';
-  private baseUrl = 'http://localhost:8080/api';
+  /*private getLoggedUserInfoUrl = 'http://localhost:8080/api/user';
+  private baseUrl = 'http://localhost:8080/api';*/
+  private getLoggedUserInfoUrl = 'http://proiectbikeparkreserve.herokuapp.com/api/user';
+  private baseUrl = 'http://proiectbikeparkreserve.herokuapp.com/api';
   private token = null;
   private currentLoggedUser: User = null;
   private specificId: number;
@@ -25,6 +27,7 @@ export class SessionManagementService {
   }
 
   public setToken(token: string) {
+    console.log('Avem token ' + token);
     token = 'Bearer ' + token;
     this.token = token;
     this.getLoggedUser().subscribe((user) => {
@@ -85,14 +88,14 @@ export class SessionManagementService {
       if (applicantNavBarItems.length === 4) {
         applicantNavBarItems.splice(applicantNavBarItems.length - 1, 1);
       }
-      applicantNavBarItems.push({title: 'My profile', path: 'profile/student/' + this.specificId});
+      // applicantNavBarItems.push({title: 'My profile', path: 'profile/bikepark/' + this.specificId});
 
       // TODO AM DE FACUT AICI FOARTE IMPORTANT SUS
     } else if (this.currentLoggedUser.roles[0].roleString === Role.RoleStringEnum.BIKEPARK) {
       if (companyNavBarItems.length === 2) {
         companyNavBarItems.splice(applicantNavBarItems.length - 1, 1);
       }
-      companyNavBarItems.push({title: 'My profile', path: 'profile/bikepark/' + this.specificId});
+      // companyNavBarItems.push({title: 'My profile', path: 'profile/bikepark/' + this.specificId});
     }
   }
 

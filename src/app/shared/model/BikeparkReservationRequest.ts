@@ -1,8 +1,9 @@
 
-import {Biker, RezervareBikePark} from './models';
+import {BikePark, Biker, RezervareBikePark} from './models';
 
 export interface BikeparkReservationRequest {
   id?: number;
-  biker?: Biker;
+  bikePark?: BikePark;
+  numeBikepark?: string;
   rezervareBikepark?: RezervareBikePark;
 }

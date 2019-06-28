@@ -28,6 +28,8 @@ export abstract class AbstractConcursForDashboardServicesService {
 
   // public abstract getRezervariConcursForBiker(): Observable<ConcursReservationRequest[]> ;
 
+  public abstract getConcurskByInscriere(id: number): Observable<Concurs> ;
+
   public abstract getRezervariForBiker(): Observable<RezervareConcurs[]> ;
 
   public abstract getRezervariForBikepark(): Observable<RezervareConcurs[]> ;
@@ -143,12 +145,12 @@ export class MockConcursForDashboardServicesService implements AbstractConcursFo
   rezervareList: ConcursReservationRequest[] = [
     {
       id: 1,
-      biker: this.biker,
+      concurs: this.concurs1,
       rezervareConcurs: this.rez1
     },
     {
       id: 2,
-      biker: this.biker,
+      concurs: this.concurs2,
       rezervareConcurs: this.rez2
     }
   ];
@@ -162,6 +164,10 @@ export class MockConcursForDashboardServicesService implements AbstractConcursFo
 
   getRezervariConcursForBiker(): Observable<ConcursReservationRequest[]> {
     return of(this.rezervareList);
+  }
+
+  getConcurskByInscriere(id: number): Observable<Concurs> {
+    return of(this.concurs1);
   }
 
   getBiker(): Observable<Biker> {
@@ -253,10 +259,10 @@ export class ServerConcursForDashboardServicesService implements AbstractConcurs
   constructor(private http: HttpClient, private sessionManager: SessionManagementService) {
   }
 
-  initialize() {
-  }
-
   /*initialize() {
+  }*/
+
+  initialize() {
     if (this.sessionManager.isUserLoggedIn()) {
       this.httpOptions = {
         headers: new HttpHeaders(
@@ -267,12 +273,12 @@ export class ServerConcursForDashboardServicesService implements AbstractConcurs
       };
       this.applicantID = this.sessionManager.getLoggedUserId();
       this.isApplicant = this.sessionManager.getLoggedUserRole() == Role.RoleStringEnum.BIKER;
-      /!*this.bikeparkID = this.sessionManager.getLoggedUserId();
-      this.isBikepark = this.sessionManager.getLoggedUserRole() == Role.RoleStringEnum.BIKEPARK;*!/
+      /*this.bikeparkID = this.sessionManager.getLoggedUserId();
+      this.isBikepark = this.sessionManager.getLoggedUserRole() == Role.RoleStringEnum.BIKEPARK;*/
     } else {
       // todo redirect to login :)
     }
-  }*/
+  }
 
   /*getRezervariConcursForBiker(): Observable<ConcursReservationRequest[]> {
     return this.http.get<BikeparkReservationRequest[]>(this.url + '/biker/concursRequests', this.httpOptions).pipe(
@@ -292,6 +298,18 @@ export class ServerConcursForDashboardServicesService implements AbstractConcurs
     return null;
   }
 
+  getConcurskByInscriere(id: number): Observable<Concurs> {
+    console.log('getConcurs by inscriere Server');
+    const httpOptions = {
+      headers: new HttpHeaders(
+        {
+          'Content-Type': 'application/json',
+          'Authorization': this.sessionManager.getToken()
+        })
+    };
+    return this.http.get<Concurs>(this.url + '/concurs/inscriere/' + id, httpOptions);
+  }
+
   getRezervariForBiker(): Observable<RezervareConcurs[]> {
     console.log('getRezervariConcursForBiker Server');
     const httpOptions = {
@@ -300,8 +318,8 @@ export class ServerConcursForDashboardServicesService implements AbstractConcurs
           'Authorization': this.sessionManager.getToken()
         })
     };
-    return this.http.get<RezervareBikePark[]>(this.url + '/biker/inscrieriByBiker/' + this.id,
-      this.httpOptions);
+    return this.http.get<RezervareBikePark[]>(this.url + '/biker/inscrieriByBiker/' + this.sessionManager.getSpecificId(),
+      httpOptions);
     // this.sessionManager.getLoggedUserId(),
   }
 
@@ -313,8 +331,8 @@ export class ServerConcursForDashboardServicesService implements AbstractConcurs
           'Authorization': this.sessionManager.getToken()
         })
     };
-    return this.http.get<RezervareBikePark[]>(this.url + '/bikepark/inscrieriByBikepark/' + this.id,
-      this.httpOptions);
+    return this.http.get<RezervareBikePark[]>(this.url + '/bikepark/inscrieriByBikepark/' + this.sessionManager.getSpecificId(),
+      httpOptions);
     // this.sessionManager.getLoggedUserId(),
   }
 
@@ -326,8 +344,8 @@ export class ServerConcursForDashboardServicesService implements AbstractConcurs
           'Authorization': this.sessionManager.getToken()
         })
     };
-    return this.http.get<RezervareBikePark[]>(this.url + '/bikepark/concursByBikepark/' + this.id,
-      this.httpOptions);
+    return this.http.get<RezervareBikePark[]>(this.url + '/bikepark/concursByBikepark/' + this.sessionManager.getSpecificId(),
+      httpOptions);
     // this.sessionManager.getLoggedUserId(),
   }
 

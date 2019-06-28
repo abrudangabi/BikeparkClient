@@ -6,6 +6,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {RezervareConcurs} from '../../../../shared/model/RezervareConcurs';
 import {AbstractConcursDetailsService} from '../../services/concurs-details.service';
 import {Concurs} from '../../../../shared/model/Concurs';
+import {Categorie} from '../../../../shared/model/Categorie';
 
 @Component({
   selector: 'app-rezervare-concurs-add',
@@ -17,6 +18,7 @@ export class RezervareConcursAddComponent implements OnInit {
   @Output() editSubmitEventEmitter = new EventEmitter();
   rezervareConcurs: RezervareConcurs;
   concursDetails: Concurs;
+  categorii: Categorie[];
 
   constructor(
     public datepipe: DatePipe,
@@ -25,6 +27,7 @@ export class RezervareConcursAddComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.rezervareConcurs = data.rezervareConcurs;
     this.concursDetails = data.concurs;
+    this.categorii = data.categorii;
   }
 
   onNoClick() {

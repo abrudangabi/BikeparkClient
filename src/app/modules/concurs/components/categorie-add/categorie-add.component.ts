@@ -17,6 +17,24 @@ export class CategorieAddComponent implements OnInit {
   @Output() editSubmitEventEmitter = new EventEmitter();
   categorie: Categorie;
   concursDetails: Concurs;
+  varsta = [
+    '14-18 ani',
+    '19-29 ani',
+    '30-39 ani',
+    '40+ ani'
+  ];
+  disciplina = [
+    'ENDURO',
+    'XC',
+    'DH',
+    'ROAD',
+    'SLOPE'
+  ];
+  dificulate = [
+    'greu',
+    'mediu',
+    'usor'
+  ];
 
   constructor(
     public datepipe: DatePipe,

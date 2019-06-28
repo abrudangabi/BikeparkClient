@@ -2,20 +2,41 @@
 <div mat-dialog-content>
   <div class="main-container">
     <mat-form-field>
-      <input matInput [(ngModel)]="categorie.tipDisciplina" placeholder="Tip Disciplina"
-             value="{{categorie.tipDisciplina}}" onchange="">
+      <mat-select placeholder = "Disciplina"
+                  [(ngModel)] = "categorie.tipDisciplina" name = "tipDisciplina">
+        <mat-option *ngFor = "let disc of disciplina"
+                    [value] = "disc">
+          {{disc}}
+        </mat-option>
+      </mat-select>
+      <!--<input matInput [(ngModel)]="categorie.tipDisciplina" placeholder="Tip Disciplina"
+             value="{{categorie.tipDisciplina}}" onchange="">-->
     </mat-form-field>
     <mat-form-field>
-      <input matInput [(ngModel)]="categorie.dificultate" placeholder="Dificultate"
-             value="{{categorie.dificultate}}" onchange="">
+      <mat-select placeholder = "Dificultate"
+                  [(ngModel)] = "categorie.dificultate" name = "dificultate">
+        <mat-option *ngFor = "let dif of dificulate"
+                    [value] = "dif">
+          {{dif}}
+        </mat-option>
+      </mat-select>
+      <!--<input matInput [(ngModel)]="categorie.dificultate" placeholder="Dificultate"
+             value="{{categorie.dificultate}}" onchange="">-->
     </mat-form-field>
     <mat-form-field>
       <input matInput [(ngModel)]="categorie.lungime" placeholder="Lungime"
              value="{{categorie.lungime}}" onchange="">
     </mat-form-field>
     <mat-form-field>
-      <input matInput [(ngModel)]="categorie.varsta" placeholder="Varsta"
-             value="{{categorie.varsta}}" onchange="">
+      <mat-select placeholder = "Varsta"
+                  [(ngModel)] = "categorie.varsta" name = "varsta">
+        <mat-option *ngFor = "let v of varsta"
+                    [value] = "v">
+          {{v}}
+        </mat-option>
+      </mat-select>
+      <!--<input matInput [(ngModel)]="categorie.varsta" placeholder="Varsta"
+             value="{{categorie.varsta}}" onchange="">-->
     </mat-form-field>
   </div>
 </div>

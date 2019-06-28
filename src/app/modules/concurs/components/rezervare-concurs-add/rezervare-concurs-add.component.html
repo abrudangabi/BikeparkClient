@@ -6,8 +6,30 @@
              value="{{rezervareConcurs.id}}" onchange="">
     </mat-form-field>-->
     <mat-form-field>
-      <input matInput [(ngModel)]="rezervareConcurs.categorie" placeholder="Categorie"
-             value="{{rezervareConcurs.categorie}}" onchange="">
+      <!--<select>
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="opel">Opel</option>
+        <option value="audi">Audi</option>
+      </select>-->
+      <!--<input matInput [(ngModel)]="rezervareConcurs.categorie" placeholder="Categorie"
+             value="{{rezervareConcurs.categorie}}" onchange="">-->
+      <!--<mat-select>
+        &lt;!&ndash;<mat-option *ngFor="let categorie of categorii" [value]="categorie.tipDisciplina + categorie.varsta">
+          {{categorie.tipDisciplina + categorie.varsta + ' ani'}}
+        </mat-option>&ndash;&gt;
+        &lt;!&ndash;<mat-option [(ngModel)]="rezervareConcurs.categorie" placeholder="Categorie"
+                    *ngFor="let categorie of categorii" [value]="rezervareConcurs.categorie">
+          {{categorie.tipDisciplina + categorie.varsta + ' ani'}}
+        </mat-option>&ndash;&gt;
+      </mat-select>-->
+      <mat-select placeholder = "Categorie"
+                  [(ngModel)] = "rezervareConcurs.categorie" name = "categorie">
+        <mat-option *ngFor = "let categorie of categorii"
+                    [value] = "categorie.tipDisciplina + ' ' + categorie.varsta">
+          {{categorie.tipDisciplina + ' ' + categorie.varsta}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
     <mat-form-field>
       <input matInput [(ngModel)]="rezervareConcurs.numar" placeholder="Numar"

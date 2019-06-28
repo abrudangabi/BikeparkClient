@@ -6,16 +6,30 @@
              value="{{traseu.denumire}}" onchange="">
     </mat-form-field>
     <mat-form-field>
-      <input matInput [(ngModel)]="traseu.dificultate" placeholder="Dificultate"
-             value="{{traseu.dificultate}}" onchange="">
+      <mat-select placeholder = "Dificultate traseu"
+                  [(ngModel)] = "traseu.dificultate" name = "Dificultate">
+        <mat-option *ngFor = "let dif of dificulate"
+                    [value] = "dif">
+          {{dif}}
+        </mat-option>
+      </mat-select>
+      <!--<input matInput [(ngModel)]="traseu.dificultate" placeholder="Dificultate"
+             value="{{traseu.dificultate}}" onchange="">-->
     </mat-form-field>
     <mat-form-field>
       <input matInput [(ngModel)]="traseu.lungime" placeholder="Lungime"
              value="{{traseu.lungime}}" onchange="">
     </mat-form-field>
     <mat-form-field>
-      <input matInput [(ngModel)]="traseu.tipTraseu" placeholder="Tip Traseu"
-             value="{{traseu.tipTraseu}}" onchange="">
+      <mat-select placeholder = "Tip Traseu"
+                  [(ngModel)] = "traseu.tipTraseu" name = "Tip Traseu">
+        <mat-option *ngFor = "let disc of disciplina"
+                    [value] = "disc">
+          {{disc}}
+        </mat-option>
+      </mat-select>
+      <!--<input matInput [(ngModel)]="traseu.tipTraseu" placeholder="Tip Traseu"
+             value="{{traseu.tipTraseu}}" onchange="">-->
     </mat-form-field>
     <!--<mat-form-field>
       <input matInput [matDatepicker]="picker2" placeholder="End Date" [(ngModel)]="rezervareBikepark.ziua">

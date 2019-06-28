@@ -19,6 +19,18 @@ export class TraseuAddComponent implements OnInit {
   traseu: Traseu;
   bikepark: BikePark;
   // trasee: Traseu[];
+  disciplina = [
+    'ENDURO',
+    'XC',
+    'DH',
+    'ROAD',
+    'SLOPE'
+  ];
+  dificulate = [
+    'greu',
+    'mediu',
+    'usor'
+  ];
 
   constructor(
     public datepipe: DatePipe,

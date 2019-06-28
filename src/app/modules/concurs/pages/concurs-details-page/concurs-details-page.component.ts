@@ -13,10 +13,16 @@ import {ActivatedRoute} from '@angular/router';
 export class ConcursDetailsPageComponent implements OnInit {
 
   public concursID: string;
-  public concursDetails: Concurs;
-  public concursLogo: Photo;
+  public concursDetails: Concurs = null;
+  public concursLogo: Photo = new class implements Photo {
+    deleted: boolean;
+    id: number;
+    path: string;
+    publicId: string;
+    url: string;
+  };
   // public concursTags: Tag[];
-  public concursCategorii: Categorie[];
+  public concursCategorii: Categorie[] = [];
 
   constructor(private details: AbstractConcursDetailsService, private route: ActivatedRoute) {
     this.route.params.subscribe(params => {

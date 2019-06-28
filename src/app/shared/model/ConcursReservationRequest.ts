@@ -1,8 +1,8 @@
 
-import {Biker, RezervareConcurs} from './models';
+import {Biker, Concurs, RezervareConcurs} from './models';
 
 export interface ConcursReservationRequest {
   id?: number;
-  biker?: Biker;
+  concurs?: Concurs;
   rezervareConcurs?: RezervareConcurs;
 }

@@ -32,7 +32,11 @@ export class BikeparkReservationsListForBikerComponent implements OnInit {
   }
 
   redirectToBikeparkPage(id: number) {
-    this.router.navigateByUrl('/profile/bikepark/' + id);
+    console.log('Id in lista de rezervari bikepark pt biker ' + id);
+    this.bikeparkRezervation.getBikeparkByRezervare(id).subscribe(data => {
+      this.router.navigateByUrl('/profile/bikepark/' + data.id);
+    });
+    //this.router.navigateByUrl('/profile/bikepark/' + id);
   }
 
   deleteBikeparkRezervation(id: number) {

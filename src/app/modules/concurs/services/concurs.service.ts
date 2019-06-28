@@ -462,7 +462,7 @@ export class ServerConcursService implements AbstractConcursService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': '' + this.sessionManager.getToken()
+        //'Authorization': '' + this.sessionManager.getToken()
         /*'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhd' +
           'WQiOlsidGVzdGp3dHJlc291cmNlaWQiXSwidXNlcl9uYW1lIjoiYXBwbGljYW50Iiwi' +
           'c2NvcGUiOlsicmVhZCIsIndyaXRlIl0sImV4cCI6MTU3NjY5OTAzOCwiYXV0aG9yaXRp' +
@@ -475,7 +475,7 @@ export class ServerConcursService implements AbstractConcursService {
       return this.concursSubject.asObservable();
     } else {
       this.concursSubject = new ReplaySubject(1);
-      this.httpClient.get<Concurs[]>(url, httpOptions).subscribe(data => this.concursSubject.next(data));
+      this.httpClient.get<Concurs[]>(url, this.httpOptions).subscribe(data => this.concursSubject.next(data));
       return this.concursSubject.asObservable();
     }
   }

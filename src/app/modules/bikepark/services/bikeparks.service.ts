@@ -133,6 +133,7 @@ export class ServerBikeparksService implements AbstractBikeparksService {
     headers: new HttpHeaders(
       {
         'Content-Type': 'application/json',
+        //'Authorization': this.sessionManager.getToken()
         'Authorization': 'Bearer x'
       })
   };
@@ -176,7 +177,8 @@ export class ServerBikeparksService implements AbstractBikeparksService {
         }
       )
     );*/
-    return this.http.get<BikePark[]>(this.url + '/' + 1 + '/recommendations').pipe(
+    console.log('Recomandari id ' + this.sessionManager.getSpecificId());
+    return this.http.get<BikePark[]>(this.url + '/' + this.sessionManager.getSpecificId() + '/recommendations', this.httpOptions).pipe(
       tap(
         data => {
           this.bikeparks = data;

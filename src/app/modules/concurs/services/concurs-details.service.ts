@@ -167,7 +167,10 @@ export class ServerConcursDetailsService implements AbstractConcursDetailsServic
   }
 
   getBikepark(id: number): Observable<BikePark> {
-    return null;
+    return this.http.get<BikePark>(this.url + '/concurs/' + id + '/bikepark', this.httpOptions).pipe(
+      tap(() => console.log(`fetched Bikepark id#${id}`)),
+      catchError(this.handleError<BikePark>(`getConcursCategorie failed ${id}`)));
+    // return null;
   }
 
   getRezervari(): RezervareConcurs[] {
@@ -175,7 +178,7 @@ export class ServerConcursDetailsService implements AbstractConcursDetailsServic
   }
 
   isHisProfile(): boolean {
-    return false;
+    return this.isApplicant;
   }
 
   addRezervare(rezervareConcurs: RezervareConcurs): Observable<RezervareConcurs> {
@@ -257,7 +260,9 @@ export class ServerConcursDetailsService implements AbstractConcursDetailsServic
   }
 
   findBikepark(idConcurs: number): Observable<BikePark> {
-    return null;
+    return this.http.get<BikePark>(this.url + '/concurs/' + idConcurs + '/bikepark', this.httpOptions).pipe(
+      tap(() => console.log(`fetched Bikepark id#${idConcurs}`)),
+      catchError(this.handleError<BikePark>(`getConcursCategorie failed ${idConcurs}`)));
   }
 
   uploadPhoto(uploadData: FormData) {

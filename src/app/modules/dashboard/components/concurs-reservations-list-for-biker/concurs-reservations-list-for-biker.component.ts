@@ -36,7 +36,11 @@ export class ConcursReservationsListForBikerComponent implements OnInit {
   }
 
   redirectToBikeparkPage(id: number) {
-    this.router.navigateByUrl('/concurs/' + id);
+    console.log('Id in lista de inscrieri concurs pt biker ' + id);
+    this.concursRezervation.getConcurskByInscriere(id).subscribe(data => {
+      this.router.navigateByUrl('/concurs/' + data.id);
+    });
+    //this.router.navigateByUrl('/concurs/' + id);
   }
 
   /*public openAddTraseuDialog() {

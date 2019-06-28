@@ -30,7 +30,16 @@ export class BikerDashboardComponent implements OnInit {
   // public companies: Company[];
   public rezervariBikepark: RezervareBikePark[] = [];
   public rezervariConcurs: RezervareConcurs[] = [];
-  public biker: Biker;
+  public biker: Biker = new class implements Biker {
+    aniExperienta: number;
+    bicicleta: string;
+    dataNasterii: Date;
+    disciplinaFavorita: string;
+    id: number;
+    membruData: Date;
+    nume: string;
+    prenume: string;
+  };
   public pieChartData;
   public chartData;
   photo1: Photo = {id: 1, url: 'https://image.shutterstock.com/image-photo/valencia-spain-march-05-2017-260nw-593204357.jpg'};

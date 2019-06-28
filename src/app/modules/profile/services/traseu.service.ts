@@ -10,6 +10,7 @@ import {tap} from 'rxjs/operators';
 import {Traseu} from '../../../shared/model/Traseu';
 import {RezervareBikePark} from '../../../shared/model/RezervareBikePark';
 import {Categorie} from '../../../shared/model/Categorie';
+import {Role} from '../../../shared/model/Role';
 
 @Injectable()
 export abstract class AbstractTraseuService {
@@ -123,7 +124,7 @@ export class ServerTraseuService implements AbstractTraseuService {
   trasee: Traseu[];
   distance: number;
   bikeparkID: number;
-  idBikepark: boolean;
+  isBikepark: boolean;
 
   traseu: Traseu;
   // trasee: Traseu[];
@@ -131,7 +132,8 @@ export class ServerTraseuService implements AbstractTraseuService {
   httpOptions = {
     headers: new HttpHeaders(
       {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer x'
       })
   };
 
@@ -168,10 +170,10 @@ export class ServerTraseuService implements AbstractTraseuService {
     // return undefined;
   }
 
-  public initialize() {
-  }
+  /*public initialize() {
+  }*/
 
-  /*initialize() {
+  initialize() {
     if (this.sessionManager.isUserLoggedIn()) {
       this.httpOptions = {
         headers: new HttpHeaders(
@@ -180,10 +182,10 @@ export class ServerTraseuService implements AbstractTraseuService {
             'Authorization': '' + this.sessionManager.getToken()
           })
       };
-      this.companyID = this.sessionManager.getLoggedUserId();
-      this.isCompany = this.sessionManager.getLoggedUserRole() == Role.RoleStringEnum.COMPANY;
+      this.bikeparkID = this.sessionManager.getLoggedUserId();
+      this.isBikepark = this.sessionManager.getLoggedUserRole() == Role.RoleStringEnum.BIKEPARK;
     }
-  }*/
+  }
 
   public getTrasee(idBikepark: number): Observable<Traseu[]> {
     // return null;

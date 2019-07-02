@@ -10,6 +10,11 @@ import {Internship} from '../../../../shared/model/InternshipEnums';*/
 import {Biker} from '../../../../shared/model/Biker';
 import {RezervareBikePark} from '../../../../shared/model/RezervareBikePark';
 import {RezervareBikeparkDTO} from '../../../../shared/model/RezervareBikeparkDTO';
+import {Role} from '../../../../shared/model/Role';
+import {BikePark} from '../../../../shared/model/BikePark';
+import {tap} from 'rxjs/operators';
+import {Contact} from '../../../../shared/model/Contact';
+import {Locatie} from '../../../../shared/model/Locatie';
 
 @Injectable({
   providedIn: 'root'
@@ -19,19 +24,22 @@ import {RezervareBikeparkDTO} from '../../../../shared/model/RezervareBikeparkDT
 export class DashboardService {
 
   private url = 'http://localhost:8080/api';  // URL to web api
-  private httpClient: HttpClient;
+  //private httpClient: HttpClient;
+  applicantID: number;
+  isApplicant: boolean;
   private httpOptions = {
     headers: new HttpHeaders(
       {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer x'
+        'Authorization': '' + this.sessionManager.getToken()
+        // 'Authorization': 'Bearer x'
       })
   };
 
   constructor(private http: HttpClient,
               private sessionManager: SessionManagementService
   ) {
-    this.httpClient = http;
+    //this.httpClient = http;
   }
 
   initialize() {
@@ -43,8 +51,70 @@ export class DashboardService {
             'Authorization': '' + this.sessionManager.getToken()
           })
       };
+
+      this.applicantID = this.sessionManager.getLoggedUserId();
+      this.isApplicant = this.sessionManager.getLoggedUserRole() == Role.RoleStringEnum.BIKER;
+      /*this.httpOptions = {
+        headers: new HttpHeaders(
+          {
+            'Content-Type': 'application/json',
+            'Authorization': '' + this.sessionManager.getToken()
+          })
+
+      };*/
     } else {
     }
+  }
+
+  editBiker(biker: Biker): Observable<Biker> {
+    console.log('Intra in edit');
+    return this.http.put(this.url + '/biker/edit/' + biker.id,
+      biker,
+      this.httpOptions
+    ).pipe(
+      tap(
+        data => {
+          // this.bikepark = data;
+        },
+        error => {
+          console.log(error);
+        }
+      )
+    );
+  }
+
+  editBikerContact(contact: Contact): Observable<Contact> {
+    console.log('Intra in edit');
+    return this.http.put(this.url + '/biker/edit/contact/' + contact.id,
+      contact,
+      this.httpOptions
+    ).pipe(
+      tap(
+        data => {
+          //this.bikepark = data;
+        },
+        error => {
+          console.log(error);
+        }
+      )
+    );
+  }
+
+  editBikerAddress(locatie: Locatie): Observable<Locatie> {
+    console.log('Intra in edit');
+    return this.http.put(this.url + '/biker/edit/locatie/' + locatie.id,
+      locatie,
+      this.httpOptions
+    ).pipe(
+      tap(
+        data => {
+          // this.bikepark = data;
+        },
+        error => {
+          console.log(error);
+        }
+      )
+    );
   }
 
   /*getAllSkills(): Observable<Skill[]>{

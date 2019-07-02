@@ -250,6 +250,7 @@ export class ServerBikeparkProfileService implements AbstractBikeparkProfileServ
   }
 
   addRezervare(rezervareBikePark: RezervareBikePark): Observable<RezervareBikePark> {
+    console.log('ziua lui ' + rezervareBikePark.ziua);
     console.log('bikepark_id ' + this.bikepark.id);
     return this.http.post(this.url + '/rezervarebikepark/rezerva',
       {

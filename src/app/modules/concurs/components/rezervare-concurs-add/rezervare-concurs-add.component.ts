@@ -31,11 +31,16 @@ export class RezervareConcursAddComponent implements OnInit {
   }
 
   onNoClick() {
+    //this.dialogRef.removePanelClass();
     this.dialogRef.close();
   }
 
   ngOnInit() {
     this.initialize();
+  }
+
+  ngOnDestroy() {
+    //
   }
 
   onSaveClick() {

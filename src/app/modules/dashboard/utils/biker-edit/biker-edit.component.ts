@@ -3,6 +3,7 @@ import {DatePipe} from '@angular/common';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Biker} from '../../../../shared/model/Biker';
 import {AbstractBikeparksForDashboardServicesService} from '../../services/bikeparks-service.service';
+import {DashboardService} from '../service/dashboard.service';
 
 @Component({
   selector: 'app-biker-edit',
@@ -17,6 +18,7 @@ export class BikerEditComponent implements OnInit {
   constructor(
     public datepipe: DatePipe,
     private bikerService: AbstractBikeparksForDashboardServicesService,
+    private dashboardService: DashboardService,
     public dialogRef: MatDialogRef<BikerEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.biker = data.biker;
@@ -32,6 +34,9 @@ export class BikerEditComponent implements OnInit {
 
   // TODO trebuie facut
   onSaveClick() {
+    this.dashboardService.editBiker(this.biker)
+      .subscribe();
+    this.dialogRef.close();
     // this.internship.birthday = new Date(this.datepipe.transform(this.internship.birthday, 'yyyy-MM-dd'));
     // this.studentProfileService.updateStudentProfileBasic(this.internship)
     //   .subscribe(() => {

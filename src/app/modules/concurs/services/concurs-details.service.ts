@@ -232,7 +232,7 @@ export class ServerConcursDetailsService implements AbstractConcursDetailsServic
   }
 
   editConcurs(concurs: Concurs): Observable<Concurs> {
-    return this.http.put(this.url + '/concurs/edit',
+    return this.http.put(this.url + '/concurs/edit/' + concurs.id,
       concurs,
       this.httpOptions
     ).pipe(

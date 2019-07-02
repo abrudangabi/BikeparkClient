@@ -67,7 +67,7 @@ export class ConcursDetailsComponent implements OnInit {
   }
 
   public openRezervareConcursDialog() {
-    const dialogRef = this.dialog.open(RezervareConcursAddComponent, {
+    let dialogRef = this.dialog.open(RezervareConcursAddComponent, {
       width: '90%',
       data: {rezervareConcurs: this.rezervareConcurs,
       concurs: this.concursDetails,
@@ -75,6 +75,7 @@ export class ConcursDetailsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(() => {
+      // dialogRef = null;
       console.log('closed');
     });
   }

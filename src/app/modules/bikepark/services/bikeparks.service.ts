@@ -161,6 +161,9 @@ export class ServerBikeparksService implements AbstractBikeparksService {
           })
       };
       this.bikeparkID = this.sessionManager.getLoggedUserId();
+      /*this.sessionManager.getLoggedUserRole().subscribe(data => {
+        this.isBikepark = data == Role.RoleStringEnum.BIKEPARK;
+      })*/
       this.isBikepark = this.sessionManager.getLoggedUserRole() == Role.RoleStringEnum.BIKEPARK;
     }
   }

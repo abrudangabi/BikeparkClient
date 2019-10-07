@@ -28,6 +28,8 @@ export abstract class AbstractTraseuService {
   public abstract deleteTraseu(id: number): Observable<Traseu>;
 
   public abstract initialize();
+
+  public abstract isHisProfile(): boolean;
 }
 
 export class MockTraseuService implements AbstractTraseuService {
@@ -111,6 +113,10 @@ export class MockTraseuService implements AbstractTraseuService {
     return this.nameFilters;
   }*/
 
+  isHisProfile(): boolean{
+    return true;
+  }
+
   public initialize() {
   }
 }
@@ -183,6 +189,9 @@ export class ServerTraseuService implements AbstractTraseuService {
           })
       };
       this.bikeparkID = this.sessionManager.getLoggedUserId();
+      /*this.sessionManager.getLoggedUserRole().subscribe(data => {
+        this.isBikepark = data == Role.RoleStringEnum.BIKEPARK;
+      })*/
       this.isBikepark = this.sessionManager.getLoggedUserRole() == Role.RoleStringEnum.BIKEPARK;
     }
   }
@@ -211,6 +220,10 @@ export class ServerTraseuService implements AbstractTraseuService {
         }
       )
     );
+  }
+
+  isHisProfile(): boolean{
+    return !this.isBikepark;
   }
 
   /*public getDenumire(): string[] {

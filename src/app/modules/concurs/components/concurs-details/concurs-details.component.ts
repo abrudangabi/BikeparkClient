@@ -41,6 +41,7 @@ export class ConcursDetailsComponent implements OnInit {
   constructor(public dialog: MatDialog,
               private concursDetailsService: AbstractConcursDetailsService,
               private router: Router) {
+    this.isHisProfile = concursDetailsService.isHisProfile();
   }
 
   ngOnInit() {

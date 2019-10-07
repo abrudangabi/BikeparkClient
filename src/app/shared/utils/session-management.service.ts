@@ -1,5 +1,5 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {User} from '../model/user';
 import {Company} from '../model/Company';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
@@ -130,8 +130,12 @@ export class SessionManagementService {
   }
 
   public getLoggedUserRole(): Role.RoleStringEnum {
-    return this.currentLoggedUser.roles[0].roleString;
+    return (this.currentLoggedUser.roles[0].roleString);
   }
+
+  /*public getLoggedUserRole(): Role.RoleStringEnum {
+    return this.currentLoggedUser.roles[0].roleString;
+  }*/
 
   public isEverythingLoaded(): boolean {
     return this.everythingLoaded;

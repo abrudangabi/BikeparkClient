@@ -22,9 +22,9 @@
     <!--<div class= "internship-logo"> <img src="{{concursLogo.url}}"></div>-->
     <!--<div class="internship-logo"><img src={{bikerDetails.contact.photo.url}} alt="..."></div>-->
 
-    <button mat-raised-button class="internship-modify" (click)="openEditDialog()">Edit Biker</button>
-    <button mat-raised-button class="contacte-modify" (click)="openContactEditDialog()">Edit Contact</button>
-    <button mat-raised-button class="location-modify" (click)="openLocationEditDialog()">Edit Locatie</button>
+    <button mat-raised-button class="internship-modify" *ngIf="isBiker" (click)="openEditDialog()">Edit Biker</button>
+    <button mat-raised-button class="contacte-modify" *ngIf="isBiker" (click)="openContactEditDialog()">Edit Contact</button>
+    <button mat-raised-button class="location-modify" *ngIf="isBiker" (click)="openLocationEditDialog()">Edit Locatie</button>
     <!--<div class="col-sm-12">
       &lt;!&ndash;Photo upload&ndash;&gt;
       <input class="input-file"

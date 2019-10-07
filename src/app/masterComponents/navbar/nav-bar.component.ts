@@ -23,6 +23,15 @@ export class NavBarComponent implements OnInit, OnDestroy {
     // this.menuNavBar.concat(companyNavBarItems);
     this.isLoginDataLoadingFinishedSubscription = this.sessionManagementService.isLoginDataLoadingFinished.subscribe((response) => {
       if (response) {
+        /*let isBiker:boolean;
+        this.sessionManagementService.getLoggedUserRole().subscribe(data => {
+          isBiker = data == Role.RoleStringEnum.BIKER;
+        });
+        if (isBiker) {
+          this.menuNavBar = applicantNavBarItems;
+        } else if (!isBiker) {
+          this.menuNavBar = companyNavBarItems;
+        }*/
         if (this.sessionManagementService.getLoggedUserRole() === Role.RoleStringEnum.BIKER) {
           this.menuNavBar = applicantNavBarItems;
         } else if (this.sessionManagementService.getLoggedUserRole() === Role.RoleStringEnum.BIKEPARK) {

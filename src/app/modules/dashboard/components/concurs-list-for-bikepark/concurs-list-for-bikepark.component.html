@@ -6,7 +6,7 @@
       </mat-card-title>
     </div>
     <div class="float-right">
-      <button mat-raised-button (click)="openAddConcursDialog()">Adauga Concurs Nou</button>
+      <button mat-raised-button *ngIf="isBikepark" (click)="openAddConcursDialog()">Adauga Concurs Nou</button>
     </div>
   </mat-card-header>
   <mat-card-content>
@@ -29,7 +29,7 @@
         </div>
 
         <div class="float-right skill-button">
-          <button mat-icon-button color="warn" (click)="deleteConcurs(concurs.id)">
+          <button mat-icon-button color="warn" *ngIf="isBikepark" (click)="deleteConcurs(concurs.id)">
             <mat-icon>delete_outline</mat-icon>
           </button>
         </div>

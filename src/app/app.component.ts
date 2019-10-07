@@ -18,22 +18,34 @@ export class AppComponent {
   }
 
   public getContentAreaClass(): string {
-    return 'contentArea'; // TODO
     if (this.sessionManagementService.isUserLoggedIn() &&
       this.sessionManagementService.isEverythingLoaded()) {
       return 'contentArea';
     } else {
       return '';
     }
+    /*return 'contentArea'; // TODO
+    if (this.sessionManagementService.isUserLoggedIn() &&
+      this.sessionManagementService.isEverythingLoaded()) {
+      return 'contentArea';
+    } else {
+      return '';
+    }*/
   }
 
   public getNavBarClass(): string {
-    return ''; // TODO
     if (this.sessionManagementService.isUserLoggedIn() &&
       this.sessionManagementService.isEverythingLoaded()) {
       return '';
     } else {
       return 'hiddenNavBar';
     }
+    /*return ''; // TODO
+    if (this.sessionManagementService.isUserLoggedIn() &&
+      this.sessionManagementService.isEverythingLoaded()) {
+      return '';
+    } else {
+      return 'hiddenNavBar';
+    }*/
   }
 }

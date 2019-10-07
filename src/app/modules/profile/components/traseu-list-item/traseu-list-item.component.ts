@@ -20,6 +20,7 @@ export class TraseuListItemComponent implements OnInit {
 
   constructor(private traseuService: AbstractTraseuService,
               private traseuList: TraseuListComponent) {
+    this.isHisProfile = !traseuService.isHisProfile();
     // console.log('Traseul ' + this.traseu.denumire);
   }
 

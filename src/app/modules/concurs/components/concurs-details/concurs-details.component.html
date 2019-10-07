@@ -21,10 +21,10 @@
       </ul>
     </div>-->
     <button mat-raised-button class="bikepark-redirect" (click)="redirectToBikeparkPage(concursDetails.id)">Spre Bikepark</button>
-    <button mat-raised-button class="internship-modify" (click)="openEditDialog()">Edit</button>
-    <button mat-raised-button class="internship-apply" (click)="openRezervareConcursDialog()">Inscriere</button>
-    <div class="col-sm-12">
-      <!--Photo upload-->
+    <button mat-raised-button class="internship-modify" *ngIf="!isHisProfile" (click)="openEditDialog()">Edit</button>
+    <button mat-raised-button class="internship-apply" *ngIf="isHisProfile" (click)="openRezervareConcursDialog()">Inscriere</button>
+    <!--todo <div class="col-sm-12">
+      &lt;!&ndash;Photo upload&ndash;&gt;
       <input class="input-file"
              type="file" (change)="onPhotoFileChanged($event)"
              #fileInput>
@@ -32,7 +32,7 @@
         <mat-icon>add_a_photo</mat-icon>
         Upload Photo
       </button>
-    </div>
+    </div>-->
     <!--<a mat-raised-button class="internship-apply" (click)="applyForConcurs(concursDetails.id)">Inscrie-te</a>-->
   </div>
 </mat-card>
@@ -43,9 +43,9 @@
         <h2>Categorii</h2>
       </mat-card-title>
     </div>
-    <div *ngIf="isHisProfile">
+    <div *ngIf="!isHisProfile">
       <div class="float-right">
-        <button mat-icon-button color="primary" (click)="openCategorieAddDialog()">
+        <button mat-icon-button color="primary" *ngIf="!isHisProfile" (click)="openCategorieAddDialog()">
           <mat-icon>add_circle</mat-icon>
         </button>
       </div>
@@ -60,9 +60,9 @@
         <div class="card-title-wrapper skill-item">
           <p>{{categorie.varsta}}</p>
         </div>
-        <div *ngIf="isHisProfile">
+        <div *ngIf="!isHisProfile">
           <div class="float-right skill-button">
-            <button mat-icon-button color="warn" (click)="deleteCategorie(categorie.id)">
+            <button mat-icon-button color="warn" *ngIf="!isHisProfile" (click)="deleteCategorie(categorie.id)">
               <mat-icon>delete_outline</mat-icon>
             </button>
           </div>

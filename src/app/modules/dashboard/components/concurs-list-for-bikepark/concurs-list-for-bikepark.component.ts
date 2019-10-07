@@ -17,6 +17,7 @@ import {Router} from '@angular/router';
 export class ConcursListForBikeparkComponent implements OnInit {
 
   concursuri: Concurs[];
+  isBikepark: boolean;
 
   concurs: Concurs = new class implements Concurs {
     dataStart: Date;
@@ -27,7 +28,9 @@ export class ConcursListForBikeparkComponent implements OnInit {
   };
 
   constructor(public dialog: MatDialog, private router: Router,
-              private concursService: AbstractConcursForDashboardServicesService) { }
+              private concursService: AbstractConcursForDashboardServicesService) {
+    this.isBikepark = !concursService.isHisProfile();
+  }
 
   ngOnInit() {
     this.intialize();

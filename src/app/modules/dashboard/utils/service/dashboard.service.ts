@@ -53,6 +53,9 @@ export class DashboardService {
       };
 
       this.applicantID = this.sessionManager.getLoggedUserId();
+      /*this.sessionManager.getLoggedUserRole().subscribe(data => {
+        this.isApplicant = data == Role.RoleStringEnum.BIKEPARK;
+      })*/
       this.isApplicant = this.sessionManager.getLoggedUserRole() == Role.RoleStringEnum.BIKER;
       /*this.httpOptions = {
         headers: new HttpHeaders(

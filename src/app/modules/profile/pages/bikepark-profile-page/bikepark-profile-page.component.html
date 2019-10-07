@@ -60,7 +60,7 @@
           </div>
 
           <!--<button mat-raised-button class="internship-modify" (click)="openEditDialog()">Edit</button>-->
-          <div class="col-sm-12 traseu-edit-button-wrapper" *ngIf="!isHisProfile">
+          <div class="col-sm-12 traseu-edit-button-wrapper" *ngIf="isHisProfile">
             <button mat-raised-button (click)="openAddRezervareDialog()">
               <!--<mat-icon>list</mat-icon>-->
               Rezerva
@@ -103,10 +103,10 @@
             </div>
           </div>
         </div>-->
-        <div class="col-md-6">
+        <!--todo <div class="col-md-6">
           <div class="row">
             <div class="col-sm-12">
-              <!--Photo upload-->
+              &lt;!&ndash;Photo upload&ndash;&gt;
               <input class="input-file"
                      type="file" (change)="onPhotoFileChanged($event)"
                      #fileInput>
@@ -116,7 +116,7 @@
               </button>
             </div>
           </div>
-        </div>
+        </div>-->
       </div>
       <div class="divider">
         <mat-divider></mat-divider>

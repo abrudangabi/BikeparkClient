@@ -17,10 +17,12 @@ import {RezervareConcurs} from '../../../../shared/model/RezervareConcurs';
 export class ConcursReservationsListForBikerComponent implements OnInit {
   // concursRezervationList: ConcursReservationRequest[] = [];
   concursRezervationList: RezervareConcurs[] = [];
+  isBiker: boolean;
 
   constructor(private concursRezervation: AbstractConcursForDashboardServicesService,
               private router: Router, private changeDetectionRef: ChangeDetectorRef/*,
               public dialog: MatDialog*/) {
+    this.isBiker = this.concursRezervation.isHisProfile();
     console.log('Lungimea la dashboard ' + this.concursRezervationList.length);
   }
 

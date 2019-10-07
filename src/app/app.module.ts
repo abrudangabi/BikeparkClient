@@ -150,7 +150,7 @@ export let applicantNavBarItems: NavBarItem[] = [
   {title: 'Bikeparks', path: 'bikeparks'},
   {title: 'Concurs', path: 'concurs'},
   // todo Nu e Bun jos
-  {title: 'BikeparkDashboardComponent', path: 'dashboard/bikeparkHome'},
+  //{title: 'BikeparkDashboardComponent', path: 'dashboard/bikeparkHome'},
 ];
 
 export let companyNavBarItems: NavBarItem[] = [

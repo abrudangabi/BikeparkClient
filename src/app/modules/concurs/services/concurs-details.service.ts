@@ -82,6 +82,9 @@ export class ServerConcursDetailsService implements AbstractConcursDetailsServic
           })
       };
       this.specificID = this.sessionManager.getSpecificId();
+      /*this.sessionManager.getLoggedUserRole().subscribe(data => {
+        this.isApplicant = data == Role.RoleStringEnum.BIKEPARK;
+      })*/
       this.isApplicant = this.sessionManager.getLoggedUserRole() == Role.RoleStringEnum.BIKER;
     } else {
       // todo redirect to login :)

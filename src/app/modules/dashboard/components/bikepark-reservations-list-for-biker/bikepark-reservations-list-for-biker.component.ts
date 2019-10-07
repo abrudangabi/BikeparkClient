@@ -14,9 +14,11 @@ import {RezervareBikePark} from '../../../../shared/model/RezervareBikePark';
 export class BikeparkReservationsListForBikerComponent implements OnInit {
   // bikeparkRezervationList: BikeparkReservationRequest[] = [];
   bikeparkRezervationList: RezervareBikePark[] = [];
+  isBiker: boolean;
 
   constructor(private bikeparkRezervation: AbstractBikeparksForDashboardServicesService,
               private router: Router, private changeDetectionRef: ChangeDetectorRef) {
+    this.isBiker = this.bikeparkRezervation.isHisProfile();
     console.log('Lungimea la dashboard ' + this.bikeparkRezervationList.length);
   }
 

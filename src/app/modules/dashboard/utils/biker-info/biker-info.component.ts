@@ -22,8 +22,10 @@ import {BikerLocationEditComponent} from '../biker-location-edit/biker-location-
 export class BikerInfoComponent implements OnInit {
 
   @Input() bikerDetails: Biker;
+  isBiker: boolean;
 
   constructor(public dialog: MatDialog, private bikerService: AbstractBikeparksForDashboardServicesService) {
+    this.isBiker = bikerService.isHisProfile();
   }
 
   ngOnInit() {

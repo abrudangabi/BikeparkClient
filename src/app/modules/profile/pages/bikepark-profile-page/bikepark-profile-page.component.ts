@@ -42,6 +42,7 @@ export class BikeparkProfilePageComponent implements OnInit {
     private bikeparkService: AbstractBikeparkProfileService,
     public dialog: MatDialog
   ) {
+    this.isHisProfile = this.bikeparkService.isHisProfile();
   }
 
   ngOnInit() {

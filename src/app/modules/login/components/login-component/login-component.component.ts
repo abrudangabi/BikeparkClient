@@ -45,6 +45,15 @@ export class LoginComponentComponent implements OnInit, OnDestroy {
 
   redirectToDashboard() {
     if (this.sessionManagementService.isUserLoggedIn()) {
+      /*let isBiker:boolean;
+      this.sessionManagementService.getLoggedUserRole().subscribe(data => {
+        isBiker = data == Role.RoleStringEnum.BIKER;
+      });
+      if (isBiker) {
+        this.router.navigateByUrl('/dashboard/' + applicantNavBarItems[0].path);
+      } else {
+        this.router.navigateByUrl('/dashboard/' + companyNavBarItems[0].path);
+      }*/
       if (this.sessionManagementService.getLoggedUserRole() === Role.RoleStringEnum.BIKER) {
         this.router.navigateByUrl('/dashboard/' + applicantNavBarItems[0].path);
       } else {

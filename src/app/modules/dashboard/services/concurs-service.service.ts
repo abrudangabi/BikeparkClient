@@ -45,6 +45,8 @@ export abstract class AbstractConcursForDashboardServicesService {
   public abstract getBiker(): Observable<Biker> ;
 
   public abstract cancelInternship(id: number);
+
+  public abstract isHisProfile(): boolean;
 }
 
 // todo mock
@@ -162,6 +164,10 @@ export class MockConcursForDashboardServicesService implements AbstractConcursFo
   initialize() {
   }
 
+  isHisProfile(): boolean{
+    return true;
+  }
+
   getRezervariConcursForBiker(): Observable<ConcursReservationRequest[]> {
     return of(this.rezervareList);
   }
@@ -272,12 +278,19 @@ export class ServerConcursForDashboardServicesService implements AbstractConcurs
           })
       };
       this.applicantID = this.sessionManager.getLoggedUserId();
+      /*this.sessionManager.getLoggedUserRole().subscribe(data => {
+        this.isApplicant = data == Role.RoleStringEnum.BIKEPARK;
+      })*/
       this.isApplicant = this.sessionManager.getLoggedUserRole() == Role.RoleStringEnum.BIKER;
       /*this.bikeparkID = this.sessionManager.getLoggedUserId();
       this.isBikepark = this.sessionManager.getLoggedUserRole() == Role.RoleStringEnum.BIKEPARK;*/
     } else {
       // todo redirect to login :)
     }
+  }
+
+  isHisProfile(): boolean{
+    return this.isApplicant;
   }
 
   /*getRezervariConcursForBiker(): Observable<ConcursReservationRequest[]> {

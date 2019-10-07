@@ -215,9 +215,9 @@ export class ServerBikeparkProfileService implements AbstractBikeparkProfileServ
   };
 
   getBikepark(id: number): Observable<BikePark> {
-    if ((!this.isBikepark) || id === this.bikeparkID) {
+    /*if ((!this.isBikepark) || id === this.bikeparkID) {
       this.isUsersProfile = false;
-    }
+    }*/
     return this.http.get<BikePark>(this.url + '/details/' + id, this.httpOptions).pipe(
       tap(
         data => {
@@ -244,6 +244,9 @@ export class ServerBikeparkProfileService implements AbstractBikeparkProfileServ
       };
       this.bikeparkID = this.sessionManager.getLoggedUserId();
       this.isBikepark = this.sessionManager.getLoggedUserRole() == Role.RoleStringEnum.BIKEPARK;
+      /*this.sessionManager.getLoggedUserRole().subscribe(data => {
+        this.isBikepark = data == Role.RoleStringEnum.BIKEPARK;
+      })*/
     } else {
       // todo redirect to login :)
     }
@@ -307,6 +310,7 @@ export class ServerBikeparkProfileService implements AbstractBikeparkProfileServ
   }
 
   isHisProfile(): boolean {
-    return this.isUsersProfile;
+    console.log('ce plm ' + !this.isBikepark);
+    return !this.isBikepark;
   }
 }

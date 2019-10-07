@@ -31,7 +31,7 @@
               </div>
 
               <div class="float-right skill-button">
-                <button mat-icon-button color="warn" (click)="deleteBikeparkRezervation(rezervareBikePark.id)">
+                <button mat-icon-button color="warn" *ngIf="isBiker" (click)="deleteBikeparkRezervation(rezervareBikePark.id)">
                   <mat-icon>delete_outline</mat-icon>
                 </button>
               </div>

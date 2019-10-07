@@ -44,6 +44,8 @@ export abstract class AbstractBikeparksForDashboardServicesService {
   public abstract uploadPhoto(uploadData: FormData);
 
   public abstract cancelInternship(id: number);
+
+  public abstract isHisProfile(): boolean;
 }
 
 // todo mock
@@ -183,6 +185,10 @@ export class MockBikeparksForDashboardServicesService implements AbstractBikepar
   initialize() {
   }
 
+  isHisProfile(): boolean{
+    return true;
+  }
+
   getRezervariBikeparkForBiker(): Observable<BikeparkReservationRequest[]> {
     // console.log('Lungimea dashboard in service ' + this.rezervareList.length);
     //return of(this.rezervareList);
@@ -320,10 +326,19 @@ export class ServerBikeparksForDashboardServicesService implements AbstractBikep
           })
       };
       this.applicantID = this.sessionManager.getLoggedUserId();
+      /*this.sessionManager.getLoggedUserRole().subscribe(data => {
+        this.isApplicant = data == Role.RoleStringEnum.BIKEPARK;
+      })*/
       this.isApplicant = this.sessionManager.getLoggedUserRole() == Role.RoleStringEnum.BIKER;
     } else {
       // todo redirect to login :)
     }
+  }
+
+  //*ngIf="isHisProfile"
+  isHisProfile(): boolean{
+    console.log('ce ma-sa e aici ' + this.isApplicant);
+    return this.isApplicant;
   }
 
   getRezervariBikeparkForBiker(): Observable<BikeparkReservationRequest[]> {
